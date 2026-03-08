@@ -1,5 +1,19 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { createReader } from '@keystatic/core/reader';
+import keystaticConfig from '../../keystatic.config';
+
+const reader = createReader(process.cwd(), keystaticConfig);
+const ab = await reader.singletons.about.read();
+
+const mp1 = ab?.missionParagraph1 ?? '';
+const mp2 = ab?.missionParagraph2 ?? '';
+const mp3 = ab?.missionParagraph3 ?? '';
+const fp1 = ab?.founderParagraph1 ?? '';
+const fp2 = ab?.founderParagraph2 ?? '';
+const fp3 = ab?.founderParagraph3 ?? '';
+const fq  = ab?.founderQuote ?? '';
+const fp4 = ab?.founderParagraph4 ?? '';
 ---
 
 <Layout
@@ -26,15 +40,9 @@ import Layout from '../layouts/Layout.astro';
         <h2 class="font-heading text-4xl md:text-5xl text-white mb-8 leading-tight">
           Built for Canadian Youth Football
         </h2>
-        <p class="text-gray-300 font-body text-base leading-relaxed mb-6">
-          ProKickTalent was founded with one mission: to give Canadian youth footballers the professional support they deserve.
-        </p>
-        <p class="text-gray-400 font-body text-base leading-relaxed mb-6">
-          Our founder, Burak Can Piroglu, is a FIFA-licensed football agent with a background in Geomatics and Geospatial Science — a rare combination that brings data precision to player development. We don't just watch games. We analyze them.
-        </p>
-        <p class="text-gray-400 font-body text-base leading-relaxed mb-10">
-          We believe the next generation of Canadian football stars is already out there, training hard, dreaming big. We're here to find them, develop them, and represent them on the world stage.
-        </p>
+        <p class="text-gray-300 font-body text-base leading-relaxed mb-6">{mp1}</p>
+        <p class="text-gray-400 font-body text-base leading-relaxed mb-6">{mp2}</p>
+        <p class="text-gray-400 font-body text-base leading-relaxed mb-10">{mp3}</p>
         <a
           href="/contact"
           class="inline-block bg-gold text-black font-body font-semibold text-sm tracking-[0.2em] uppercase px-8 py-3 hover:bg-yellow-400 transition-colors"
@@ -90,21 +98,13 @@ import Layout from '../layouts/Layout.astro';
         </h2>
 
         <div class="space-y-5 font-body text-gray-300 text-base leading-relaxed">
-          <p>
-            I'm not coming from a big agency. I'm not coming from a wealthy football family. I'm a Geomatics Engineer from Toronto who fell in love with this game and never stopped believing it could be more than just a passion.
-          </p>
-          <p>
-            In late 2024, I passed my FIFA Agent License exam. That piece of paper took sacrifice, study, and a level of belief in myself that honestly scared me some days. But I did it. And now I'm building something real.
-          </p>
+          <p>{fp1}</p>
+          <p>{fp2}</p>
           <blockquote class="border-l-4 border-gold pl-6 py-2 my-8">
-            <p class="text-white font-body text-lg italic">
-              "I rep players the right way — with data, with honesty, and with everything I've got."
-            </p>
+            <p class="text-white font-body text-lg italic">"{fq}"</p>
           </blockquote>
-          <p>
-            This is where that journey gets documented. From day one. If you're a young player in Toronto, in Canada, anywhere — and you believe you have more to give this game than anyone's seen yet, I want to hear from you.
-          </p>
-          <p class="text-gold font-semibold">We're just getting started.</p>
+          <p>{fp3}</p>
+          <p class="text-gold font-semibold">{fp4}</p>
         </div>
 
         <div class="mt-10">
