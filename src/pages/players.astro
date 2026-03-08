@@ -1,0 +1,116 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Players"
+  description="ProKickTalent is looking for Ontario's next generation of professional footballers. Are you next?"
+>
+
+  <!-- RECRUITMENT HERO -->
+  <section class="relative min-h-[70vh] flex items-center justify-center text-center overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-background via-gray-900 to-background"></div>
+    <div class="absolute inset-0 opacity-5" style="background-image: repeating-linear-gradient(0deg, transparent, transparent 79px, #22C55E 79px, #22C55E 80px), repeating-linear-gradient(90deg, transparent, transparent 79px, #22C55E 79px, #22C55E 80px);"></div>
+
+    <div class="relative z-10 max-w-4xl mx-auto px-6">
+      <p class="text-green text-sm tracking-[0.3em] uppercase font-body mb-4">ProKickTalent Roster</p>
+      <h1 class="font-heading text-7xl md:text-9xl text-white leading-none mb-6">
+        Are You<br/><span class="text-green">Next?</span>
+      </h1>
+      <p class="text-gray-300 font-body text-lg md:text-xl max-w-2xl mx-auto mb-10">
+        We're building Ontario's next generation of professional footballers. Talented, driven, coachable players — we're looking for you.
+      </p>
+      <a
+        href="/contact"
+        class="inline-block bg-green text-black font-body font-semibold text-sm tracking-[0.2em] uppercase px-10 py-4 hover:bg-emerald-400 transition-colors"
+      >
+        I Want to Be Represented
+      </a>
+    </div>
+  </section>
+
+  <!-- WHAT WE LOOK FOR -->
+  <section class="py-24 px-6 max-w-7xl mx-auto">
+    <p class="text-gold text-sm tracking-[0.3em] uppercase font-body mb-3">The Standard</p>
+    <h2 class="font-heading text-5xl md:text-6xl text-white mb-16">What We Look For</h2>
+
+    <div class="grid md:grid-cols-3 gap-6">
+      {[
+        {
+          number: '01',
+          title: 'Skill & Potential',
+          desc: 'Raw ability on the ball, tactical awareness, and the physical tools to compete at the next level. We evaluate players across all positions.',
+        },
+        {
+          number: '02',
+          title: 'Drive & Dedication',
+          desc: 'Natural talent is the starting point. What separates professionals is the commitment to improving every single day, on and off the pitch.',
+        },
+        {
+          number: '03',
+          title: 'Character & Coachability',
+          desc: 'Professional clubs look at the whole player. We represent athletes with the mindset to accept feedback, grow, and lead by example.',
+        },
+      ].map(item => (
+        <div class="bg-surface border border-white/10 p-8 hover:border-green/50 transition-colors">
+          <p class="font-heading text-5xl text-green/30 mb-4">{item.number}</p>
+          <h3 class="font-heading text-2xl text-white mb-4 tracking-wide">{item.title}</h3>
+          <p class="text-gray-400 font-body text-sm leading-relaxed">{item.desc}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="py-24 bg-surface">
+    <div class="max-w-7xl mx-auto px-6">
+      <p class="text-gold text-sm tracking-[0.3em] uppercase font-body mb-3">The Process</p>
+      <h2 class="font-heading text-5xl md:text-6xl text-white mb-16">How It Works</h2>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        {[
+          {
+            step: '1',
+            title: 'Get Found',
+            desc: 'We scout live games and tournaments across Ontario. Reach out directly or get referred by a coach — every inquiry is reviewed.',
+          },
+          {
+            step: '2',
+            title: 'Get Evaluated',
+            desc: 'We assess your current level, potential, and goals through a combination of live scouting and GPS performance data.',
+          },
+          {
+            step: '3',
+            title: 'Get Represented',
+            desc: 'If we believe in your future, we build a personalized pathway — from your next club to your first professional contract.',
+          },
+        ].map(item => (
+          <div class="flex gap-6">
+            <div class="font-heading text-7xl text-gold/20 leading-none select-none">{item.step}</div>
+            <div>
+              <h3 class="font-heading text-2xl text-white mb-3 tracking-wide">{item.title}</h3>
+              <p class="text-gray-400 font-body text-sm leading-relaxed">{item.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="py-24 px-6 max-w-4xl mx-auto text-center">
+    <h2 class="font-heading text-5xl md:text-6xl text-white mb-6">
+      Your Career Starts<br/><span class="text-gold">With One Message.</span>
+    </h2>
+    <p class="text-gray-400 font-body text-lg mb-10">
+      Tell us about yourself. Your age, position, current club, and why you believe you have what it takes. We read every message.
+    </p>
+    <a
+      href="/contact"
+      class="inline-block bg-gold text-black font-body font-semibold text-sm tracking-[0.2em] uppercase px-10 py-4 hover:bg-yellow-400 transition-colors"
+    >
+      Contact Us Now
+    </a>
+  </section>
+
+</Layout>
