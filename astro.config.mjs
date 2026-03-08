@@ -1,6 +1,11 @@
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
+import keystatic from '@keystatic/astro';
 
 export default defineConfig({
-  integrations: [tailwind({ applyBaseStyles: false })],
+  output: 'static',
+  integrations: [
+    tailwind({ applyBaseStyles: false }),
+    keystatic(),
+  ],
 });
