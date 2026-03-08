@@ -1,52 +1,22 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { createReader } from '@keystatic/core/reader';
+import keystaticConfig from '../../keystatic.config';
 
-const services = [
-  {
-    id: 'representation',
-    number: '01',
-    title: 'Player Representation & Contract Negotiation',
-    tagline: 'Your Career. Your Terms.',
-    body: [
-      'We represent players with professionalism, integrity, and ambition. From club trials to contract signings, we advocate for your best interests every step of the way — so you can focus on what you do best: playing football.',
-      'Having a FIFA-licensed agent means you have professional protection. We understand contract structures, transfer regulations, and league rules so that you never sign something that doesn\'t serve your future.',
-    ],
-    highlight: 'FIFA-Licensed Representation',
-  },
-  {
-    id: 'gps',
-    number: '02',
-    title: 'GPS Performance Analysis & Reports',
-    tagline: 'Where Sports Meet Science.',
-    body: [
-      'Using cutting-edge GPS tracking vest technology, we collect real match and training data to build personalized performance reports for each player. Speed, distance, intensity, positioning — we turn raw athletic data into actionable insights.',
-      'These reports help players develop faster and impress scouts with objective evidence of their athletic output. This is ProKickTalent\'s signature offering — the edge that separates serious players from the rest.',
-    ],
-    highlight: 'ProKickTalent Signature Service',
-  },
-  {
-    id: 'scouting',
-    number: '03',
-    title: 'Scouting & Talent Identification',
-    tagline: 'We\'re Always Watching.',
-    body: [
-      'We actively scout youth and emerging talent across Ontario. Whether you\'re playing in a local league or a regional tournament, we\'re watching. If you have the drive and the skill, we want to find you.',
-      'Our scouting network covers amateur leagues, school competitions, and regional tournaments throughout the province. Talent doesn\'t always come pre-packaged — we find it where it grows.',
-    ],
-    highlight: 'Ontario-Wide Scouting Network',
-  },
-  {
-    id: 'development',
-    number: '04',
-    title: 'Career Development & Guidance',
-    tagline: 'The Roadmap to Professional Football.',
-    body: [
-      'The road to professional football is more than just talent. We work with players and their families to build a roadmap — from youth academies to professional clubs — with mentorship, education planning, and career strategy built in.',
-      'We help families understand the landscape: MLS academies, CPL pathways, European trials, and college programs. No more guessing, no more costly mistakes. Just a clear, informed plan built around your player\'s goals.',
-    ],
-    highlight: 'Family-Centered Approach',
-  },
-];
+const reader = createReader(process.cwd(), keystaticConfig);
+const allServices = await reader.collections.services.all();
+
+const services = allServices
+  .map(entry => ({
+    id: entry.slug,
+    number: entry.entry.number,
+    title: entry.entry.title,
+    tagline: entry.entry.tagline,
+    highlight: entry.entry.highlight,
+    body: [entry.entry.bodyParagraph1, entry.entry.bodyParagraph2],
+    order: entry.entry.order ?? 0,
+  }))
+  .sort((a, b) => a.order - b.order);
 ---
 
 <Layout
