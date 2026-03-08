@@ -1,5 +1,14 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { createReader } from '@keystatic/core/reader';
+import keystaticConfig from '../../keystatic.config';
+
+const reader = createReader(process.cwd(), keystaticConfig);
+const hp = await reader.singletons.homepage.read();
+
+const heroTitle = hp?.heroTitle ?? 'Guiding Young Players\nto Professional\nSoccer Careers';
+const heroSubtitle = hp?.heroSubtitle ?? 'ProKickTalent Sports Group — where talent meets opportunity and careers are built, not chased.';
+const ctaText = hp?.ctaText ?? 'Schedule Free Consultation';
 ---
 
 <Layout title="Home" description="ProKickTalent Sports Group — FIFA-licensed football agent Burak Can Piroglu guides young Canadian players (U13–U23) to professional soccer careers through representation, GPS analysis, scouting, and career development.">
@@ -13,19 +22,15 @@ import Layout from '../layouts/Layout.astro';
 
     <div class="relative z-10 max-w-4xl mx-auto px-6">
       <p class="text-gold text-sm tracking-[0.3em] uppercase mb-4 font-body">Burak Can Piroglu &mdash; FIFA Licensed Agent</p>
-      <h1 class="font-heading text-6xl md:text-8xl text-white leading-none mb-6">
-        Guiding Young Players<br/>
-        <span class="text-gold">to Professional</span><br/>
-        Soccer Careers
-      </h1>
+      <h1 class="font-heading text-6xl md:text-8xl text-white leading-none mb-6" set:html={heroTitle.replace(/\n/g, '<br/>')} />
       <p class="text-gray-300 text-lg md:text-xl font-body max-w-2xl mx-auto mb-10">
-        ProKickTalent Sports Group — where talent meets opportunity and careers are built, not chased.
+        {heroSubtitle}
       </p>
       <a
         href="/contact"
         class="inline-block bg-gold text-black font-body font-semibold text-sm tracking-[0.2em] uppercase px-10 py-4 hover:bg-yellow-400 transition-colors"
       >
-        Schedule Free Consultation
+        {ctaText}
       </a>
     </div>
 
