@@ -1,17 +1,179 @@
 ---
-
+import Layout from '../layouts/Layout.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title="Home">
+
+  <!-- HERO -->
+  <section class="relative min-h-screen flex items-center justify-center text-center overflow-hidden">
+    <!-- Placeholder image background (replace with real image later) -->
+    <div class="absolute inset-0 bg-gradient-to-br from-gray-900 via-background to-black"></div>
+    <!-- Decorative pitch lines overlay -->
+    <div class="absolute inset-0 opacity-5" style="background-image: repeating-linear-gradient(0deg, transparent, transparent 79px, #ffffff 79px, #ffffff 80px), repeating-linear-gradient(90deg, transparent, transparent 79px, #ffffff 79px, #ffffff 80px);"></div>
+
+    <div class="relative z-10 max-w-4xl mx-auto px-6">
+      <p class="text-gold text-sm tracking-[0.3em] uppercase mb-4 font-body">Burak Can Piroglu &mdash; FIFA Licensed Agent</p>
+      <h1 class="font-heading text-6xl md:text-8xl text-white leading-none mb-6">
+        Guiding Young Players<br/>
+        <span class="text-gold">to Professional</span><br/>
+        Soccer Careers
+      </h1>
+      <p class="text-gray-300 text-lg md:text-xl font-body max-w-2xl mx-auto mb-10">
+        ProKickTalent Sports Group — where talent meets opportunity and careers are built, not chased.
+      </p>
+      <a
+        href="/contact"
+        class="inline-block bg-gold text-black font-body font-semibold text-sm tracking-[0.2em] uppercase px-10 py-4 hover:bg-yellow-400 transition-colors"
+      >
+        Schedule Free Consultation
+      </a>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+      <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+      </svg>
+    </div>
+  </section>
+
+  <!-- WHO WE SERVE -->
+  <section class="py-24 px-6 max-w-7xl mx-auto">
+    <p class="text-gold text-sm tracking-[0.3em] uppercase font-body mb-3">Who We Serve</p>
+    <h2 class="font-heading text-5xl md:text-6xl text-white mb-16">The Players We Develop</h2>
+
+    <div class="grid md:grid-cols-3 gap-6">
+      <!-- Card 1 -->
+      <div class="bg-surface border border-white/10 p-8 hover:border-gold/50 transition-colors group">
+        <div class="text-green font-heading text-4xl mb-2">U13–U16</div>
+        <h3 class="font-heading text-2xl text-white mb-3 tracking-wide">Youth Players</h3>
+        <p class="text-gray-400 font-body text-sm leading-relaxed">
+          Early pathway planning and development guidance to set the foundation for professional careers.
+        </p>
+      </div>
+      <!-- Card 2 -->
+      <div class="bg-surface border border-white/10 p-8 hover:border-gold/50 transition-colors group">
+        <div class="text-green font-heading text-4xl mb-2">U17–U19</div>
+        <h3 class="font-heading text-2xl text-white mb-3 tracking-wide">Academy Players</h3>
+        <p class="text-gray-400 font-body text-sm leading-relaxed">
+          Trial preparation, showcase opportunities, and strategic positioning for the next level.
+        </p>
+      </div>
+      <!-- Card 3 -->
+      <div class="bg-surface border border-white/10 p-8 hover:border-gold/50 transition-colors group">
+        <div class="text-green font-heading text-4xl mb-2">U20–U23</div>
+        <h3 class="font-heading text-2xl text-white mb-3 tracking-wide">College / Semi-Pro</h3>
+        <p class="text-gray-400 font-body text-sm leading-relaxed">
+          Transition support from college or semi-pro to professional contracts in competitive leagues.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- OUR APPROACH -->
+  <section class="py-24 bg-surface">
+    <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+      <div>
+        <p class="text-gold text-sm tracking-[0.3em] uppercase font-body mb-3">Our Approach</p>
+        <h2 class="font-heading text-5xl md:text-6xl text-white mb-8 leading-none">
+          Most Agents Focus on Transactions.<br/>
+          <span class="text-gold">We Focus on Careers.</span>
+        </h2>
+        <p class="text-gray-300 font-body text-base leading-relaxed mb-6">
+          At ProKickTalent, we believe talented young players deserve more than just contract negotiations — they deserve genuine career guidance.
+        </p>
+        <p class="text-gray-400 font-body text-base leading-relaxed mb-6">
+          Too many families enter the professional football world without understanding the pathways, the timelines, or the red flags. We provide education first, helping players and parents make informed decisions about MLS academies, CPL opportunities, European trials, and college programs.
+        </p>
+        <p class="text-gray-300 font-body text-base leading-relaxed mb-10 font-semibold">
+          Your success is our success. We're here for the long term — building careers, not chasing quick commissions.
+        </p>
+        <a
+          href="/contact"
+          class="inline-block border border-gold text-gold font-body font-semibold text-sm tracking-[0.2em] uppercase px-8 py-3 hover:bg-gold hover:text-black transition-colors"
+        >
+          Contact Us
+        </a>
+      </div>
+      <!-- Agent credential panel -->
+      <div class="border border-white/10 p-8 bg-background">
+        <div class="w-24 h-24 bg-gold/20 border border-gold/30 mb-6 flex items-center justify-center">
+          <!-- Placeholder for agent photo -->
+          <svg class="w-12 h-12 text-gold/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+          </svg>
+        </div>
+        <p class="font-heading text-3xl text-white tracking-wide mb-1">Burak Can Piroglu</p>
+        <p class="text-gold text-sm tracking-widest uppercase font-body mb-4">FIFA&trade; Licensed Football Agent</p>
+        <div class="space-y-2 text-sm text-gray-400 font-body">
+          <p class="flex items-center gap-2">
+            <span class="text-green">&#10003;</span> FIFA Licensed Agent (2024)
+          </p>
+          <p class="flex items-center gap-2">
+            <span class="text-green">&#10003;</span> Geomatics &amp; Geospatial Science
+          </p>
+          <p class="flex items-center gap-2">
+            <span class="text-green">&#10003;</span> Based in Toronto, Ontario
+          </p>
+          <p class="flex items-center gap-2">
+            <span class="text-green">&#10003;</span> Serving players across Canada
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES OVERVIEW -->
+  <section class="py-24 px-6 max-w-7xl mx-auto">
+    <p class="text-gold text-sm tracking-[0.3em] uppercase font-body mb-3">What We Offer</p>
+    <h2 class="font-heading text-5xl md:text-6xl text-white mb-16">Services Overview</h2>
+
+    <div class="grid md:grid-cols-2 gap-6">
+      {[
+        {
+          title: 'Player Representation & Contract Negotiation',
+          desc: 'We advocate for your career with a FIFA-licensed agent who negotiates contracts and opportunities so you can stay focused on the game.',
+        },
+        {
+          title: 'GPS Performance Analysis & Reports',
+          desc: 'Using GPS tracking vest technology, we turn your on-field performance into data-driven reports that help you develop faster and get noticed by scouts.',
+        },
+        {
+          title: 'Scouting & Talent Identification',
+          desc: 'We actively scout emerging youth talent across Ontario — if you have the skill and the drive, we want to find you.',
+        },
+        {
+          title: 'Career Development & Guidance',
+          desc: 'From local leagues to professional clubs, we build a personalized roadmap to help players and families navigate the path to professional football.',
+        },
+      ].map((service) => (
+        <div class="bg-surface border border-white/10 p-8 hover:border-gold/50 transition-colors group">
+          <h3 class="font-heading text-2xl text-white mb-4 tracking-wide group-hover:text-gold transition-colors">
+            {service.title}
+          </h3>
+          <p class="text-gray-400 font-body text-sm leading-relaxed mb-6">{service.desc}</p>
+          <a href="/services" class="text-gold text-sm tracking-widest uppercase font-body hover:underline">
+            Learn More &rarr;
+          </a>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- FINAL CTA BANNER -->
+  <section class="py-24 bg-gold">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <h2 class="font-heading text-5xl md:text-6xl text-black mb-6">Ready to Plan Your Pathway?</h2>
+      <p class="text-black/70 font-body text-lg mb-10">
+        Take the first step toward your professional football career. A free consultation costs nothing but could change everything.
+      </p>
+      <a
+        href="/contact"
+        class="inline-block bg-black text-white font-body font-semibold text-sm tracking-[0.2em] uppercase px-10 py-4 hover:bg-gray-900 transition-colors"
+      >
+        Schedule Free Consultation
+      </a>
+    </div>
+  </section>
+
+</Layout>
