@@ -12,7 +12,9 @@ export default config({
       path: 'src/content/homepage',
       format: { data: 'json' },
       schema: {
-        heroTitle: fields.text({ label: 'Hero Title', multiline: true }),
+        heroLine1: fields.text({ label: 'Hero Title — Line 1 (white)' }),
+        heroLine2: fields.text({ label: 'Hero Title — Line 2 (gold)' }),
+        heroLine3: fields.text({ label: 'Hero Title — Line 3 (white)' }),
         heroSubtitle: fields.text({ label: 'Hero Subtitle', multiline: true }),
         ctaText: fields.text({ label: 'CTA Button Text' }),
       },

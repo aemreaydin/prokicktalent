@@ -6,17 +6,10 @@ import keystaticConfig from '../../keystatic.config';
 const reader = createReader(process.cwd(), keystaticConfig);
 const galleryEntries = await reader.collections.gallery.all();
 
-const staticImages = [
-  { src: '/images/media/media_01.jpeg', alt: 'ProKickTalent' },
-  { src: '/images/media/media_02.jpeg', alt: 'ProKickTalent' },
-];
-
-const keystatic_images = galleryEntries.map(entry => ({
+const images = galleryEntries.map(entry => ({
   src: entry.entry.image ?? '',
   alt: entry.entry.caption.name,
 })).filter(img => img.src);
-
-const images = [...staticImages, ...keystatic_images];
 ---
 
 <Layout

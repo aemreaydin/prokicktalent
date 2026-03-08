@@ -14,4 +14,11 @@ export default defineConfig({
     markdoc(),
     keystatic(),
   ],
+  vite: {
+    server: {
+      watch: {
+        ignored: ['!**/src/content/**'],
+      },
+    },
+  },
 });
