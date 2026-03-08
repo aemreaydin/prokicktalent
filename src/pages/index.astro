@@ -96,28 +96,27 @@ import Layout from '../layouts/Layout.astro';
         </a>
       </div>
       <!-- Agent credential panel -->
-      <div class="border border-white/10 p-8 bg-background">
-        <div class="w-24 h-24 bg-gold/20 border border-gold/30 mb-6 flex items-center justify-center">
-          <!-- Placeholder for agent photo -->
-          <svg class="w-12 h-12 text-gold/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-          </svg>
+      <div class="border border-white/10 bg-background overflow-hidden">
+        <div class="w-full aspect-[4/3] overflow-hidden">
+          <img src="/images/burak.jpg" alt="Burak Can Piroglu" class="w-full h-full object-cover object-top" />
         </div>
-        <p class="font-heading text-3xl text-white tracking-wide mb-1">Burak Can Piroglu</p>
-        <p class="text-gold text-sm tracking-widest uppercase font-body mb-4">FIFA&trade; Licensed Football Agent</p>
-        <div class="space-y-2 text-sm text-gray-400 font-body">
-          <p class="flex items-center gap-2">
-            <span class="text-green">&#10003;</span> FIFA Licensed Agent (2024)
-          </p>
-          <p class="flex items-center gap-2">
-            <span class="text-green">&#10003;</span> Geomatics &amp; Geospatial Science
-          </p>
-          <p class="flex items-center gap-2">
-            <span class="text-green">&#10003;</span> Based in Toronto, Ontario
-          </p>
-          <p class="flex items-center gap-2">
-            <span class="text-green">&#10003;</span> Serving players across Canada
-          </p>
+        <div class="p-8">
+          <p class="font-heading text-3xl text-white tracking-wide mb-1">Burak Can Piroglu</p>
+          <p class="text-gold text-sm tracking-widest uppercase font-body mb-4">FIFA&trade; Licensed Football Agent</p>
+          <div class="space-y-2 text-sm text-gray-400 font-body">
+            <p class="flex items-center gap-2">
+              <span class="text-green">&#10003;</span> FIFA Licensed Agent (2024)
+            </p>
+            <p class="flex items-center gap-2">
+              <span class="text-green">&#10003;</span> Geomatics &amp; Geospatial Science
+            </p>
+            <p class="flex items-center gap-2">
+              <span class="text-green">&#10003;</span> Based in Toronto, Ontario
+            </p>
+            <p class="flex items-center gap-2">
+              <span class="text-green">&#10003;</span> Serving players across Canada
+            </p>
+          </div>
         </div>
       </div>
     </div>
