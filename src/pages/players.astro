@@ -1,5 +1,14 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { createReader } from '@keystatic/core/reader';
+import keystaticConfig from '../../keystatic.config';
+
+const reader = createReader(process.cwd(), keystaticConfig);
+const pl = await reader.singletons.players.read();
+
+const heroHeading = pl?.heroHeading ?? 'Are You Next?';
+const heroSubtext = pl?.heroSubtext ?? "We're building Ontario's next generation of professional footballers.";
+const ctaText = pl?.ctaText ?? 'I Want to Be Represented';
 ---
 
 <Layout
@@ -14,17 +23,13 @@ import Layout from '../layouts/Layout.astro';
 
     <div class="relative z-10 max-w-4xl mx-auto px-6">
       <p class="text-green text-sm tracking-[0.3em] uppercase font-body mb-4">ProKickTalent Roster</p>
-      <h1 class="font-heading text-7xl md:text-9xl text-white leading-none mb-6">
-        Are You<br/><span class="text-green">Next?</span>
-      </h1>
-      <p class="text-gray-300 font-body text-lg md:text-xl max-w-2xl mx-auto mb-10">
-        We're building Ontario's next generation of professional footballers. Talented, driven, coachable players — we're looking for you.
-      </p>
+      <h1 class="font-heading text-7xl md:text-9xl text-white leading-none mb-6">{heroHeading}</h1>
+      <p class="text-gray-300 font-body text-lg md:text-xl max-w-2xl mx-auto mb-10">{heroSubtext}</p>
       <a
         href="/contact"
         class="inline-block bg-green text-black font-body font-semibold text-sm tracking-[0.2em] uppercase px-10 py-4 hover:bg-emerald-400 transition-colors"
       >
-        I Want to Be Represented
+        {ctaText}
       </a>
     </div>
   </section>
