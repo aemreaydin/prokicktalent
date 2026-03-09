@@ -11,6 +11,11 @@ const heroLine2 = hp?.heroLine2 ?? 'to Professional';
 const heroLine3 = hp?.heroLine3 ?? 'Soccer Careers';
 const heroSubtitle = hp?.heroSubtitle ?? 'ProKickTalent Sports Group — where talent meets opportunity and careers are built, not chased.';
 const ctaText = hp?.ctaText ?? 'Schedule Free Consultation';
+const approachHeading1 = hp?.approachHeading1 ?? 'Most Agents Focus on Transactions.';
+const approachHeading2 = hp?.approachHeading2 ?? 'We Focus on Careers.';
+const approachParagraph1 = hp?.approachParagraph1 ?? '';
+const approachParagraph2 = hp?.approachParagraph2 ?? '';
+const approachParagraph3 = hp?.approachParagraph3 ?? '';
 ---
 
 <Layout title="Home" description="ProKickTalent Sports Group — FIFA-licensed football agent Burak Can Piroglu guides young Canadian players (U13–U23) to professional soccer careers through representation, GPS analysis, scouting, and career development.">
@@ -87,18 +92,12 @@ const ctaText = hp?.ctaText ?? 'Schedule Free Consultation';
       <div>
         <p class="text-gold text-sm tracking-[0.3em] uppercase font-body mb-3">Our Approach</p>
         <h2 class="font-heading text-5xl md:text-6xl text-white mb-8 leading-none">
-          Most Agents Focus on Transactions.<br/>
-          <span class="text-gold">We Focus on Careers.</span>
+          {approachHeading1}<br/>
+          <span class="text-gold">{approachHeading2}</span>
         </h2>
-        <p class="text-gray-300 font-body text-base leading-relaxed mb-6">
-          At ProKickTalent, we believe talented young players deserve more than just contract negotiations — they deserve genuine career guidance.
-        </p>
-        <p class="text-gray-400 font-body text-base leading-relaxed mb-6">
-          Too many families enter the professional football world without understanding the pathways, the timelines, or the red flags. We provide education first, helping players and parents make informed decisions about MLS academies, CPL opportunities, European trials, and college programs.
-        </p>
-        <p class="text-gray-300 font-body text-base leading-relaxed mb-10 font-semibold">
-          Your success is our success. We're here for the long term — building careers, not chasing quick commissions.
-        </p>
+        <p class="text-gray-300 font-body text-base leading-relaxed mb-6">{approachParagraph1}</p>
+        <p class="text-gray-400 font-body text-base leading-relaxed mb-6">{approachParagraph2}</p>
+        <p class="text-gray-300 font-body text-base leading-relaxed mb-10 font-semibold">{approachParagraph3}</p>
         <a
           href="/contact"
           class="inline-block border border-gold text-gold font-body font-semibold text-sm tracking-[0.2em] uppercase px-8 py-3 hover:bg-gold hover:text-black transition-colors"

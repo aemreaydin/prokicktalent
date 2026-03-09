@@ -20,6 +20,11 @@ export default config({
         heroLine3: fields.text({ label: 'Hero Title — Line 3 (white)' }),
         heroSubtitle: fields.text({ label: 'Hero Subtitle', multiline: true }),
         ctaText: fields.text({ label: 'CTA Button Text' }),
+        approachHeading1: fields.text({ label: 'Approach — Heading Line 1 (white)' }),
+        approachHeading2: fields.text({ label: 'Approach — Heading Line 2 (gold)' }),
+        approachParagraph1: fields.text({ label: 'Approach — Paragraph 1', multiline: true }),
+        approachParagraph2: fields.text({ label: 'Approach — Paragraph 2', multiline: true }),
+        approachParagraph3: fields.text({ label: 'Approach — Paragraph 3 (bold)', multiline: true }),
       },
     }),
 
