@@ -1,0 +1,18 @@
+{
+  "slug": "career",
+  "order": 4,
+  "number": "04",
+  "title": "Career Guidance",
+  "phase": "Pathway planning",
+  "hubBlurb": "Mapping academy, college, CPL, MLS Next Pro, and European routes against profile, timing, and outcomes.",
+  "body": "Families face real forks: stay in academy, take a college offer, chase a CPL or MLS Next Pro slot, pursue European trials. We map the routes against profile, timing, and realistic outcomes.",
+  "bullets": [
+    "Route comparison",
+    "Risk & timing",
+    "Eligibility tracking",
+    "Combine prep",
+    "Backup plan",
+    "Periodic review"
+  ],
+  "vizType": "pathway"
+}

@@ -1,0 +1,14 @@
+{
+  "reference": "rw-2007-01",
+  "order": 1,
+  "status": "watched",
+  "ageGroup": "U19",
+  "descriptor": "winger",
+  "position": "RW",
+  "birthYear": "2007",
+  "region": "Ontario",
+  "identity": {
+    "discriminant": "anonymized",
+    "value": null
+  }
+}

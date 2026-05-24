@@ -1,0 +1,14 @@
+{
+  "reference": "gk-2008-05",
+  "order": 5,
+  "status": "watched",
+  "ageGroup": "U18",
+  "descriptor": "keeper",
+  "position": "GK",
+  "birthYear": "2008",
+  "region": "GTA",
+  "identity": {
+    "discriminant": "anonymized",
+    "value": null
+  }
+}

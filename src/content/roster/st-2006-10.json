@@ -1,0 +1,14 @@
+{
+  "reference": "st-2006-10",
+  "order": 10,
+  "status": "trial",
+  "ageGroup": "U20",
+  "descriptor": "forward",
+  "position": "ST",
+  "birthYear": "2006",
+  "region": "CPL combine",
+  "identity": {
+    "discriminant": "anonymized",
+    "value": null
+  }
+}

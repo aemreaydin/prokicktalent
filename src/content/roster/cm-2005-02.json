@@ -1,0 +1,14 @@
+{
+  "reference": "cm-2005-02",
+  "order": 2,
+  "status": "trial",
+  "ageGroup": "U21",
+  "descriptor": "#8",
+  "position": "CM",
+  "birthYear": "2005",
+  "region": "Toronto",
+  "identity": {
+    "discriminant": "anonymized",
+    "value": null
+  }
+}

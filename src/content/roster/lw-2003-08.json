@@ -1,0 +1,14 @@
+{
+  "reference": "lw-2003-08",
+  "order": 8,
+  "status": "placed",
+  "ageGroup": "U23",
+  "descriptor": "winger",
+  "position": "LW",
+  "birthYear": "2003",
+  "region": "USL Championship",
+  "identity": {
+    "discriminant": "anonymized",
+    "value": null
+  }
+}

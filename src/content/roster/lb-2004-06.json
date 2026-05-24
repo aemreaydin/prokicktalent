@@ -1,0 +1,14 @@
+{
+  "reference": "lb-2004-06",
+  "order": 6,
+  "status": "trial",
+  "ageGroup": "U22",
+  "descriptor": "fullback",
+  "position": "LB",
+  "birthYear": "2004",
+  "region": "MLS Next Pro",
+  "identity": {
+    "discriminant": "anonymized",
+    "value": null
+  }
+}

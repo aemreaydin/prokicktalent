@@ -1,0 +1,14 @@
+{
+  "reference": "cb-2003-03",
+  "order": 3,
+  "status": "signed",
+  "ageGroup": "U23",
+  "descriptor": "centre-back",
+  "position": "CB",
+  "birthYear": "2003",
+  "region": "L1O",
+  "identity": {
+    "discriminant": "anonymized",
+    "value": null
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "reference": "rb-2005-11",
+  "order": 11,
+  "status": "signed",
+  "ageGroup": "U21",
+  "descriptor": "fullback",
+  "position": "RB",
+  "birthYear": "2005",
+  "region": "CPL Y2",
+  "identity": {
+    "discriminant": "anonymized",
+    "value": null
+  }
+}

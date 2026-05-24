@@ -1,0 +1,14 @@
+{
+  "reference": "st-2006-04",
+  "order": 4,
+  "status": "placed",
+  "ageGroup": "U20",
+  "descriptor": "striker",
+  "position": "ST",
+  "birthYear": "2006",
+  "region": "European trial",
+  "identity": {
+    "discriminant": "anonymized",
+    "value": null
+  }
+}
