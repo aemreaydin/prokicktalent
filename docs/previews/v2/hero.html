@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>v2 · Hero — editorial</title>
+  <meta name="description" content="ProKickTalent hero — scroll-driven editorial statement for a FIFA-licensed football agent." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><path d='M3 27 Q 16 -1 29 27' stroke='%23CBA257' stroke-width='2' fill='none' stroke-linecap='round'/><circle cx='16' cy='6' r='3.5' fill='%23CBA257'/></svg>" />
+  <link rel="stylesheet" href="./_system.css" />
+  <style>
+    :root { --p: 0; }
+
+    .hero { position: relative; height: 240vh; }
+    .hero__pin {
+      position: sticky; top: 0;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+    }
+
+    /* full-bleed photo, quietly scaling + darkening on scroll */
+    .hero__photo {
+      position: absolute; inset: 0;
+      transform: scale(calc(1 + 0.08 * var(--p)));
+      transition: transform 120ms linear;
+    }
+    .hero__photo .photo { position: absolute; inset: 0; }
+    .hero__scrim {
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(90deg, rgba(11,11,12,0.92) 0%, rgba(11,11,12,0.65) 45%, rgba(11,11,12,0.35) 100%),
+        linear-gradient(0deg, rgba(11,11,12,0.85), transparent 55%);
+      z-index: 1;
+    }
+
+    .hero__content { position: relative; z-index: 2; width: 100%; }
+    .hero__id {
+      display: flex; gap: 18px; align-items: center; margin-bottom: 28px;
+      font: 500 11px/1 var(--mono); letter-spacing: 0.08em; color: var(--mute);
+    }
+    .hero__id .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--gold); }
+
+    /* three-beat editorial statement */
+    .beats { display: grid; }
+    .beat {
+      grid-area: 1 / 1;
+      opacity: 0; transition: opacity 600ms var(--ease);
+    }
+    .beat[data-on="true"] { opacity: 1; }
+
+    .hero__sub {
+      margin-top: 32px; max-width: 46ch;
+      color: var(--mute); font-size: 18px; line-height: 1.55;
+      opacity: 0; transform: translateY(8px);
+      transition: opacity 600ms var(--ease), transform 600ms var(--ease);
+    }
+    .hero__sub[data-on="true"] { opacity: 1; transform: none; }
+    .hero__cta {
+      margin-top: 32px; display: flex; gap: 14px; flex-wrap: wrap;
+      opacity: 0; transform: translateY(8px);
+      transition: opacity 600ms var(--ease) 80ms, transform 600ms var(--ease) 80ms;
+    }
+    .hero__cta[data-on="true"] { opacity: 1; transform: none; }
+
+    /* thin scroll progress hint at the very bottom */
+    .hero__progress { position: absolute; left: 0; bottom: 0; height: 2px; background: var(--gold); width: calc(100% * var(--p)); z-index: 3; opacity: 0.7; }
+
+    .scroll-cue {
+      position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
+      z-index: 3; font: 500 10px/1 var(--mono); letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--mute); display: flex; flex-direction: column; align-items: center; gap: 10px;
+      opacity: calc(1 - 2 * var(--p));
+    }
+    .scroll-cue .line { width: 1px; height: 28px; background: linear-gradient(var(--mute), transparent); }
+
+    .after { padding: 120px var(--gutter); text-align: center; }
+
+    @media (prefers-reduced-motion: reduce) {
+      :root { --p: 1; }
+      .hero { height: auto; }
+      .hero__pin { position: relative; height: auto; min-height: 90vh; padding-block: 120px; }
+      .beat[data-beat="3"] { opacity: 1; position: relative; }
+      .beat[data-beat="1"], .beat[data-beat="2"] { display: none; }
+      .hero__sub, .hero__cta { opacity: 1; transform: none; }
+      .scroll-cue { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="pchrome">
+  <div class="pchrome__in">
+    <span class="pchrome__brand">PKT · <b>v2 editorial</b></span>
+    <a href="./index.html">Index</a>
+    <a href="./home.html">Home</a>
+    <a href="./about.html">About</a>
+    <a href="./players.html">Players</a>
+    <a href="./services.html">Services</a>
+    <a href="./contract-analysis.html">Contract</a>
+    <a href="./media.html">Media</a>
+    <a href="./contact.html">Contact</a>
+    <a href="./hero.html" aria-current="page">Hero</a>
+    <button class="theme-toggle" id="themeToggle" type="button">◐ light</button>
+  </div>
+</nav>
+<script>
+  (function () {
+    // Default = light (CSS :root). Dark is opt-in via [data-theme="dark"].
+    const tg = document.getElementById('themeToggle');
+    const root = document.documentElement;
+    if (localStorage.getItem('pkt-v2-theme') === 'dark') { root.setAttribute('data-theme', 'dark'); tg.textContent = '◐ dark'; }
+    tg.addEventListener('click', () => {
+      const dark = root.getAttribute('data-theme') !== 'dark';
+      if (dark) root.setAttribute('data-theme', 'dark'); else root.removeAttribute('data-theme');
+      tg.textContent = dark ? '◐ dark' : '◐ light';
+      localStorage.setItem('pkt-v2-theme', dark ? 'dark' : 'light');
+    });
+  })();
+</script>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="m" viewBox="0 0 32 32"><path d="M3 27 Q 16 -1 29 27" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-dasharray="2.5 3"/><circle cx="16" cy="6" r="3.5" fill="currentColor"/></symbol>
+</svg>
+
+<nav class="nav" data-scrolled="true">
+  <div class="nav__in">
+    <a href="./home.html" class="nav__brand"><svg width="22" height="22"><use href="#m"/></svg><b>ProKickTalent</b></a>
+    <a href="./home.html" class="nav__link">Home</a>
+    <a href="./about.html" class="nav__link">About</a>
+    <a href="./players.html" class="nav__link">Players</a>
+    <a href="./services.html" class="nav__link">Services</a>
+    <a href="./media.html" class="nav__link">Media</a>
+    <a href="./contact.html" class="nav__cta">Start an evaluation</a>
+  </div>
+</nav>
+
+<section class="hero" id="hero" data-theme="dark">
+  <div class="hero__pin">
+    <div class="hero__photo">
+      <div class="photo"><span class="photo__tag">PLACEHOLDER · AI HERO STILL — full-bleed, golden-hour strike</span></div>
+    </div>
+    <div class="hero__scrim"></div>
+
+    <div class="hero__content">
+      <div class="wrap">
+        <div class="hero__id">
+          <span>PKT—001</span>
+          <span class="dot"></span>
+          <span>FIFA LICENSED</span>
+          <span class="dot"></span>
+          <span>TORONTO</span>
+        </div>
+
+        <div class="beats">
+          <h1 class="display-1 beat" data-beat="1" data-on="true">See the<br/><em>player.</em></h1>
+          <h1 class="display-1 beat" data-beat="2">Read the<br/><em>evidence.</em></h1>
+          <h1 class="display-1 beat" data-beat="3">Make the<br/><em>move.</em></h1>
+        </div>
+
+        <p class="hero__sub" id="sub">
+          FIFA-licensed representation for U17–U23 Canadian footballers.
+          Scout report, GPS performance, and the right next step — built on
+          evidence, not promises.
+        </p>
+        <div class="hero__cta" id="cta">
+          <a href="#" class="btn btn--primary">Start an evaluation <span class="arr">→</span></a>
+          <a href="#" class="btn btn--ghost">Meet Burak</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="scroll-cue"><span>scroll</span><span class="line"></span></div>
+    <div class="hero__progress"></div>
+  </div>
+</section>
+
+<section class="after">
+  <p class="eyebrow eyebrow--gold">↑ scroll up to replay</p>
+  <h2 style="margin: 20px auto 0; max-width: 18ch;">No overlays. No gadgets. Just the moment and the line.</h2>
+  <p class="muted" style="margin: 20px auto 0; max-width: 50ch;">
+    Compare this to <a href="../hero-animation.html" class="btn--link" style="color: var(--gold)">v1's hero</a> — the
+    tactic board, scout cards, GPS readout, and pitch grid are all gone. The
+    research showed 0 of 11 peer sites use a component-grid hero. This is the
+    editorial statement model (Wasserman / Gestifute / F1).
+  </p>
+  <p class="muted" style="margin: 28px auto 0; max-width: 50ch;">
+    Continue to the <a href="./home.html" class="btn--link" style="color: var(--gold)">v2 home page →</a>
+  </p>
+</section>
+
+<script>
+  const hero = document.getElementById('hero');
+  const beats = document.querySelectorAll('.beat');
+  const sub = document.getElementById('sub');
+  const cta = document.getElementById('cta');
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+
+  function update() {
+    if (reduced.matches) {
+      document.documentElement.style.setProperty('--p', '1');
+      beats.forEach(b => b.dataset.on = (b.dataset.beat === '3'));
+      sub.dataset.on = 'true'; cta.dataset.on = 'true';
+      return;
+    }
+    const r = hero.getBoundingClientRect();
+    const total = Math.max(hero.scrollHeight - innerHeight, 1);
+    const p = Math.min(Math.max(-r.top / total, 0), 1);
+    document.documentElement.style.setProperty('--p', p.toFixed(4));
+
+    let active = p > 0.66 ? 3 : p > 0.33 ? 2 : 1;
+    beats.forEach(b => b.dataset.on = (Number(b.dataset.beat) === active));
+    const final = active === 3;
+    sub.dataset.on = final; cta.dataset.on = final;
+  }
+  let t = false;
+  addEventListener('scroll', () => { if (!t) { t = true; requestAnimationFrame(() => { update(); t = false; }); } }, { passive: true });
+  addEventListener('resize', update);
+  update();
+</script>
+
+</body>
+</html>

@@ -1,121 +1,150 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { createReader } from '@keystatic/core/reader';
-import keystaticConfig from '../../keystatic.config';
 
-const reader = createReader(process.cwd(), keystaticConfig);
-const pl = await reader.singletons.players.read();
-
-const heroHeading = pl?.heroHeading ?? 'Are You Next?';
-const heroSubtext = pl?.heroSubtext ?? "We're building Ontario's next generation of professional footballers.";
-const ctaText = pl?.ctaText ?? 'I Want to Be Represented';
+const roster = [
+  { status: 'watched', label: 'Watched', name: 'U19 winger', meta: 'RW · 2007 · Ontario' },
+  { status: 'trial', label: 'Trialing', name: 'U21 #8', meta: 'CM · 2005 · Toronto' },
+  { status: 'signed', label: 'Signed', name: 'U23 centre-back', meta: 'CB · 2003 · L1O' },
+  { status: 'placed', label: 'Placed', name: 'U20 striker', meta: 'ST · 2006 · European trial' },
+  { status: 'watched', label: 'Watched', name: 'U18 keeper', meta: 'GK · 2008 · GTA' },
+  { status: 'trial', label: 'Trialing', name: 'U22 fullback', meta: 'LB · 2004 · MLS Next Pro' },
+  { status: 'watched', label: 'Watched', name: 'U17 midfielder', meta: 'AM · 2009 · Ontario' },
+  { status: 'placed', label: 'Placed', name: 'U23 winger', meta: 'LW · 2003 · USL Championship' },
+  { status: 'watched', label: 'Watched', name: 'U19 #6', meta: 'DM · 2007 · L1O reserve' },
+  { status: 'trial', label: 'Trialing', name: 'U20 forward', meta: 'ST · 2006 · CPL combine' },
+  { status: 'signed', label: 'Signed', name: 'U21 fullback', meta: 'RB · 2005 · CPL Y2' },
+  { status: 'watched', label: 'Watched', name: 'U18 winger', meta: 'LW · 2008 · Showcase 2026' },
+];
+const counts = {
+  all: roster.length,
+  watched: roster.filter((p) => p.status === 'watched').length,
+  trial: roster.filter((p) => p.status === 'trial').length,
+  signed: roster.filter((p) => p.status === 'signed').length,
+  placed: roster.filter((p) => p.status === 'placed').length,
+};
+const lookFor = [
+  { n: '01', title: 'Skill & potential', body: 'Ability on the ball, tactical awareness, and the physical tools to compete at the next level — evaluated across all positions.' },
+  { n: '02', title: 'Drive & dedication', body: 'Talent is the starting point. What separates professionals is the commitment to improve every day, on and off the pitch.' },
+  { n: '03', title: 'Character & coachability', body: 'Clubs look at the whole player. We represent athletes with the mindset to accept feedback, grow, and lead.' },
+];
 ---
 
-<Layout
-  title="Players"
-  description="ProKickTalent is looking for Ontario's next generation of professional footballers. Are you next?"
->
+<Layout title="Players" description="The players ProKickTalent evaluates — anonymized roster of U17–U23 Canadian footballers. Real names appear only with consent.">
 
-  <!-- RECRUITMENT HERO -->
-  <section class="relative min-h-[70vh] flex items-center justify-center text-center overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-br from-background via-gray-900 to-background"></div>
-    <div class="absolute inset-0 opacity-5" style="background-image: repeating-linear-gradient(0deg, transparent, transparent 79px, #22C55E 79px, #22C55E 80px), repeating-linear-gradient(90deg, transparent, transparent 79px, #22C55E 79px, #22C55E 80px);"></div>
-
-    <div class="relative z-10 max-w-4xl mx-auto px-6">
-      <p class="text-green text-sm tracking-[0.3em] uppercase font-body mb-4">ProKickTalent Roster</p>
-      <h1 class="font-heading text-7xl md:text-9xl text-white leading-none mb-6">{heroHeading}</h1>
-      <p class="text-gray-300 font-body text-lg md:text-xl max-w-2xl mx-auto mb-10">{heroSubtext}</p>
-      <a
-        href="/contact"
-        class="inline-block bg-green text-black font-body font-semibold text-sm tracking-[0.2em] uppercase px-10 py-4 hover:bg-emerald-400 transition-colors"
-      >
-        {ctaText}
-      </a>
+  <section class="pl-hero" data-theme="dark">
+    <div class="photo"><span class="photo__tag">PLACEHOLDER · matchday wide shot</span></div>
+    <div class="pl-hero__scrim"></div>
+    <div class="pl-hero__in">
+      <div class="wrap">
+        <p class="eyebrow eyebrow--gold" style="margin-bottom: 22px;">Roster · 2026</p>
+        <h1 class="display-1">The players<br/>we <em>evaluate.</em></h1>
+        <p class="pl-hero__sub">Anonymized at launch — every card is a real evaluation footprint with no identifying details. Names and faces appear only with written player and family consent.</p>
+      </div>
     </div>
   </section>
 
-  <!-- WHAT WE LOOK FOR -->
-  <section class="py-24 px-6 max-w-7xl mx-auto">
-    <p class="text-gold text-sm tracking-[0.3em] uppercase font-body mb-3">The Standard</p>
-    <h2 class="font-heading text-5xl md:text-6xl text-white mb-16">What We Look For</h2>
+  <section class="section">
+    <div class="wrap">
+      <p class="notice"><b>⚠ Anonymized roster.</b> The card component supports a real-player mode the moment consent is in place.</p>
 
-    <div class="grid md:grid-cols-3 gap-6">
-      {[
-        {
-          number: '01',
-          title: 'Skill & Potential',
-          desc: 'Raw ability on the ball, tactical awareness, and the physical tools to compete at the next level. We evaluate players across all positions.',
-        },
-        {
-          number: '02',
-          title: 'Drive & Dedication',
-          desc: 'Natural talent is the starting point. What separates professionals is the commitment to improving every single day, on and off the pitch.',
-        },
-        {
-          number: '03',
-          title: 'Character & Coachability',
-          desc: 'Professional clubs look at the whole player. We represent athletes with the mindset to accept feedback, grow, and lead by example.',
-        },
-      ].map(item => (
-        <div class="bg-surface border border-white/10 p-8 hover:border-green/50 transition-colors">
-          <p class="font-heading text-5xl text-green/30 mb-4">{item.number}</p>
-          <h3 class="font-heading text-2xl text-white mb-4 tracking-wide">{item.title}</h3>
-          <p class="text-gray-400 font-body text-sm leading-relaxed">{item.desc}</p>
-        </div>
-      ))}
-    </div>
-  </section>
+      <div class="filters" role="group" aria-label="Filter roster by status">
+        <button class="filter" data-active="true" data-f="all">All <span>{counts.all}</span></button>
+        <button class="filter" data-f="watched">Watched <span>{counts.watched}</span></button>
+        <button class="filter" data-f="trial">Trialing <span>{counts.trial}</span></button>
+        <button class="filter" data-f="signed">Signed <span>{counts.signed}</span></button>
+        <button class="filter" data-f="placed">Placed <span>{counts.placed}</span></button>
+      </div>
 
-  <!-- HOW IT WORKS -->
-  <section class="py-24 bg-surface">
-    <div class="max-w-7xl mx-auto px-6">
-      <p class="text-gold text-sm tracking-[0.3em] uppercase font-body mb-3">The Process</p>
-      <h2 class="font-heading text-5xl md:text-6xl text-white mb-16">How It Works</h2>
-
-      <div class="grid md:grid-cols-3 gap-8">
-        {[
-          {
-            step: '1',
-            title: 'Get Found',
-            desc: 'We scout live games and tournaments across Ontario. Reach out directly or get referred by a coach — every inquiry is reviewed.',
-          },
-          {
-            step: '2',
-            title: 'Get Evaluated',
-            desc: 'We assess your current level, potential, and goals through a combination of live scouting and GPS performance data.',
-          },
-          {
-            step: '3',
-            title: 'Get Represented',
-            desc: 'If we believe in your future, we build a personalized pathway — from your next club to your first professional contract.',
-          },
-        ].map(item => (
-          <div class="flex gap-6">
-            <div class="font-heading text-7xl text-gold/20 leading-none select-none">{item.step}</div>
-            <div>
-              <h3 class="font-heading text-2xl text-white mb-3 tracking-wide">{item.title}</h3>
-              <p class="text-gray-400 font-body text-sm leading-relaxed">{item.desc}</p>
+      <div class="roster" id="roster">
+        {roster.map((p) => (
+          <article class="pcard" data-status={p.status}>
+            <div class="pcard__photo"><div class="pcard__sil"></div></div>
+            <div class="pcard__body">
+              <p class="pcard__status" data-s={p.status}>{p.label}</p>
+              <p class="pcard__name">{p.name}</p>
+              <p class="pcard__meta">{p.meta}</p>
             </div>
-          </div>
+          </article>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- FINAL CTA -->
-  <section class="py-24 px-6 max-w-4xl mx-auto text-center">
-    <h2 class="font-heading text-5xl md:text-6xl text-white mb-6">
-      Your Career Starts<br/><span class="text-gold">With One Message.</span>
-    </h2>
-    <p class="text-gray-400 font-body text-lg mb-10">
-      Tell us about yourself. Your age, position, current club, and why you believe you have what it takes. We read every message.
-    </p>
-    <a
-      href="/contact"
-      class="inline-block bg-gold text-black font-body font-semibold text-sm tracking-[0.2em] uppercase px-10 py-4 hover:bg-yellow-400 transition-colors"
-    >
-      Contact Us Now
-    </a>
+  <section class="section section--hair">
+    <div class="wrap">
+      <div class="shead">
+        <p class="eyebrow eyebrow--gold">The standard</p>
+        <h2>What we look for.</h2>
+        <p class="shead__lede">Three filters run before any conversation. Anything that doesn't pass stays a watched profile until it does.</p>
+      </div>
+      <div class="wlf">
+        {lookFor.map((w) => (
+          <div class="wlf__c"><span class="wlf__n">{w.n}</span><h3>{w.title}</h3><p>{w.body}</p></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--hair" style="text-align:center;">
+    <div class="wrap wrap--narrow">
+      <p class="eyebrow eyebrow--gold" style="margin-bottom: 24px;">For players</p>
+      <h2 class="display-2">Are you <em>next?</em></h2>
+      <p class="lede" style="margin: 20px auto 32px; max-width: 46ch;">Submit your profile and a recent match. We evaluate and respond within seven days.</p>
+      <a href="/contact" class="btn btn--primary">Submit my profile <span class="arr">→</span></a>
+    </div>
   </section>
 
 </Layout>
+
+<style>
+  .pl-hero { position: relative; min-height: 56vh; display: flex; align-items: flex-end; overflow: hidden; }
+  .pl-hero .photo { position: absolute; inset: 0; }
+  .pl-hero__scrim { position: absolute; inset: 0; z-index: 1; background: linear-gradient(0deg, rgba(11,11,12,0.9), transparent 70%); }
+  .pl-hero__in { position: relative; z-index: 2; width: 100%; padding-bottom: clamp(36px, 6vh, 72px); }
+  .pl-hero__sub { color: rgba(236,234,227,0.75); max-width: 48ch; margin-top: 20px; }
+
+  .notice { font: 500 12px/1.5 var(--mono); color: var(--mute); padding: 14px 18px; border: 1px solid var(--line); border-radius: var(--r-md); margin-bottom: 36px; }
+  .notice b { color: var(--gold); }
+
+  .filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 40px; }
+  .filter { font: 600 11px/1 var(--sans); letter-spacing: 0.12em; text-transform: uppercase; color: var(--mute); padding: 10px 16px; border: 1px solid var(--line-2); border-radius: 100px; background: transparent; cursor: pointer; transition: all 250ms var(--ease); }
+  .filter:hover { color: var(--ink); border-color: var(--ink); }
+  .filter[data-active="true"] { color: var(--bg); background: var(--ink); border-color: var(--ink); }
+  .filter span { color: var(--dim); margin-left: 6px; font-family: var(--mono); }
+  .filter[data-active="true"] span { color: var(--bg); opacity: 0.6; }
+
+  .roster { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .pcard { border: 1px solid var(--line); border-radius: var(--r-md); overflow: hidden; background: var(--bg-2); transition: border-color 300ms var(--ease), transform 300ms var(--ease); }
+  .pcard:hover { border-color: var(--line-2); transform: translateY(-3px); }
+  .pcard__photo { aspect-ratio: 3/4; position: relative; display: flex; align-items: flex-end; justify-content: center; background: linear-gradient(180deg, var(--bg-3), var(--bg-2)); overflow: hidden; }
+  .pcard__sil { width: 64%; height: 80%; background: var(--line-2); mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 130'><ellipse cx='50' cy='28' rx='17' ry='21'/><path d='M22 130 Q22 62 50 57 Q78 62 78 130 Z'/></svg>") no-repeat center/contain; -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 130'><ellipse cx='50' cy='28' rx='17' ry='21'/><path d='M22 130 Q22 62 50 57 Q78 62 78 130 Z'/></svg>") no-repeat center/contain; }
+  .pcard__body { padding: 16px; }
+  .pcard__status { display: inline-flex; align-items: center; gap: 6px; font: 600 10px/1 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--mute); margin-bottom: 10px; }
+  .pcard__status::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+  .pcard__status[data-s="trial"] { color: var(--data); }
+  .pcard__status[data-s="signed"] { color: var(--gold); }
+  .pcard__status[data-s="placed"] { color: var(--ink); }
+  .pcard__name { font-family: var(--serif); font-weight: 500; font-size: 21px; margin: 0 0 4px; }
+  .pcard__meta { font: 500 12px/1.4 var(--mono); color: var(--mute); margin: 0; }
+
+  .wlf { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--r-md); overflow: hidden; }
+  .wlf__c { background: var(--bg); padding: 32px; }
+  .wlf__n { font: 500 12px/1 var(--mono); color: var(--gold); }
+  .wlf__c h3 { margin: 14px 0 8px; }
+  .wlf__c p { color: var(--mute); font-size: 14px; margin: 0; }
+
+  @media (max-width: 900px) { .roster { grid-template-columns: repeat(3,1fr); } }
+  @media (max-width: 760px) { .wlf { grid-template-columns: 1fr; } }
+  @media (max-width: 600px) { .roster { grid-template-columns: repeat(2,1fr); } }
+</style>
+
+<script>
+  const filters = document.querySelectorAll<HTMLButtonElement>('.filter');
+  const cards = document.querySelectorAll<HTMLElement>('#roster .pcard');
+  filters.forEach((f) => f.addEventListener('click', () => {
+    filters.forEach((x) => x.removeAttribute('data-active'));
+    f.setAttribute('data-active', 'true');
+    const want = f.dataset.f;
+    cards.forEach((c) => { c.style.display = (want === 'all' || c.dataset.status === want) ? '' : 'none'; });
+  }));
+</script>

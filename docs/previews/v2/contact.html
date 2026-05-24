@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>v2 · Contact — editorial</title>
+  <meta name="description" content="Get in touch with ProKickTalent — FIFA-licensed representation for U17–U23 Canadian footballers. 24-hour response." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><path d='M3 27 Q 16 -1 29 27' stroke='%23CBA257' stroke-width='2' fill='none' stroke-linecap='round'/><circle cx='16' cy='6' r='3.5' fill='%23CBA257'/></svg>" />
+  <link rel="stylesheet" href="./_system.css" />
+  <style>
+    .ct-hero { position: relative; min-height: 46vh; display: flex; align-items: flex-end; overflow: hidden; }
+    .ct-hero .photo { position: absolute; inset: 0; }
+    .ct-hero__scrim { position: absolute; inset: 0; z-index: 1; background: linear-gradient(0deg, rgba(11,11,12,0.9), transparent 70%); }
+    .ct-hero__in { position: relative; z-index: 2; width: 100%; padding-bottom: clamp(32px,5vh,64px); }
+
+    .ct-grid { display: grid; grid-template-columns: 0.58fr 0.42fr; gap: clamp(28px,5vw,56px); align-items: start; }
+    @media (max-width: 880px) { .ct-grid { grid-template-columns: 1fr; } }
+
+    .form { border: 1px solid var(--line); border-radius: var(--r-md); background: var(--bg-2); padding: clamp(24px,4vw,36px); }
+    .form h2 { font-size: 30px; margin: 0 0 24px; }
+    .field { margin-bottom: 20px; }
+    .field label { display: block; font: 600 11px/1 var(--sans); letter-spacing: 0.16em; text-transform: uppercase; color: var(--mute); margin-bottom: 9px; }
+    .field input, .field select, .field textarea {
+      width: 100%; background: var(--bg); border: 1px solid var(--line-2); border-radius: var(--r-sm);
+      color: var(--ink); font: 400 15px/1.4 var(--sans); padding: 13px 15px; outline: none;
+      transition: border-color 250ms var(--ease), box-shadow 250ms;
+      font-family: var(--sans);
+    }
+    .field input::placeholder, .field textarea::placeholder { color: var(--dim); }
+    .field input:focus, .field select:focus, .field textarea:focus { border-color: var(--gold); box-shadow: 0 0 0 3px var(--gold-soft); }
+    .field textarea { resize: vertical; min-height: 130px; }
+    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 560px) { .field-row { grid-template-columns: 1fr; } }
+    .form__submit { width: 100%; margin-top: 6px; }
+
+    .expect { border: 1px solid var(--line); border-radius: var(--r-md); padding: clamp(24px,4vw,32px); }
+    .expect h2 { font-size: 24px; margin: 0 0 22px; }
+    .expect ul { list-style: none; padding: 0; margin: 0 0 28px; }
+    .expect li { display: grid; grid-template-columns: 16px 1fr; gap: 12px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+    .expect li:last-child { border-bottom: none; }
+    .expect li::before { content: ""; grid-row: 1/3; width: 7px; height: 7px; margin-top: 7px; border-radius: 50%; background: var(--data); box-shadow: 0 0 0 4px var(--gold-soft); }
+    .expect li b { grid-column: 2; font: 600 14px/1.3 var(--sans); color: var(--ink); margin-bottom: 3px; display: block; }
+    .expect li p { grid-column: 2; font-size: 13px; color: var(--mute); margin: 0; line-height: 1.5; }
+    .alt { padding: 18px; background: var(--bg-2); border-radius: var(--r-sm); }
+    .alt h3 { font: 600 11px/1 var(--sans); letter-spacing: 0.16em; text-transform: uppercase; color: var(--mute); margin: 0 0 12px; }
+    .alt__r { display: flex; justify-content: space-between; padding: 7px 0; }
+    .alt__r span { font-size: 13px; color: var(--ink); }
+    .alt__r a { font-size: 13px; color: var(--gold); }
+  </style>
+</head>
+<body>
+
+<nav class="pchrome">
+  <div class="pchrome__in">
+    <span class="pchrome__brand">PKT · <b>v2 editorial</b></span>
+    <a href="./index.html">Index</a>
+    <a href="./home.html">Home</a>
+    <a href="./about.html">About</a>
+    <a href="./players.html">Players</a>
+    <a href="./services.html">Services</a>
+    <a href="./contract-analysis.html">Contract</a>
+    <a href="./media.html">Media</a>
+    <a href="./contact.html" aria-current="page">Contact</a>
+    <a href="./hero.html">Hero</a>
+    <button class="theme-toggle" id="themeToggle" type="button">◐ light</button>
+  </div>
+</nav>
+<script>
+  (function () {
+    const tg = document.getElementById('themeToggle'), root = document.documentElement;
+    if (localStorage.getItem('pkt-v2-theme') === 'dark') { root.setAttribute('data-theme','dark'); tg.textContent='◐ dark'; }
+    tg.addEventListener('click', () => { const d = root.getAttribute('data-theme') !== 'dark'; if (d) root.setAttribute('data-theme','dark'); else root.removeAttribute('data-theme'); tg.textContent = d ? '◐ dark' : '◐ light'; localStorage.setItem('pkt-v2-theme', d ? 'dark' : 'light'); });
+  })();
+</script>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="m" viewBox="0 0 32 32"><path d="M3 27 Q 16 -1 29 27" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-dasharray="2.5 3"/><circle cx="16" cy="6" r="3.5" fill="currentColor"/></symbol>
+</svg>
+
+<nav class="nav" id="nav">
+  <div class="nav__in">
+    <a href="./home.html" class="nav__brand"><svg width="22" height="22"><use href="#m"/></svg><b>ProKickTalent</b></a>
+    <a href="./home.html" class="nav__link">Home</a>
+    <a href="./about.html" class="nav__link">About</a>
+    <a href="./players.html" class="nav__link">Players</a>
+    <a href="./services.html" class="nav__link">Services</a>
+    <a href="./media.html" class="nav__link">Media</a>
+    <a href="./contact.html" class="nav__cta">Start an evaluation</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- HERO (dark band) -->
+  <section class="ct-hero" data-theme="dark">
+    <div class="photo"><span class="photo__tag">PLACEHOLDER · Toronto</span></div>
+    <div class="ct-hero__scrim"></div>
+    <div class="ct-hero__in">
+      <div class="wrap">
+        <p class="eyebrow eyebrow--gold" style="margin-bottom: 20px;">Start the conversation</p>
+        <h1 class="display-1">Get in <em>touch.</em></h1>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="ct-grid">
+
+        <!-- FORM -->
+        <form class="form" action="#" method="POST">
+          <h2>Send a message.</h2>
+          <div class="field-row">
+            <div class="field"><label for="name">Full name</label><input id="name" name="name" type="text" placeholder="Your full name" required /></div>
+            <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" placeholder="you@example.com" required /></div>
+          </div>
+          <div class="field"><label for="interest">I'm interested in</label>
+            <select id="interest" name="interest">
+              <option>Player representation</option>
+              <option>GPS performance analysis</option>
+              <option>Scouting / evaluation</option>
+              <option>Career / pathway guidance</option>
+              <option>Contract review</option>
+              <option>Press &amp; media enquiry</option>
+            </select>
+          </div>
+          <div class="field"><label for="player">Player context (age / position / region)</label><input id="player" name="player" type="text" placeholder="U19 winger · 2007 · Ontario" /></div>
+          <div class="field"><label for="message">Message</label><textarea id="message" name="message" placeholder="What's the next decision in front of you?"></textarea></div>
+          <button class="btn btn--primary form__submit" type="submit">Send message <span class="arr">→</span></button>
+        </form>
+
+        <!-- WHAT TO EXPECT -->
+        <aside class="expect">
+          <h2>What to expect.</h2>
+          <ul>
+            <li><b>24-hour response</b><p>Every message gets a reply within one business day.</p></li>
+            <li><b>20-minute intro call</b><p>If there's a fit, a free call to understand the player's situation.</p></li>
+            <li><b>What to send</b><p>Profile, position, age, current club, one recent match link — keeps the call focused.</p></li>
+            <li><b>Confidentiality</b><p>Nothing leaves the conversation without your written agreement.</p></li>
+            <li><b>If we're not the fit</b><p>We'll say so directly, and where possible suggest a better path.</p></li>
+          </ul>
+          <div class="alt">
+            <h3>Alternate contact</h3>
+            <div class="alt__r"><span>Email</span><a href="mailto:burak@prokicktalent.com">burak@prokicktalent.com</a></div>
+            <div class="alt__r"><span>Instagram</span><a href="#">@prokicktalent</a></div>
+            <div class="alt__r"><span>WhatsApp</span><a href="#">+1 (xxx) xxx-xxxx</a></div>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="foot__in">
+    <a href="./home.html" class="nav__brand"><svg width="20" height="20" style="color:var(--gold)"><use href="#m"/></svg><b style="font-size:16px">ProKickTalent</b></a>
+    <div class="foot__cred"><span>FIFA Licensed Agent</span><span>Toronto · Canada</span><span>© 2026 ProKickTalent</span></div>
+  </div>
+</footer>
+
+<script>const nav=document.getElementById('nav');addEventListener('scroll',()=>{nav.dataset.scrolled=scrollY>16;},{passive:true});</script>
+
+</body>
+</html>

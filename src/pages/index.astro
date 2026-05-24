@@ -1,188 +1,272 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { createReader } from '@keystatic/core/reader';
-import keystaticConfig from '../../keystatic.config';
 
-const reader = createReader(process.cwd(), keystaticConfig);
-const hp = await reader.singletons.homepage.read();
-
-const heroLine1 = hp?.heroLine1 ?? 'Guiding Young Players';
-const heroLine2 = hp?.heroLine2 ?? 'to Professional';
-const heroLine3 = hp?.heroLine3 ?? 'Soccer Careers';
-const heroSubtitle = hp?.heroSubtitle ?? 'ProKickTalent Sports Group — where talent meets opportunity and careers are built, not chased.';
-const ctaText = hp?.ctaText ?? 'Schedule Free Consultation';
-const approachHeading1 = hp?.approachHeading1 ?? 'Most Agents Focus on Transactions.';
-const approachHeading2 = hp?.approachHeading2 ?? 'We Focus on Careers.';
-const approachParagraph1 = hp?.approachParagraph1 ?? '';
-const approachParagraph2 = hp?.approachParagraph2 ?? '';
-const approachParagraph3 = hp?.approachParagraph3 ?? '';
+const services = [
+  { n: '01', title: 'Representation', href: '/services#representation', desc: "Advocacy through trials, offers, and contract terms — FIFA-aligned, from the player's side of the table." },
+  { n: '02', title: 'GPS Analysis', href: '/services#gps', desc: 'Match-by-match data that turns speed, workload, and intensity into evidence scouts can read.' },
+  { n: '03', title: 'Scouting', href: '/services#scouting', desc: 'On-field evaluation across real competitive environments — body shape, decision speed, role fit.' },
+  { n: '04', title: 'Career Guidance', href: '/services#career', desc: 'Mapping academy, college, CPL, MLS Next Pro, and European routes against profile, timing, and outcomes.' },
+];
 ---
 
-<Layout title="Home" description="ProKickTalent Sports Group — FIFA-licensed football agent Burak Can Piroglu guides young Canadian players (U13–U23) to professional soccer careers through representation, GPS analysis, scouting, and career development.">
+<Layout
+  title="Home"
+  description="FIFA-licensed representation for U17–U23 Canadian footballers — scout report, GPS performance, and the right next step, built on evidence, not promises."
+>
+  <Fragment slot="head">
+    <link rel="preload" as="image" type="image/webp" imagesrcset="/images/hero-strike-1100.webp 1100w, /images/hero-strike.webp 1672w" imagesizes="100vw" fetchpriority="high" />
+  </Fragment>
 
-  <!-- HERO -->
-  <section class="relative min-h-screen flex items-center justify-center text-center overflow-hidden">
-    <!-- Placeholder image background (replace with real image later) -->
-    <div class="absolute inset-0 bg-gradient-to-br from-gray-900 via-background to-black"></div>
-    <!-- Decorative pitch lines overlay -->
-    <div class="absolute inset-0 opacity-5" style="background-image: repeating-linear-gradient(0deg, transparent, transparent 79px, #ffffff 79px, #ffffff 80px), repeating-linear-gradient(90deg, transparent, transparent 79px, #ffffff 79px, #ffffff 80px);"></div>
 
-    <div class="relative z-10 max-w-4xl mx-auto px-6">
-      <p class="text-gold text-sm tracking-[0.3em] uppercase mb-4 font-body">Burak Can Piroglu &mdash; FIFA Licensed Agent</p>
-      <h1 class="font-heading text-6xl md:text-8xl text-white leading-none mb-6">
-        {heroLine1}<br/>
-        <span class="text-gold">{heroLine2}</span><br/>
-        {heroLine3}
-      </h1>
-      <p class="text-gray-300 text-lg md:text-xl font-body max-w-2xl mx-auto mb-10">
-        {heroSubtitle}
-      </p>
-      <a
-        href="/contact"
-        class="inline-block bg-gold text-black font-body font-semibold text-sm tracking-[0.2em] uppercase px-10 py-4 hover:bg-yellow-400 transition-colors"
-      >
-        {ctaText}
-      </a>
-    </div>
-
-    <!-- Scroll indicator -->
-    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-      <svg aria-hidden="true" class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-      </svg>
-    </div>
-  </section>
-
-  <!-- WHO WE SERVE -->
-  <section class="py-24 px-6 max-w-7xl mx-auto">
-    <p class="text-gold text-sm tracking-[0.3em] uppercase font-body mb-3">Who We Serve</p>
-    <h2 class="font-heading text-5xl md:text-6xl text-white mb-16">The Players We Develop</h2>
-
-    <div class="grid md:grid-cols-3 gap-6">
-      <!-- Card 1 -->
-      <div class="bg-surface border border-white/10 p-8 hover:border-gold/50 transition-colors group">
-        <div class="text-green font-heading text-4xl mb-2">U13–U16</div>
-        <h3 class="font-heading text-2xl text-white mb-3 tracking-wide">Youth Players</h3>
-        <p class="text-gray-400 font-body text-sm leading-relaxed">
-          Early pathway planning and development guidance to set the foundation for professional careers.
-        </p>
+  <!-- HERO — scroll-driven three-beat editorial statement (always dark) -->
+  <section class="hero" id="hero" data-theme="dark">
+    <div class="hero__pin">
+      <div class="hero__photo">
+        <picture>
+          <source type="image/webp" srcset="/images/hero-strike-1100.webp 1100w, /images/hero-strike.webp 1672w" sizes="100vw" />
+          <img
+            src="/images/hero-strike-1100.jpg"
+            srcset="/images/hero-strike-1100.jpg 1100w, /images/hero-strike.jpg 1672w"
+            sizes="100vw"
+            alt="Footballer striking the ball on an empty pitch at golden hour"
+            fetchpriority="high"
+            decoding="async"
+          />
+        </picture>
       </div>
-      <!-- Card 2 -->
-      <div class="bg-surface border border-white/10 p-8 hover:border-gold/50 transition-colors group">
-        <div class="text-green font-heading text-4xl mb-2">U17–U19</div>
-        <h3 class="font-heading text-2xl text-white mb-3 tracking-wide">Academy Players</h3>
-        <p class="text-gray-400 font-body text-sm leading-relaxed">
-          Trial preparation, showcase opportunities, and strategic positioning for the next level.
-        </p>
-      </div>
-      <!-- Card 3 -->
-      <div class="bg-surface border border-white/10 p-8 hover:border-gold/50 transition-colors group">
-        <div class="text-green font-heading text-4xl mb-2">U20–U23</div>
-        <h3 class="font-heading text-2xl text-white mb-3 tracking-wide">College / Semi-Pro</h3>
-        <p class="text-gray-400 font-body text-sm leading-relaxed">
-          Transition support from college or semi-pro to professional contracts in competitive leagues.
-        </p>
-      </div>
-    </div>
-  </section>
+      <div class="hero__scrim"></div>
 
-  <!-- OUR APPROACH -->
-  <section class="py-24 bg-surface">
-    <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
-      <div>
-        <p class="text-gold text-sm tracking-[0.3em] uppercase font-body mb-3">Our Approach</p>
-        <h2 class="font-heading text-5xl md:text-6xl text-white mb-8 leading-none">
-          {approachHeading1}<br/>
-          <span class="text-gold">{approachHeading2}</span>
-        </h2>
-        <p class="text-gray-300 font-body text-base leading-relaxed mb-6">{approachParagraph1}</p>
-        <p class="text-gray-400 font-body text-base leading-relaxed mb-6">{approachParagraph2}</p>
-        <p class="text-gray-300 font-body text-base leading-relaxed mb-10 font-semibold">{approachParagraph3}</p>
-        <a
-          href="/contact"
-          class="inline-block border border-gold text-gold font-body font-semibold text-sm tracking-[0.2em] uppercase px-8 py-3 hover:bg-gold hover:text-black transition-colors"
-        >
-          Contact Us
-        </a>
-      </div>
-      <!-- Agent credential panel -->
-      <div class="border border-white/10 bg-background overflow-hidden">
-        <div class="w-full aspect-[4/3] overflow-hidden">
-          <img src="/images/burak.jpg" alt="Burak Can Piroglu" class="w-full h-full object-cover object-top" />
+      <div class="hero__content">
+        <div class="wrap">
+          <div class="hero__id">
+            <span>PKT—001</span><span class="dot"></span><span>FIFA LICENSED</span><span class="dot"></span><span>TORONTO</span>
+          </div>
+          <div class="beats">
+            <h1 class="display-1 beat" data-beat="1" data-on="true">See the<br/><em>player.</em></h1>
+            <h1 class="display-1 beat" data-beat="2">Read the<br/><em>evidence.</em></h1>
+            <h1 class="display-1 beat" data-beat="3">Make the<br/><em>move.</em></h1>
+          </div>
+          <p class="hero__sub" id="hero-sub">
+            FIFA-licensed representation for U17–U23 Canadian footballers. Scout
+            report, GPS performance, and the right next step — built on evidence,
+            not promises.
+          </p>
+          <div class="hero__cta" id="hero-cta">
+            <a href="/contact" class="btn btn--primary">Start an evaluation <span class="arr">→</span></a>
+            <a href="/about" class="btn btn--ghost">Meet Burak</a>
+          </div>
         </div>
-        <div class="p-8">
-          <p class="font-heading text-3xl text-white tracking-wide mb-1">Burak Can Piroglu</p>
-          <p class="text-gold text-sm tracking-widest uppercase font-body mb-4">FIFA&trade; Licensed Football Agent</p>
-          <div class="space-y-2 text-sm text-gray-400 font-body">
-            <p class="flex items-center gap-2">
-              <span class="text-green">&#10003;</span> FIFA Licensed Agent (2024)
-            </p>
-            <p class="flex items-center gap-2">
-              <span class="text-green">&#10003;</span> Geomatics &amp; Geospatial Science
-            </p>
-            <p class="flex items-center gap-2">
-              <span class="text-green">&#10003;</span> Based in Toronto, Ontario
-            </p>
-            <p class="flex items-center gap-2">
-              <span class="text-green">&#10003;</span> Serving players across Canada
-            </p>
+      </div>
+
+      <div class="scroll-cue"><span>scroll</span><span class="line"></span></div>
+      <div class="hero__progress"></div>
+    </div>
+  </section>
+
+  <!-- MANIFESTO -->
+  <section class="section">
+    <div class="wrap">
+      <p class="eyebrow eyebrow--gold" style="margin-bottom: 28px;">The approach</p>
+      <h2 class="display-2" style="max-width: 22ch;">Representation that starts with <em>evidence</em>, not introductions.</h2>
+      <p class="lede" style="margin-top: 32px; max-width: 54ch;">
+        Every player file is built before a single conversation happens. We look
+        at the player, the pathway, the timing, and the fit — then decide what
+        move is actually worth making.
+      </p>
+    </div>
+  </section>
+
+  <!-- FOUNDER ANCHOR -->
+  <section class="section section--hair">
+    <div class="wrap">
+      <div class="founder">
+        <div class="founder__portrait">
+          <img src="/images/burak.jpg" alt="Burak Can Piroglu, FIFA-licensed football agent" />
+          <div class="founder__name"><b>Burak Can Piroglu</b><span>FIFA™ Licensed Agent</span></div>
+        </div>
+        <div>
+          <p class="eyebrow eyebrow--gold" style="margin-bottom: 24px;">The agent</p>
+          <blockquote class="founder__quote">The work starts before the trial. The trial only confirms what the evidence already shows.”</blockquote>
+          <div class="creds">
+            <div class="cred"><p class="eyebrow">License</p><b>FIFA</b><span>Professional standards</span></div>
+            <div class="cred"><p class="eyebrow">Base</p><b>Toronto</b><span>Ontario · Canada</span></div>
+            <div class="cred"><p class="eyebrow">Method</p><b>Scout + GPS</b><span>Judgment + data</span></div>
+            <div class="cred"><p class="eyebrow">Focus</p><b>U17–U23</b><span>Serious players only</span></div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- SERVICES OVERVIEW -->
-  <section class="py-24 px-6 max-w-7xl mx-auto">
-    <p class="text-gold text-sm tracking-[0.3em] uppercase font-body mb-3">What We Offer</p>
-    <h2 class="font-heading text-5xl md:text-6xl text-white mb-16">Services Overview</h2>
-
-    <div class="grid md:grid-cols-2 gap-6">
-      {[
-        {
-          title: 'Player Representation & Contract Negotiation',
-          desc: 'We advocate for your career with a FIFA-licensed agent who negotiates contracts and opportunities so you can stay focused on the game.',
-        },
-        {
-          title: 'GPS Performance Analysis & Reports',
-          desc: 'Using GPS tracking vest technology, we turn your on-field performance into data-driven reports that help you develop faster and get noticed by scouts.',
-        },
-        {
-          title: 'Scouting & Talent Identification',
-          desc: 'We actively scout emerging youth talent across Ontario — if you have the skill and the drive, we want to find you.',
-        },
-        {
-          title: 'Career Development & Guidance',
-          desc: 'From local leagues to professional clubs, we build a personalized roadmap to help players and families navigate the path to professional football.',
-        },
-      ].map((service) => (
-        <div class="bg-surface border border-white/10 p-8 hover:border-gold/50 transition-colors group">
-          <h3 class="font-heading text-2xl text-white mb-4 tracking-wide group-hover:text-gold transition-colors">
-            {service.title}
-          </h3>
-          <p class="text-gray-400 font-body text-sm leading-relaxed mb-6">{service.desc}</p>
-          <a href="/services" class="text-gold text-sm tracking-widest uppercase font-body hover:underline">
-            Learn More &rarr;
+  <!-- SERVICES (editorial list) -->
+  <section class="section">
+    <div class="wrap">
+      <div class="shead">
+        <p class="eyebrow eyebrow--gold">What we do</p>
+        <h2>Four parts of one player file.</h2>
+      </div>
+      <div class="svc">
+        {services.map((s) => (
+          <a href={s.href} class="svc__row">
+            <span class="svc__num">{s.n}</span>
+            <div><h3>{s.title}</h3><p>{s.desc}</p></div>
+            <svg class="svc__go" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   </section>
 
-  <!-- FINAL CTA BANNER -->
-  <section class="py-24 bg-gold">
-    <div class="max-w-4xl mx-auto px-6 text-center">
-      <h2 class="font-heading text-5xl md:text-6xl text-black mb-6">Ready to Plan Your Pathway?</h2>
-      <p class="text-black/70 font-body text-lg mb-10">
-        Take the first step toward your professional football career. A free consultation costs nothing but could change everything.
-      </p>
-      <a
-        href="/contact"
-        class="inline-block bg-black text-white font-body font-semibold text-sm tracking-[0.2em] uppercase px-10 py-4 hover:bg-gray-900 transition-colors"
-      >
-        Schedule Free Consultation
-      </a>
+  <!-- PATHWAY -->
+  <section class="section section--hair">
+    <div class="wrap">
+      <div class="shead">
+        <p class="eyebrow eyebrow--data">Pathway</p>
+        <h2>Two stages. Two different problems.</h2>
+        <p class="shead__lede">The work is understanding what the player is ready for — and what move creates the strongest next opportunity.</p>
+      </div>
+      <div class="paths">
+        <div class="path">
+          <span class="path__code">U17—U19</span>
+          <h3>Academy &amp; showcase window.</h3>
+          <p>Exposure decisions, trial readiness, and performance proof. Which events, academies, and introductions are worth the time, money, and risk.</p>
+          <ul>
+            <li>Match influence &amp; technical floor</li>
+            <li>Coachability &amp; physical output</li>
+            <li>Evidence-backed player file</li>
+            <li>The right showcase or trial path</li>
+          </ul>
+        </div>
+        <div class="path">
+          <span class="path__code">U20—U23</span>
+          <h3>College &amp; semi-pro transition.</h3>
+          <p>Contract readiness, market fit, and the next credible professional step. How to compare CPL, MLS Next Pro, European trial, college, and semi-pro routes.</p>
+          <ul>
+            <li>Role clarity &amp; game-model fit</li>
+            <li>Data consistency &amp; contract timing</li>
+            <li>Packaging for serious conversations</li>
+            <li>Clubs, scouts, decision-makers</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLOSING CTA -->
+  <section class="section section--hair" style="text-align: center;">
+    <div class="wrap wrap--narrow">
+      <p class="eyebrow eyebrow--gold" style="margin-bottom: 28px;">Evaluation request</p>
+      <h2 class="display-2">Ready to build the <em>player file?</em></h2>
+      <p class="lede" style="margin: 0 auto 36px; max-width: 48ch;">Send the context, the questions, and the next decision in front of you. We'll evaluate the pathway before the move is made.</p>
+      <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;">
+        <a href="/contact" class="btn btn--primary">Start a player evaluation <span class="arr">→</span></a>
+        <a href="mailto:burak@prokicktalent.com" class="btn btn--ghost">Email Burak</a>
+      </div>
     </div>
   </section>
 
 </Layout>
+
+<style>
+  .hero { position: relative; height: 240vh; }
+  .hero__pin { position: sticky; top: 0; height: 100vh; overflow: hidden; display: flex; align-items: center; }
+  .hero__photo { position: absolute; inset: 0; transform: scale(calc(1 + 0.08 * var(--p, 0))); transition: transform 120ms linear; }
+  .hero__photo picture, .hero__photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
+  .hero__scrim { position: absolute; inset: 0; z-index: 1; background: linear-gradient(90deg, rgba(11,11,12,0.92) 0%, rgba(11,11,12,0.65) 45%, rgba(11,11,12,0.35) 100%), linear-gradient(0deg, rgba(11,11,12,0.85), transparent 55%); }
+  .hero__content { position: relative; z-index: 2; width: 100%; }
+  .hero__id { display: flex; gap: 16px; align-items: center; margin-bottom: 28px; font: 500 11px/1 var(--mono); letter-spacing: 0.08em; color: var(--mute); }
+  .hero__id .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--gold); }
+  .beats { display: grid; }
+  .beat { grid-area: 1 / 1; opacity: 0; transition: opacity 600ms var(--ease); }
+  .beat[data-on="true"] { opacity: 1; }
+  .hero__sub { margin-top: 32px; max-width: 46ch; color: var(--mute); font-size: 18px; line-height: 1.55; opacity: 0; transform: translateY(8px); transition: opacity 600ms var(--ease), transform 600ms var(--ease); }
+  .hero__sub[data-on="true"] { opacity: 1; transform: none; }
+  .hero__cta { margin-top: 32px; display: flex; gap: 14px; flex-wrap: wrap; opacity: 0; transform: translateY(8px); transition: opacity 600ms var(--ease) 80ms, transform 600ms var(--ease) 80ms; }
+  .hero__cta[data-on="true"] { opacity: 1; transform: none; }
+  .hero__progress { position: absolute; left: 0; bottom: 0; height: 2px; background: var(--gold); width: calc(100% * var(--p, 0)); z-index: 3; opacity: 0.7; }
+  .scroll-cue { position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%); z-index: 3; font: 500 10px/1 var(--mono); letter-spacing: 0.2em; text-transform: uppercase; color: var(--mute); display: flex; flex-direction: column; align-items: center; gap: 10px; opacity: calc(1 - 2 * var(--p, 0)); }
+  .scroll-cue .line { width: 1px; height: 28px; background: linear-gradient(var(--mute), transparent); }
+
+  .founder { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: clamp(32px, 6vw, 88px); align-items: center; }
+  .founder__portrait { position: relative; aspect-ratio: 4/5; border-radius: var(--r-md); overflow: hidden; background: var(--bg-3); }
+  .founder__portrait img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 18%; }
+  .founder__name { position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; padding: 22px; background: linear-gradient(0deg, rgba(0,0,0,0.85), transparent); }
+  .founder__name b { font-family: var(--serif); font-weight: 500; font-size: 26px; display: block; color: #ECEAE3; }
+  .founder__name span { font: 600 11px/1 var(--sans); letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
+  .founder__quote { margin: 0 0 32px; font-family: var(--serif); font-style: italic; font-size: clamp(24px, 3vw, 36px); line-height: 1.35; color: var(--ink); }
+  .founder__quote::before { content: "“"; color: var(--gold); }
+  .creds { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--r-md); overflow: hidden; }
+  .cred { background: var(--bg); padding: 20px; }
+  .cred .eyebrow { margin-bottom: 8px; }
+  .cred b { font-family: var(--serif); font-weight: 500; font-size: 22px; display: block; }
+  .cred span { color: var(--mute); font-size: 13px; }
+
+  .svc { border-top: 1px solid var(--line); }
+  .svc__row { display: grid; grid-template-columns: 80px 1fr auto; gap: clamp(16px, 4vw, 56px); align-items: baseline; padding: clamp(28px, 4vh, 44px) 0; border-bottom: 1px solid var(--line); transition: padding-left 350ms var(--ease); }
+  .svc__row:hover { padding-left: 12px; }
+  .svc__num { font: 500 13px/1 var(--mono); color: var(--gold); }
+  .svc__row h3 { margin: 0 0 8px; }
+  .svc__row p { margin: 0; color: var(--mute); font-size: 15px; max-width: 52ch; }
+  .svc__go { color: var(--mute); transition: color 250ms var(--ease), transform 300ms var(--ease); }
+  .svc__row:hover .svc__go { color: var(--gold); transform: translateX(4px); }
+
+  .paths { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--r-md); overflow: hidden; }
+  .path { background: var(--bg); padding: clamp(28px, 4vw, 44px); }
+  .path__code { font: 500 12px/1 var(--mono); color: var(--data); letter-spacing: 0.1em; }
+  .path h3 { margin: 14px 0 18px; }
+  .path p { color: var(--mute); font-size: 15px; }
+  .path ul { list-style: none; padding: 0; margin: 20px 0 0; }
+  .path li { padding: 8px 0; border-top: 1px solid var(--line); color: var(--mute); font-size: 14px; display: flex; gap: 10px; }
+  .path li::before { content: ""; width: 5px; height: 5px; margin-top: 8px; background: var(--data); border-radius: 50%; flex-shrink: 0; }
+
+  @media (max-width: 900px) { .founder { grid-template-columns: 1fr; } }
+  @media (max-width: 760px) { .paths { grid-template-columns: 1fr; } }
+  @media (max-width: 720px) { .svc__row { grid-template-columns: 48px 1fr; } .svc__go { display: none; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero { height: auto; }
+    .hero__pin { position: relative; height: auto; min-height: 90vh; padding-block: 120px; }
+    .beat[data-beat="3"] { opacity: 1; position: relative; }
+    .beat[data-beat="1"], .beat[data-beat="2"] { display: none; }
+    .hero__sub, .hero__cta { opacity: 1; transform: none; }
+    .scroll-cue { display: none; }
+  }
+</style>
+
+<script>
+  const hero = document.getElementById('hero');
+  const beats = document.querySelectorAll<HTMLElement>('.beat');
+  const sub = document.getElementById('hero-sub');
+  const cta = document.getElementById('hero-cta');
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  function update() {
+    if (!hero) return;
+    if (reduced.matches) {
+      document.documentElement.style.setProperty('--p', '1');
+      beats.forEach((b) => b.dataset.on = String(b.dataset.beat === '3'));
+      sub?.setAttribute('data-on', 'true');
+      cta?.setAttribute('data-on', 'true');
+      return;
+    }
+    const r = hero.getBoundingClientRect();
+    const total = Math.max(hero.scrollHeight - window.innerHeight, 1);
+    const p = Math.min(Math.max(-r.top / total, 0), 1);
+    document.documentElement.style.setProperty('--p', p.toFixed(4));
+
+    const active = p > 0.66 ? 3 : p > 0.33 ? 2 : 1;
+    beats.forEach((b) => b.dataset.on = String(Number(b.dataset.beat) === active));
+    const final = active === 3;
+    sub?.setAttribute('data-on', String(final));
+    cta?.setAttribute('data-on', String(final));
+  }
+
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => { update(); ticking = false; });
+  }, { passive: true });
+  window.addEventListener('resize', update);
+  update();
+</script>

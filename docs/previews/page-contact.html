@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>A6.6 · Contact — page mockup</title>
+  <link rel="stylesheet" href="./_preview-system.css" />
+  <link rel="stylesheet" href="./_preview-components.css" />
+  <style>
+    .ct-hero {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 96px 24px 32px;
+    }
+    .ct-hero h1 { font-size: clamp(72px, 9vw, 128px); }
+    .ct-hero h1 span { color: var(--gold); }
+
+    .ct-grid {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 48px 24px 96px;
+      display: grid;
+      grid-template-columns: 0.58fr 0.42fr;
+      gap: 32px;
+      align-items: start;
+    }
+    @media (max-width: 900px) { .ct-grid { grid-template-columns: 1fr; } }
+
+    /* form */
+    .ct-form {
+      padding: 32px;
+    }
+    .ct-form h2 { font-size: 36px; margin: 0 0 24px; }
+    .ct-form__field {
+      margin-bottom: 20px;
+    }
+    .ct-form__label {
+      display: block;
+      font: 600 11px/1 'Inter';
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: var(--mute);
+      margin-bottom: 10px;
+    }
+    .ct-form__input,
+    .ct-form__select,
+    .ct-form__textarea {
+      width: 100%;
+      background: var(--surface-2);
+      border: 1px solid var(--hairline);
+      border-radius: var(--r-sm);
+      color: var(--bone);
+      font: 400 15px/1.4 'Inter';
+      padding: 14px 16px;
+      outline: none;
+      transition: border-color 250ms var(--ease-out-expo), box-shadow 250ms;
+    }
+    .ct-form__input::placeholder,
+    .ct-form__textarea::placeholder { color: var(--dim); }
+    .ct-form__input:focus,
+    .ct-form__select:focus,
+    .ct-form__textarea:focus {
+      border-color: var(--electric);
+      box-shadow: 0 0 0 4px rgba(110,231,255,0.08);
+    }
+    .ct-form__textarea {
+      resize: vertical;
+      min-height: 140px;
+      font-family: 'Inter', sans-serif;
+    }
+    .ct-form__row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 600px) { .ct-form__row { grid-template-columns: 1fr; } }
+    .ct-form__submit {
+      width: 100%;
+      padding: 16px;
+      margin-top: 8px;
+      background: var(--gold);
+      color: #0A0A0A;
+      border: none;
+      border-radius: var(--r-sm);
+      font: 600 13px/1 'Inter';
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      cursor: pointer;
+      transition: background 250ms;
+    }
+    .ct-form__submit:hover { background: var(--bone); }
+
+    /* what to expect */
+    .ct-expect {
+      padding: 32px;
+    }
+    .ct-expect h2 { font-size: 28px; margin: 0 0 24px; }
+    .ct-expect ul {
+      list-style: none; padding: 0; margin: 0 0 32px;
+    }
+    .ct-expect li {
+      display: grid;
+      grid-template-columns: 24px 1fr;
+      gap: 12px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--hairline);
+    }
+    .ct-expect li:last-child { border-bottom: none; }
+    .ct-expect li strong {
+      grid-column: 2;
+      display: block;
+      font: 600 14px/1.3 'Inter';
+      color: var(--bone);
+      margin-bottom: 4px;
+    }
+    .ct-expect li p {
+      grid-column: 2;
+      font-size: 13px;
+      color: var(--mute);
+      margin: 0;
+      line-height: 1.5;
+    }
+    .ct-expect li::before {
+      content: "";
+      grid-column: 1;
+      grid-row: 1 / 3;
+      width: 8px; height: 8px;
+      margin-top: 8px;
+      background: var(--signal);
+      border-radius: 50%;
+      box-shadow: 0 0 0 4px rgba(100,217,138,0.15);
+    }
+
+    .ct-alt {
+      padding: 20px;
+      background: var(--surface-2);
+      border-radius: var(--r-sm);
+      margin-top: 16px;
+    }
+    .ct-alt h3 {
+      font: 600 11px/1 'Inter';
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: var(--mute);
+      margin: 0 0 12px;
+    }
+    .ct-alt__row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 0;
+    }
+    .ct-alt__row span { font-size: 13px; color: var(--bone); }
+    .ct-alt__row a { color: var(--electric); font-size: 13px; text-decoration: none; }
+    .ct-alt__row a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+<nav class="preview-chrome" aria-label="Preview index">
+  <div class="preview-chrome__inner">
+    <span class="preview-chrome__brand">PKT design previews · <b>Phase A</b></span>
+    <a class="preview-chrome__link" href="./index.html">Index</a>
+    <a class="preview-chrome__link" href="./style-tile.html">Style tile</a>
+    <a class="preview-chrome__link" href="./logo-concepts.html">Logo</a>
+    <a class="preview-chrome__link" href="./components.html">Components</a>
+    <a class="preview-chrome__link" href="./command-bar.html">⌘K bar</a>
+    <a class="preview-chrome__link" href="./hero-animation.html">Hero</a>
+    <a class="preview-chrome__link" href="./page-home.html">Home</a>
+    <a class="preview-chrome__link" href="./page-about.html">About</a>
+    <a class="preview-chrome__link" href="./page-players.html">Players</a>
+    <a class="preview-chrome__link" href="./page-services.html">Services</a>
+    <a class="preview-chrome__link" href="./page-media.html">Media</a>
+    <a class="preview-chrome__link" href="./page-contact.html" aria-current="page">Contact</a>
+  </div>
+</nav>
+
+<svg width="0" height="0" style="position: absolute;" aria-hidden="true">
+  <symbol id="m" viewBox="0 0 32 32"><path d="M3 27 Q 16 -1 29 27" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-dasharray="2.5 3"/><circle cx="16" cy="6" r="3.5" fill="currentColor"/></symbol>
+</svg>
+
+<nav class="c-gnav">
+  <div class="c-gnav__inner">
+    <a href="./page-home.html" class="c-gnav__brand"><svg width="24" height="24"><use href="#m"/></svg><span>PROKICKTALENT</span></a>
+    <a href="./page-home.html" class="c-gnav__link">Home</a>
+    <a href="./page-about.html" class="c-gnav__link">About</a>
+    <a href="./page-players.html" class="c-gnav__link">Players</a>
+    <a href="./page-services.html" class="c-gnav__link">Services</a>
+    <a href="./page-media.html" class="c-gnav__link">Media</a>
+    <a href="./page-contact.html" class="c-gnav__link" aria-current="page">Contact</a>
+    <button class="c-gnav__kbd" type="button">⌘K</button>
+  </div>
+</nav>
+
+<main>
+  <section class="ct-hero">
+    <p class="eyebrow eyebrow--gold">Start the conversation</p>
+    <h1 style="margin-top: 16px;">Get in<br/><span>touch.</span></h1>
+  </section>
+
+  <div class="ct-grid">
+
+    <!-- FORM -->
+    <form class="ct-form tier-glass" action="#" method="POST">
+      <h2>Send a message.</h2>
+
+      <div class="ct-form__row">
+        <div class="ct-form__field">
+          <label class="ct-form__label" for="name">Full name</label>
+          <input class="ct-form__input" id="name" name="name" type="text" placeholder="Your full name" required />
+        </div>
+        <div class="ct-form__field">
+          <label class="ct-form__label" for="email">Email</label>
+          <input class="ct-form__input" id="email" name="email" type="email" placeholder="you@example.com" required />
+        </div>
+      </div>
+
+      <div class="ct-form__field">
+        <label class="ct-form__label" for="interest">I'm interested in</label>
+        <select class="ct-form__select" id="interest" name="interest">
+          <option>Player representation</option>
+          <option>GPS performance analysis</option>
+          <option>Scouting / evaluation</option>
+          <option>Career / pathway guidance</option>
+          <option>Press &amp; media enquiry</option>
+          <option>Something else</option>
+        </select>
+      </div>
+
+      <div class="ct-form__field">
+        <label class="ct-form__label" for="player">Player context (age / position / region)</label>
+        <input class="ct-form__input" id="player" name="player" type="text" placeholder="U19 winger · 2007 · Ontario" />
+      </div>
+
+      <div class="ct-form__field">
+        <label class="ct-form__label" for="message">Message</label>
+        <textarea class="ct-form__textarea" id="message" name="message" placeholder="What's the next decision in front of you?"></textarea>
+      </div>
+
+      <button class="ct-form__submit" type="submit">Send message</button>
+    </form>
+
+    <!-- WHAT TO EXPECT -->
+    <aside class="ct-expect tier-flat">
+      <h2>What to expect.</h2>
+      <ul>
+        <li>
+          <strong>24-hour response</strong>
+          <p>Every message gets a reply within one business day.</p>
+        </li>
+        <li>
+          <strong>20-minute intro call</strong>
+          <p>If there's a fit, we schedule a free 20-minute call to understand the player's situation.</p>
+        </li>
+        <li>
+          <strong>What to send beforehand</strong>
+          <p>Player profile, position, age, current club, one recent match link if available — keeps the call focused.</p>
+        </li>
+        <li>
+          <strong>Confidentiality</strong>
+          <p>Nothing leaves the conversation without your written agreement. No public sharing, no name-dropping.</p>
+        </li>
+        <li>
+          <strong>If we're not the right fit</strong>
+          <p>We'll say so directly and, where possible, suggest a more appropriate path.</p>
+        </li>
+      </ul>
+
+      <div class="ct-alt">
+        <h3>Alternate contact</h3>
+        <div class="ct-alt__row">
+          <span>Email</span>
+          <a href="mailto:burak@example.com">burak@prokicktalent.com</a>
+        </div>
+        <div class="ct-alt__row">
+          <span>Instagram</span>
+          <a href="https://instagram.com/prokicktalent" target="_blank" rel="noopener">@prokicktalent</a>
+        </div>
+        <div class="ct-alt__row">
+          <span>WhatsApp</span>
+          <a href="#">+1 (xxx) xxx-xxxx</a>
+        </div>
+      </div>
+    </aside>
+
+  </div>
+</main>
+
+<footer class="c-footer">
+  <div>
+    <a href="./page-home.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--bone);">
+      <svg width="20" height="20" style="color: var(--gold);"><use href="#m"/></svg>
+      <span style="font: 700 14px/1 'Bebas Neue'; letter-spacing: 0.06em;">PROKICKTALENT</span>
+    </a>
+  </div>
+  <div class="c-footer__cred">
+    <span>FIFA Licensed Agent</span>
+    <span>Toronto · Canada</span>
+    <span>© 2026 ProKickTalent Sports Group</span>
+  </div>
+</footer>
+
+</body>
+</html>

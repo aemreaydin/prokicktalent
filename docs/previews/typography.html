@@ -1,0 +1,542 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>A1.b · Typography directions</title>
+  <link rel="stylesheet" href="./_preview-system.css" />
+
+  <!-- Load every typeface up-front so direction-comparisons are fair -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,700;1,9..144,400;1,9..144,500&family=Anton&family=Public+Sans:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    .dir {
+      padding: 56px 48px;
+      margin-bottom: 32px;
+      position: relative;
+    }
+    .dir__head {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      gap: 24px;
+      flex-wrap: wrap;
+      padding-bottom: 24px;
+      margin-bottom: 40px;
+      border-bottom: 1px solid var(--hairline);
+    }
+    .dir__title { font: 600 13px/1 'Inter', sans-serif; letter-spacing: 0.22em; text-transform: uppercase; color: var(--electric); margin: 0 0 8px; }
+    .dir__name { font: 600 28px/1.1 'Inter', sans-serif; color: var(--bone); margin: 0; }
+    .dir__pair { font: 500 12px/1.4 'JetBrains Mono', monospace; color: var(--mute); margin: 8px 0 0; }
+    .dir__ref {
+      max-width: 320px;
+      font: 400 13px/1.5 'Inter', sans-serif;
+      color: var(--mute);
+    }
+    .dir__ref b { color: var(--bone); font-weight: 600; }
+
+    /* sample uses CSS vars per direction */
+    .dir .s-eyebrow {
+      font-family: var(--ff-ui);
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.24em;
+      color: var(--gold);
+      margin: 0 0 24px;
+    }
+    .dir .s-hero {
+      font-family: var(--ff-display);
+      font-size: clamp(64px, 8vw, 112px);
+      line-height: var(--lh-display, 0.95);
+      font-weight: var(--fw-display, 400);
+      color: var(--bone);
+      margin: 0 0 8px;
+      letter-spacing: var(--ls-display, 0);
+    }
+    .dir .s-hero em {
+      font-style: italic;
+      color: var(--gold);
+      font-weight: var(--fw-display, 400);
+    }
+    .dir .s-sub {
+      font-family: var(--ff-body);
+      font-size: 18px;
+      line-height: 1.6;
+      color: var(--mute);
+      max-width: 540px;
+      margin: 32px 0;
+    }
+    .dir .s-quote {
+      font-family: var(--ff-quote);
+      font-style: italic;
+      font-weight: 500;
+      font-size: 26px;
+      line-height: 1.4;
+      color: var(--bone);
+      padding: 24px 0 24px 24px;
+      border-left: 2px solid var(--gold);
+      margin: 32px 0;
+      max-width: 560px;
+    }
+    .dir .s-row {
+      display: flex; gap: 24px; flex-wrap: wrap; align-items: center;
+      margin-top: 24px;
+    }
+    .dir .s-btn {
+      font-family: var(--ff-ui);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 14px 24px;
+      border: none;
+      border-radius: var(--r-sm);
+      background: var(--gold);
+      color: #0A0A0A;
+      cursor: pointer;
+    }
+    .dir .s-mono {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      color: var(--signal);
+      letter-spacing: -0.01em;
+    }
+    .dir .s-card {
+      margin-top: 32px;
+      padding: 24px;
+      background: var(--surface-2);
+      border: 1px solid var(--hairline);
+      border-radius: var(--r-md);
+      max-width: 360px;
+    }
+    .dir .s-card-eyebrow {
+      font-family: var(--ff-ui);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--mute);
+      margin: 0 0 12px;
+    }
+    .dir .s-card-h {
+      font-family: var(--ff-display);
+      font-size: var(--fs-h3, 36px);
+      line-height: 1.05;
+      font-weight: var(--fw-display, 400);
+      color: var(--bone);
+      margin: 0 0 12px;
+    }
+    .dir .s-card-p {
+      font-family: var(--ff-body);
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--mute);
+      margin: 0;
+    }
+
+    .dir__notes {
+      margin-top: 40px;
+      padding-top: 24px;
+      border-top: 1px solid var(--hairline);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    @media (max-width: 700px) { .dir__notes { grid-template-columns: 1fr; } }
+    .dir__notes h4 {
+      font: 600 11px/1 'Inter', sans-serif;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      margin: 0 0 12px;
+    }
+    .dir__notes ul { padding: 0; margin: 0; list-style: none; font-size: 13px; line-height: 1.6; color: var(--mute); }
+    .dir__notes li { padding: 4px 0; }
+    .dir__notes li::before { content: "·  "; color: var(--gold); }
+    .dir__notes--strength h4 { color: var(--signal); }
+    .dir__notes--risk h4 { color: var(--warn); }
+
+    /* direction-specific tokens */
+    .dir--current  { --ff-display: 'Bebas Neue', sans-serif; --ff-body: 'Inter', sans-serif; --ff-ui: 'Inter', sans-serif; --ff-quote: 'Inter', sans-serif; --fw-display: 400; }
+    .dir--editorial { --ff-display: 'Fraunces', serif; --ff-body: 'Inter', sans-serif; --ff-ui: 'Inter', sans-serif; --ff-quote: 'Fraunces', serif; --fw-display: 500; --ls-display: -0.015em; }
+    .dir--sport    { --ff-display: 'Anton', sans-serif; --ff-body: 'Public Sans', sans-serif; --ff-ui: 'Public Sans', sans-serif; --ff-quote: 'Public Sans', sans-serif; --fw-display: 400; --ls-display: 0.005em; }
+    .dir--luxury   { --ff-display: 'Cormorant Garamond', serif; --ff-body: 'Inter', sans-serif; --ff-ui: 'Inter', sans-serif; --ff-quote: 'Cormorant Garamond', serif; --fw-display: 500; --ls-display: -0.01em; --lh-display: 1.0; }
+    .dir--agency   { --ff-display: 'Manrope', sans-serif; --ff-body: 'Manrope', sans-serif; --ff-ui: 'Manrope', sans-serif; --ff-quote: 'Manrope', sans-serif; --fw-display: 700; --ls-display: -0.025em; --lh-display: 0.95; }
+
+    /* picker */
+    .picker {
+      position: sticky;
+      bottom: 16px;
+      margin: 64px auto 0;
+      padding: 16px 24px;
+      max-width: 1280px;
+      display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
+      box-shadow: var(--shadow-1);
+      z-index: 20;
+    }
+    .picker__label { color: var(--mute); font-size: 13px; }
+    .picker__value { font: 500 13px/1 'JetBrains Mono', monospace; color: var(--electric); }
+    .picker button {
+      background: var(--gold);
+      color: #0A0A0A;
+      border: none;
+      padding: 10px 16px;
+      font: 600 11px/1 'Inter';
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      border-radius: var(--r-sm);
+      cursor: pointer;
+    }
+    .picker button[disabled] { opacity: 0.4; cursor: not-allowed; }
+
+    .dir.is-selected {
+      box-shadow: 0 0 0 2px var(--gold);
+    }
+    .select-hint {
+      position: absolute;
+      top: 16px; right: 16px;
+      font: 500 10px/1 'JetBrains Mono', monospace;
+      color: var(--mute);
+      padding: 6px 10px;
+      border: 1px solid var(--hairline-strong);
+      border-radius: var(--r-sm);
+      cursor: pointer;
+    }
+    .dir:hover .select-hint { border-color: var(--electric); color: var(--electric); }
+    .dir.is-selected .select-hint { border-color: var(--gold); color: var(--gold); }
+    .dir.is-selected .select-hint::before { content: "✓ "; }
+  </style>
+</head>
+<body>
+
+<nav class="preview-chrome" aria-label="Preview index">
+  <div class="preview-chrome__inner">
+    <span class="preview-chrome__brand">PKT design previews · <b>Phase A</b></span>
+    <a class="preview-chrome__link" href="./index.html">Index</a>
+    <a class="preview-chrome__link" href="./typography.html" aria-current="page">Typography</a>
+    <a class="preview-chrome__link" href="./style-tile.html">Style tile</a>
+    <a class="preview-chrome__link" href="./logo-concepts.html">Logo</a>
+    <a class="preview-chrome__link" href="./components.html">Components</a>
+    <a class="preview-chrome__link" href="./command-bar.html">⌘K bar</a>
+    <a class="preview-chrome__link" href="./hero-animation.html">Hero</a>
+    <a class="preview-chrome__link" href="./page-home.html">Home</a>
+    <a class="preview-chrome__link" href="./page-about.html">About</a>
+    <a class="preview-chrome__link" href="./page-players.html">Players</a>
+    <a class="preview-chrome__link" href="./page-services.html">Services</a>
+    <a class="preview-chrome__link" href="./page-media.html">Media</a>
+    <a class="preview-chrome__link" href="./page-contact.html">Contact</a>
+  </div>
+</nav>
+
+<main class="shell">
+
+  <header style="margin-bottom: 48px;">
+    <p class="eyebrow eyebrow--electric">A1.b · Typography directions</p>
+    <h1 style="margin: 16px 0 24px; font-family: 'Bebas Neue', sans-serif;">Pick the voice.</h1>
+    <p class="muted" style="max-width: 640px; font-size: 18px;">
+      Four directions distilled from peer research (full table in
+      <code class="mono">docs/plans/2026-05-23-peer-research.md</code>). Each
+      direction renders the <b>same content</b> so you can compare the
+      personality of the typography, not the layout.
+    </p>
+    <p class="dim" style="font-size: 14px; margin-top: 16px;">
+      All four use free Google Fonts — production-ready. The current
+      Bebas+Inter pairing is shown first as the baseline to compare against.
+    </p>
+  </header>
+
+  <!-- =================== CURRENT (BASELINE) =================== -->
+  <article class="dir dir--current tier-flat" data-id="current">
+    <span class="select-hint">click to mark as your pick</span>
+    <header class="dir__head">
+      <div>
+        <p class="dir__title">00 · Baseline (current)</p>
+        <h2 class="dir__name">Bebas Neue + Inter</h2>
+        <p class="dir__pair">Bebas Neue (display) · Inter (body)</p>
+      </div>
+      <p class="dir__ref">
+        <b>Where you've seen it:</b> Bebas is the default condensed display
+        sans of the past decade. Used everywhere from bootcamp portfolios to
+        startup landing pages. Free, recognizable, hard to make feel premium.
+      </p>
+    </header>
+
+    <p class="s-eyebrow">PKT-001 · Scouting dossier · FIFA licensed</p>
+    <h3 class="s-hero">See the player.<br/><em>Read the evidence.</em><br/>Make the move.</h3>
+    <p class="s-sub">FIFA-licensed representation for U17–U23 Canadian footballers — scout report, GPS performance, and the right next step.</p>
+    <blockquote class="s-quote">The work starts before the trial. The trial only confirms what the evidence already shows.</blockquote>
+    <div class="s-row">
+      <button class="s-btn">Start an evaluation</button>
+      <span class="s-mono">Distance: 11.4 km · Top sprint: 32.6 km/h · Bursts: 24</span>
+    </div>
+    <div class="s-card">
+      <p class="s-card-eyebrow">Watched</p>
+      <h4 class="s-card-h">U19 winger</h4>
+      <p class="s-card-p">RW · 2007 · Ontario</p>
+    </div>
+  </article>
+
+  <!-- =================== EDITORIAL FOOTBALL =================== -->
+  <article class="dir dir--editorial tier-flat" data-id="editorial">
+    <span class="select-hint">click to mark as your pick</span>
+    <header class="dir__head">
+      <div>
+        <p class="dir__title">01 · Editorial-football <span style="color: var(--gold);">· recommended</span></p>
+        <h2 class="dir__name">Fraunces + Inter</h2>
+        <p class="dir__pair">Fraunces variable serif (display · italic emphasis) · Inter (body · UI)</p>
+      </div>
+      <p class="dir__ref">
+        <b>Reference:</b> The Players' Tribune (Publico + Graphik).
+        Fraunces is a free, variable serif that approximates Publico's wedge-serif
+        character. The editorial-italic move is what gives Wasserman/THE·TEAM
+        and Players' Tribune their "authored" feel rather than "marketed."
+      </p>
+    </header>
+
+    <p class="s-eyebrow">PKT-001 · Scouting dossier · FIFA licensed</p>
+    <h3 class="s-hero">See the player.<br/><em>Read the evidence.</em><br/>Make the move.</h3>
+    <p class="s-sub">FIFA-licensed representation for U17–U23 Canadian footballers — scout report, GPS performance, and the right next step.</p>
+    <blockquote class="s-quote">The work starts before the trial. The trial only confirms what the evidence already shows.</blockquote>
+    <div class="s-row">
+      <button class="s-btn">Start an evaluation</button>
+      <span class="s-mono">Distance: 11.4 km · Top sprint: 32.6 km/h · Bursts: 24</span>
+    </div>
+    <div class="s-card">
+      <p class="s-card-eyebrow">Watched</p>
+      <h4 class="s-card-h">U19 winger</h4>
+      <p class="s-card-p">RW · 2007 · Ontario</p>
+    </div>
+
+    <div class="dir__notes">
+      <div class="dir__notes--strength">
+        <h4>What it does well</h4>
+        <ul>
+          <li>Serif display feels authored, not marketed</li>
+          <li>Italic carries emotion without ornament</li>
+          <li>Closest peer (Players' Tribune) is the right reference for athlete-centric premium</li>
+          <li>Reads as luxurious + inviting + professional — the brief</li>
+        </ul>
+      </div>
+      <div class="dir__notes--risk">
+        <h4>Where it might struggle</h4>
+        <ul>
+          <li>Serifs at small UI sizes need care — fall back to Inter under 16px</li>
+          <li>Less obviously "sport" than condensed grotesques</li>
+          <li>Wrong if the brand wants to feel kinetic / energetic</li>
+        </ul>
+      </div>
+    </div>
+  </article>
+
+  <!-- =================== SPORT GROTESQUE =================== -->
+  <article class="dir dir--sport tier-flat" data-id="sport">
+    <span class="select-hint">click to mark as your pick</span>
+    <header class="dir__head">
+      <div>
+        <p class="dir__title">02 · Sport-grotesque</p>
+        <h2 class="dir__name">Anton + Public Sans</h2>
+        <p class="dir__pair">Anton (heavy condensed display) · Public Sans (variable body)</p>
+      </div>
+      <p class="dir__ref">
+        <b>Reference:</b> Mundial Magazine (Sant'Elia Sans), Copa90 (Oswald + Diatype),
+        Formula 1 (custom "Formula1 Wide"). Anton is the free Google Fonts
+        cousin of those condensed display families. Public Sans is the IBM/USWDS
+        humanist sans — same family as Mundial.
+      </p>
+    </header>
+
+    <p class="s-eyebrow">PKT-001 · Scouting dossier · FIFA licensed</p>
+    <h3 class="s-hero">SEE THE PLAYER.<br/><em>READ THE EVIDENCE.</em><br/>MAKE THE MOVE.</h3>
+    <p class="s-sub">FIFA-licensed representation for U17–U23 Canadian footballers — scout report, GPS performance, and the right next step.</p>
+    <blockquote class="s-quote">The work starts before the trial. The trial only confirms what the evidence already shows.</blockquote>
+    <div class="s-row">
+      <button class="s-btn">Start an evaluation</button>
+      <span class="s-mono">Distance: 11.4 km · Top sprint: 32.6 km/h · Bursts: 24</span>
+    </div>
+    <div class="s-card">
+      <p class="s-card-eyebrow">Watched</p>
+      <h4 class="s-card-h">U19 WINGER</h4>
+      <p class="s-card-p">RW · 2007 · Ontario</p>
+    </div>
+
+    <div class="dir__notes">
+      <div class="dir__notes--strength">
+        <h4>What it does well</h4>
+        <ul>
+          <li>Reads instantly as "sport" — the jersey-numeral feel</li>
+          <li>Distinctive in a category dominated by safe sans-serif</li>
+          <li>Holds attention at hero scale</li>
+          <li>Easy hierarchy — display vs body contrast is dramatic</li>
+        </ul>
+      </div>
+      <div class="dir__notes--risk">
+        <h4>Where it might struggle</h4>
+        <ul>
+          <li>Less "luxurious" than the editorial direction</li>
+          <li>All-caps display is harder to read in long-form</li>
+          <li>Can tip into "kit launch" / poster feel</li>
+        </ul>
+      </div>
+    </div>
+  </article>
+
+  <!-- =================== QUIET LUXURY =================== -->
+  <article class="dir dir--luxury tier-flat" data-id="luxury">
+    <span class="select-hint">click to mark as your pick</span>
+    <header class="dir__head">
+      <div>
+        <p class="dir__title">03 · Quiet luxury</p>
+        <h2 class="dir__name">Cormorant Garamond + Inter</h2>
+        <p class="dir__pair">Cormorant Garamond (classical serif display · italic) · Inter (body)</p>
+      </div>
+      <p class="dir__ref">
+        <b>Reference:</b> the Loro Piana / Moncler / quiet-money family.
+        Cormorant Garamond is a free Garamond revival with elegant italic.
+        Most overtly "luxurious" of the four — leans away from sport, toward
+        an old-money advisory practice.
+      </p>
+    </header>
+
+    <p class="s-eyebrow">PKT-001 · Scouting dossier · FIFA licensed</p>
+    <h3 class="s-hero">See the player.<br/><em>Read the evidence.</em><br/>Make the move.</h3>
+    <p class="s-sub">FIFA-licensed representation for U17–U23 Canadian footballers — scout report, GPS performance, and the right next step.</p>
+    <blockquote class="s-quote">The work starts before the trial. The trial only confirms what the evidence already shows.</blockquote>
+    <div class="s-row">
+      <button class="s-btn">Start an evaluation</button>
+      <span class="s-mono">Distance: 11.4 km · Top sprint: 32.6 km/h · Bursts: 24</span>
+    </div>
+    <div class="s-card">
+      <p class="s-card-eyebrow">Watched</p>
+      <h4 class="s-card-h">U19 winger</h4>
+      <p class="s-card-p">RW · 2007 · Ontario</p>
+    </div>
+
+    <div class="dir__notes">
+      <div class="dir__notes--strength">
+        <h4>What it does well</h4>
+        <ul>
+          <li>Most overtly luxurious of the four</li>
+          <li>Italic Cormorant is genuinely beautiful</li>
+          <li>Differentiated from anything else in the agent category</li>
+          <li>Reads "advisor / counsel" rather than "agency"</li>
+        </ul>
+      </div>
+      <div class="dir__notes--risk">
+        <h4>Where it might struggle</h4>
+        <ul>
+          <li>Far from "sport" — almost reads as a private bank</li>
+          <li>Garamond at hero scale can feel stretched / thin</li>
+          <li>Wrong if the player audience expects football-energy</li>
+          <li>Risk: tips into "wedding invitation" territory if mishandled</li>
+        </ul>
+      </div>
+    </div>
+  </article>
+
+  <!-- =================== MODERN AGENCY =================== -->
+  <article class="dir dir--agency tier-flat" data-id="agency">
+    <span class="select-hint">click to mark as your pick</span>
+    <header class="dir__head">
+      <div>
+        <p class="dir__title">04 · Modern agency</p>
+        <h2 class="dir__name">Manrope (single family)</h2>
+        <p class="dir__pair">Manrope (display + body + UI) — one geometric sans across all roles</p>
+      </div>
+      <p class="dir__ref">
+        <b>Reference:</b> Wasserman/THE·TEAM (Gotham), Stellar Entertainment (Avenir Next),
+        Roc Nation Sports (Roboto Condensed). Single-family humanist/geometric sans is
+        the "modern agency" baseline. Manrope is the free, well-cut equivalent of Gotham/Avenir.
+      </p>
+    </header>
+
+    <p class="s-eyebrow">PKT-001 · Scouting dossier · FIFA licensed</p>
+    <h3 class="s-hero">See the player.<br/><em>Read the evidence.</em><br/>Make the move.</h3>
+    <p class="s-sub">FIFA-licensed representation for U17–U23 Canadian footballers — scout report, GPS performance, and the right next step.</p>
+    <blockquote class="s-quote">The work starts before the trial. The trial only confirms what the evidence already shows.</blockquote>
+    <div class="s-row">
+      <button class="s-btn">Start an evaluation</button>
+      <span class="s-mono">Distance: 11.4 km · Top sprint: 32.6 km/h · Bursts: 24</span>
+    </div>
+    <div class="s-card">
+      <p class="s-card-eyebrow">Watched</p>
+      <h4 class="s-card-h">U19 winger</h4>
+      <p class="s-card-p">RW · 2007 · Ontario</p>
+    </div>
+
+    <div class="dir__notes">
+      <div class="dir__notes--strength">
+        <h4>What it does well</h4>
+        <ul>
+          <li>Most "agency baseline" — direct peer to Wasserman</li>
+          <li>Single family = clean, no pairing risk</li>
+          <li>Reads as modern, professional, restrained</li>
+          <li>Familiar enough not to distract</li>
+        </ul>
+      </div>
+      <div class="dir__notes--risk">
+        <h4>Where it might struggle</h4>
+        <ul>
+          <li>Least distinctive — closest to "Linear template" generic</li>
+          <li>No emotional gear — no italic editorial flourish</li>
+          <li>Easy to land in the same "generic SaaS" trap we're trying to escape</li>
+        </ul>
+      </div>
+    </div>
+  </article>
+
+  <!-- PICKER -->
+  <aside class="picker tier-glass" role="status" aria-live="polite">
+    <span class="picker__label">Your typography pick: </span>
+    <span class="picker__value" id="pick">— none yet —</span>
+    <button id="copy" disabled style="margin-left: auto;">Copy decision text</button>
+  </aside>
+
+  <section class="tier-lit" style="padding: 32px; margin-top: 48px;">
+    <p class="eyebrow eyebrow--gold">Recommendation</p>
+    <h3 style="margin: 8px 0 16px;">01 · Editorial-football (Fraunces + Inter)</h3>
+    <p class="muted" style="font-size: 15px; margin: 0 0 12px;">
+      Closest to the brief ("luxurious, inviting, professional"). The italic
+      gives the brand emotion without ornament. Closest peer in the research
+      (Players' Tribune) is the most successful athlete-centric premium site in the set.
+    </p>
+    <p class="muted" style="font-size: 14px; margin: 0;">
+      <b style="color: var(--bone);">If you want more sport energy:</b> 02 Sport-grotesque.
+      <b style="color: var(--bone);">If you want maximum quiet luxury and don't mind moving away from sport:</b> 03 Quiet luxury.
+      <b style="color: var(--bone);">If safer / more familiar is the goal:</b> 04 Modern agency.
+    </p>
+  </section>
+
+</main>
+
+<script>
+  const dirs = document.querySelectorAll('.dir');
+  const pick = document.getElementById('pick');
+  const copyBtn = document.getElementById('copy');
+  let current = null;
+  const labels = {
+    current: '00 · Baseline (Bebas + Inter)',
+    editorial: '01 · Editorial-football (Fraunces + Inter)',
+    sport: '02 · Sport-grotesque (Anton + Public Sans)',
+    luxury: '03 · Quiet luxury (Cormorant Garamond + Inter)',
+    agency: '04 · Modern agency (Manrope)'
+  };
+  dirs.forEach(d => {
+    d.addEventListener('click', () => {
+      dirs.forEach(x => x.classList.remove('is-selected'));
+      d.classList.add('is-selected');
+      current = d.dataset.id;
+      pick.textContent = labels[current];
+      copyBtn.disabled = false;
+    });
+  });
+  copyBtn.addEventListener('click', () => {
+    if (!current) return;
+    navigator.clipboard?.writeText(`Typography decision: ${labels[current]}`).then(() => {
+      copyBtn.textContent = 'Copied ✓';
+      setTimeout(() => copyBtn.textContent = 'Copy decision text', 1500);
+    });
+  });
+</script>
+
+</body>
+</html>

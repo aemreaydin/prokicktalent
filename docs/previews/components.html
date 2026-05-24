@@ -1,0 +1,836 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>A3 · Component kitchen-sink</title>
+  <link rel="stylesheet" href="./_preview-system.css" />
+  <style>
+    .comp {
+      margin-bottom: 96px;
+    }
+    .comp__head {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      padding-bottom: 16px;
+      margin-bottom: 24px;
+      border-bottom: 1px solid var(--hairline);
+      flex-wrap: wrap;
+    }
+    .comp__num { font: 500 11px/1 'JetBrains Mono', monospace; color: var(--gold); }
+    .comp__name { font-size: 32px; }
+    .comp__meta {
+      margin-left: auto;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .comp__where {
+      font: 500 10px/1 'JetBrains Mono', monospace;
+      letter-spacing: 0.04em;
+      color: var(--mute);
+      padding: 4px 8px;
+      border: 1px solid var(--hairline);
+      border-radius: var(--r-sm);
+    }
+    .comp__where--page { color: var(--electric); border-color: rgba(110,231,255,0.3); }
+    .comp__demo {
+      padding: 32px;
+      background: var(--surface-1);
+      border: 1px solid var(--hairline);
+      border-radius: var(--r-md);
+      position: relative;
+    }
+    .comp__demo--checker {
+      background-image:
+        linear-gradient(45deg, rgba(255,255,255,0.02) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(255,255,255,0.02) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgba(255,255,255,0.02) 75%),
+        linear-gradient(-45deg, transparent 75%, rgba(255,255,255,0.02) 75%);
+      background-size: 24px 24px;
+      background-position: 0 0, 0 12px, 12px -12px, -12px 0px;
+      background-color: var(--surface-1);
+    }
+    .comp__state-label {
+      font: 500 10px/1 'JetBrains Mono', monospace;
+      color: var(--dim);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    /* ========== StatBlock ========== */
+    .stat-block { padding: 24px; }
+    .stat-block__label { font: 600 11px/1 'Inter'; letter-spacing: 0.22em; text-transform: uppercase; color: var(--mute); margin: 0 0 16px; }
+    .stat-block__value { font: 400 64px/0.9 'Bebas Neue'; color: var(--bone); margin: 0; }
+    .stat-block__spark { display: flex; align-items: flex-end; gap: 3px; margin-top: 16px; height: 24px; }
+    .stat-block__spark span { width: 6px; background: var(--signal); opacity: 0.6; border-radius: 1px; }
+
+    /* ========== GpsReadout ========== */
+    .gps {
+      padding: 20px;
+      background: var(--surface-2);
+      border: 1px solid var(--hairline-strong);
+      border-radius: var(--r-md);
+      max-width: 360px;
+    }
+    .gps__head { display: flex; justify-content: space-between; align-items: center; padding-bottom: 12px; border-bottom: 1px solid var(--hairline); margin-bottom: 16px; }
+    .gps__title { font: 600 11px/1 'Inter'; letter-spacing: 0.2em; color: var(--mute); text-transform: uppercase; }
+    .gps__example {
+      font: 600 9px/1 'JetBrains Mono', monospace;
+      color: var(--warn);
+      padding: 4px 7px;
+      border: 1px solid var(--warn);
+      border-radius: 3px;
+      letter-spacing: 0.1em;
+    }
+    .gps__row { display: flex; justify-content: space-between; align-items: baseline; padding: 10px 0; border-bottom: 1px solid var(--hairline); }
+    .gps__row:last-child { border-bottom: none; }
+    .gps__metric { font: 500 11px/1.2 'Inter'; letter-spacing: 0.18em; text-transform: uppercase; color: var(--mute); }
+    .gps__num { font: 500 18px/1 'JetBrains Mono', monospace; color: var(--signal); }
+    .gps__avg { font: 400 10px/1 'JetBrains Mono', monospace; color: var(--dim); margin-left: 8px; }
+
+    /* ========== TacticBoard ========== */
+    .tactic {
+      background: linear-gradient(135deg, #0f2317, #07120c);
+      border: 1px solid var(--hairline);
+      border-radius: var(--r-md);
+      padding: 12px;
+      position: relative;
+      aspect-ratio: 16 / 10;
+      max-width: 540px;
+    }
+    .tactic__pitch {
+      position: absolute;
+      inset: 12px;
+      border: 1px solid rgba(100,217,138,0.3);
+      background-image:
+        linear-gradient(rgba(100,217,138,0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(100,217,138,0.06) 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+    .tactic__pitch::before {
+      content: ""; position: absolute; top: 50%; left: 0; right: 0; height: 1px;
+      background: rgba(100,217,138,0.3);
+    }
+    .tactic__pitch::after {
+      content: ""; position: absolute; top: 50%; left: 50%;
+      width: 80px; height: 80px; border-radius: 50%;
+      border: 1px solid rgba(100,217,138,0.3);
+      transform: translate(-50%, -50%);
+    }
+    .tactic__player {
+      position: absolute;
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      background: var(--bone);
+      border: 1px solid var(--bg);
+      box-shadow: 0 0 8px rgba(0,0,0,0.4);
+      transform: translate(-50%, -50%);
+    }
+    .tactic__player--focus {
+      background: var(--gold);
+      box-shadow: 0 0 0 4px rgba(212,175,55,0.2), 0 0 12px rgba(212,175,55,0.4);
+    }
+    .tactic__arrow {
+      position: absolute;
+      height: 1px;
+      background: var(--signal);
+      transform-origin: left center;
+      opacity: 0.7;
+    }
+    .tactic__arrow::after {
+      content: ""; position: absolute; right: -2px; top: -3px;
+      width: 6px; height: 6px;
+      border-right: 1px solid var(--signal);
+      border-top: 1px solid var(--signal);
+      transform: rotate(45deg);
+    }
+    .tactic__label {
+      position: absolute; bottom: 16px; left: 16px;
+      font: 500 10px/1 'JetBrains Mono', monospace;
+      color: var(--signal);
+      letter-spacing: 0.08em;
+    }
+
+    /* ========== Marquee ========== */
+    .marquee {
+      overflow: hidden;
+      padding: 16px 0;
+      mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
+      -webkit-mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
+    }
+    .marquee__track {
+      display: flex;
+      gap: 64px;
+      animation: marquee-scroll 28s linear infinite;
+      width: max-content;
+    }
+    .marquee__item {
+      font: 700 18px/1 'Bebas Neue';
+      letter-spacing: 0.12em;
+      color: var(--mute);
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .marquee__item::before {
+      content: "·";
+      color: var(--dim);
+    }
+    .marquee__item:first-child::before { content: none; }
+    @keyframes marquee-scroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ========== Bento ========== */
+    .bento {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      grid-template-rows: repeat(4, 1fr);
+      gap: 12px;
+      min-height: 420px;
+    }
+    .bento__cell {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .bento__cell[data-span="2x2"] { grid-column: span 2; grid-row: span 2; }
+    .bento__cell[data-span="2x4"] { grid-column: span 2; grid-row: span 4; }
+    .bento__cell[data-span="3x2"] { grid-column: span 3; grid-row: span 2; }
+    .bento__cell[data-span="4x2"] { grid-column: span 4; grid-row: span 2; }
+    @media (max-width: 768px) {
+      .bento { grid-template-columns: 1fr; grid-template-rows: none; }
+      .bento__cell[data-span] { grid-column: 1; grid-row: auto; }
+    }
+
+    /* ========== PathwayTabs ========== */
+    .ptabs { background: var(--surface-1); border: 1px solid var(--hairline); border-radius: var(--r-md); overflow: hidden; }
+    .ptabs__tabs { display: flex; border-bottom: 1px solid var(--hairline); }
+    .ptabs__tab {
+      flex: 1;
+      padding: 20px 24px;
+      background: transparent;
+      border: none;
+      border-right: 1px solid var(--hairline);
+      color: var(--mute);
+      font: 600 11px/1 'Inter';
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      cursor: pointer;
+      text-align: left;
+      transition: color 250ms var(--ease-out-expo);
+      position: relative;
+    }
+    .ptabs__tab:last-child { border-right: none; }
+    .ptabs__tab:hover { color: var(--bone); }
+    .ptabs__tab[data-active="true"] { color: var(--bone); }
+    .ptabs__tab[data-active="true"]::after {
+      content: ""; position: absolute; bottom: -1px; left: 24px; right: 24px;
+      height: 2px; background: var(--electric);
+    }
+    .ptabs__tab strong { display: block; font: 400 32px/1 'Bebas Neue'; letter-spacing: 0.02em; color: inherit; }
+    .ptabs__panel { padding: 32px; display: none; }
+    .ptabs__panel[data-active="true"] { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .ptabs__panel h4 { font: 600 11px/1 'Inter'; text-transform: uppercase; letter-spacing: 0.22em; color: var(--gold); margin: 0 0 12px; }
+    .ptabs__panel p, .ptabs__panel li { font-size: 14px; color: var(--mute); line-height: 1.6; margin: 0; }
+    .ptabs__panel ul { padding: 0; list-style: none; }
+    .ptabs__panel li { padding: 4px 0 4px 16px; position: relative; }
+    .ptabs__panel li::before { content: ""; position: absolute; left: 0; top: 10px; width: 6px; height: 6px; background: var(--signal); }
+    @media (max-width: 640px) {
+      .ptabs__panel[data-active="true"] { grid-template-columns: 1fr; }
+    }
+
+    /* ========== PlayerCard ========== */
+    .pcard {
+      background: var(--surface-1);
+      border: 1px solid var(--hairline);
+      border-radius: var(--r-md);
+      overflow: hidden;
+      transition: border-color 250ms var(--ease-out-expo), transform 250ms;
+      cursor: pointer;
+    }
+    .pcard:hover { border-color: var(--electric); transform: translateY(-2px); }
+    .pcard__photo {
+      aspect-ratio: 3 / 4;
+      background:
+        radial-gradient(ellipse at 50% 30%, rgba(100,217,138,0.10), transparent 50%),
+        linear-gradient(180deg, #1a2520, #0a1310);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .pcard__silhouette {
+      width: 60%;
+      height: 75%;
+      background: rgba(0,0,0,0.4);
+      mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 130'><ellipse cx='50' cy='28' rx='18' ry='22'/><path d='M20 130 Q20 60 50 55 Q80 60 80 130 Z'/></svg>") no-repeat center / contain;
+      -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 130'><ellipse cx='50' cy='28' rx='18' ry='22'/><path d='M20 130 Q20 60 50 55 Q80 60 80 130 Z'/></svg>") no-repeat center / contain;
+    }
+    .pcard__body { padding: 16px; }
+    .pcard__status {
+      display: inline-flex; align-items: center; gap: 6px;
+      font: 600 10px/1 'JetBrains Mono', monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--electric);
+      margin-bottom: 12px;
+    }
+    .pcard__status::before {
+      content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor;
+      box-shadow: 0 0 8px currentColor;
+    }
+    .pcard__name { font: 400 22px/1 'Bebas Neue'; color: var(--bone); margin: 0 0 4px; }
+    .pcard__meta { font: 500 12px/1.4 'JetBrains Mono', monospace; color: var(--mute); margin: 0; }
+
+    /* ========== CTAPanel ========== */
+    .cta-panel {
+      position: relative;
+      padding: 64px 32px;
+      background: var(--gold);
+      color: #0A0A0A;
+      border-radius: var(--r-md);
+      overflow: hidden;
+      text-align: center;
+    }
+    .cta-panel::before {
+      content: ""; position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse at 30% 100%, rgba(255,255,255,0.4), transparent 50%),
+        radial-gradient(ellipse at 70% 0%, rgba(0,0,0,0.2), transparent 60%);
+      pointer-events: none;
+    }
+    .cta-panel::after {
+      content: ""; position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(0,0,0,0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,0,0,0.1) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+      opacity: 0.3;
+    }
+    .cta-panel > * { position: relative; z-index: 1; }
+    .cta-panel__stamp {
+      position: absolute; top: 16px; right: 16px;
+      font: 600 10px/1 'JetBrains Mono', monospace;
+      color: rgba(0,0,0,0.5);
+      letter-spacing: 0.18em;
+      padding: 6px 10px;
+      border: 1px solid rgba(0,0,0,0.2);
+      border-radius: 3px;
+      z-index: 2;
+    }
+    .cta-panel__btn-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 32px; }
+    .cta-panel__btn--primary {
+      background: #0A0A0A; color: white;
+      padding: 14px 28px;
+      font: 600 12px/1 'Inter'; text-transform: uppercase; letter-spacing: 0.18em;
+      border: none; border-radius: var(--r-sm); cursor: pointer;
+    }
+    .cta-panel__btn--ghost {
+      background: rgba(0,0,0,0.05); color: #0A0A0A;
+      padding: 14px 28px;
+      font: 600 12px/1 'Inter'; text-transform: uppercase; letter-spacing: 0.18em;
+      border: 1px solid rgba(0,0,0,0.3); border-radius: var(--r-sm); cursor: pointer;
+    }
+
+    /* GlassNav mini-demo */
+    .gnav-demo {
+      background: rgba(7,9,11,0.6);
+      backdrop-filter: blur(20px) saturate(140%);
+      border: 1px solid var(--hairline);
+      border-radius: var(--r-md);
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .gnav-demo__brand { display: flex; align-items: center; gap: 10px; margin-right: auto; }
+    .gnav-demo__brand span { font: 700 18px/1 'Bebas Neue'; letter-spacing: 0.06em; color: var(--bone); }
+    .gnav-demo__brand svg { color: var(--gold); }
+    .gnav-demo__link {
+      font: 500 11px/1 'Inter'; text-transform: uppercase; letter-spacing: 0.22em;
+      color: var(--mute);
+      padding: 6px 4px;
+      position: relative;
+    }
+    .gnav-demo__link:hover { color: var(--bone); }
+    .gnav-demo__link[aria-current="page"] { color: var(--bone); }
+    .gnav-demo__link[aria-current="page"]::after {
+      content: ""; position: absolute; bottom: -4px; left: 0; right: 0; height: 2px; background: var(--electric);
+    }
+    .gnav-demo__kbd {
+      padding: 4px 8px;
+      border: 1px solid var(--hairline-strong);
+      border-radius: var(--r-sm);
+      font: 500 10px/1 'JetBrains Mono', monospace;
+      color: var(--mute);
+    }
+  </style>
+</head>
+<body>
+
+<nav class="preview-chrome" aria-label="Preview index">
+  <div class="preview-chrome__inner">
+    <span class="preview-chrome__brand">PKT design previews · <b>Phase A</b></span>
+    <a class="preview-chrome__link" href="./index.html">Index</a>
+    <a class="preview-chrome__link" href="./style-tile.html">Style tile</a>
+    <a class="preview-chrome__link" href="./logo-concepts.html">Logo</a>
+    <a class="preview-chrome__link" href="./components.html" aria-current="page">Components</a>
+    <a class="preview-chrome__link" href="./command-bar.html">⌘K bar</a>
+    <a class="preview-chrome__link" href="./hero-animation.html">Hero</a>
+    <a class="preview-chrome__link" href="./page-home.html">Home</a>
+    <a class="preview-chrome__link" href="./page-about.html">About</a>
+    <a class="preview-chrome__link" href="./page-players.html">Players</a>
+    <a class="preview-chrome__link" href="./page-services.html">Services</a>
+    <a class="preview-chrome__link" href="./page-media.html">Media</a>
+    <a class="preview-chrome__link" href="./page-contact.html">Contact</a>
+  </div>
+</nav>
+
+<svg width="0" height="0" style="position:absolute;" aria-hidden="true">
+  <symbol id="logo-mark" viewBox="0 0 32 32">
+    <path d="M3 27 Q 16 -1 29 27" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-dasharray="2.5 3"/>
+    <circle cx="16" cy="6" r="3.5" fill="currentColor"/>
+  </symbol>
+</svg>
+
+<main class="shell">
+
+  <header style="margin-bottom: 80px;">
+    <p class="eyebrow eyebrow--electric">A3 · Component kitchen-sink</p>
+    <h1 style="margin: 16px 0 24px;">The kit.</h1>
+    <p class="muted" style="max-width: 640px; font-size: 18px;">
+      Ten components. Each lives in <code class="mono">src/components/ui/</code>
+      during Phase B. Hover where appropriate. The logo placeholder uses the
+      <em>trajectory</em> concept — pick a different one in
+      <a href="./logo-concepts.html" style="color: var(--electric);">A2</a> if you prefer.
+    </p>
+  </header>
+
+  <!-- ============== GLASSNAV ============== -->
+  <article class="comp">
+    <header class="comp__head">
+      <span class="comp__num">01</span>
+      <h2 class="comp__name">GlassNav</h2>
+      <div class="comp__meta">
+        <span class="comp__where comp__where--page">every page</span>
+        <span class="comp__where">Astro</span>
+      </div>
+    </header>
+
+    <span class="comp__state-label">Default · scrolled state (border + shadow appears past 16px)</span>
+    <div class="comp__demo" style="padding: 0; background: transparent; border: none;">
+      <div class="gnav-demo">
+        <a href="#" class="gnav-demo__brand"><svg width="24" height="24"><use href="#logo-mark"/></svg><span>PROKICKTALENT</span></a>
+        <a href="#" class="gnav-demo__link" aria-current="page">Home</a>
+        <a href="#" class="gnav-demo__link">About</a>
+        <a href="#" class="gnav-demo__link">Players</a>
+        <a href="#" class="gnav-demo__link">Services</a>
+        <a href="#" class="gnav-demo__link">Media</a>
+        <a href="#" class="gnav-demo__link">Contact</a>
+        <span class="gnav-demo__kbd">⌘K</span>
+      </div>
+    </div>
+    <p class="muted" style="font-size: 13px; margin-top: 12px;">
+      Frosted glass · electric underline on active route · ⌘K affordance on the right · icon-mark precedes wordmark.
+    </p>
+  </article>
+
+  <!-- ============== STATBLOCK ============== -->
+  <article class="comp">
+    <header class="comp__head">
+      <span class="comp__num">02</span>
+      <h2 class="comp__name">StatBlock</h2>
+      <div class="comp__meta">
+        <span class="comp__where comp__where--page">Home · About</span>
+        <span class="comp__where">label, value, sparkline?</span>
+      </div>
+    </header>
+
+    <div class="grid-3">
+      <div>
+        <span class="comp__state-label">Default</span>
+        <div class="stat-block tier-flat">
+          <p class="stat-block__label">Age band</p>
+          <p class="stat-block__value">U17–U23</p>
+        </div>
+      </div>
+      <div>
+        <span class="comp__state-label">With sparkline</span>
+        <div class="stat-block tier-flat">
+          <p class="stat-block__label">Distance covered</p>
+          <p class="stat-block__value">11.4 <span style="font-size: 24px; color: var(--mute);">km</span></p>
+          <div class="stat-block__spark">
+            <span style="height: 30%"></span><span style="height: 45%"></span><span style="height: 60%"></span>
+            <span style="height: 50%"></span><span style="height: 75%"></span><span style="height: 90%"></span>
+            <span style="height: 70%"></span><span style="height: 100%; opacity: 1"></span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <span class="comp__state-label">Signal accent</span>
+        <div class="stat-block tier-flat">
+          <p class="stat-block__label">Region</p>
+          <p class="stat-block__value" style="color: var(--signal);">Canada</p>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- ============== GPSREADOUT ============== -->
+  <article class="comp">
+    <header class="comp__head">
+      <span class="comp__num">03</span>
+      <h2 class="comp__name">GpsReadout</h2>
+      <div class="comp__meta">
+        <span class="comp__where comp__where--page">Home · Services/GPS</span>
+        <span class="comp__where">always labelled EXAMPLE</span>
+      </div>
+    </header>
+
+    <span class="comp__state-label">Default — sample report, illustratively labelled</span>
+    <div class="gps">
+      <div class="gps__head">
+        <span class="gps__title">GPS Report · Match 14</span>
+        <span class="gps__example">EXAMPLE</span>
+      </div>
+      <div class="gps__row">
+        <span class="gps__metric">Distance</span>
+        <span><span class="gps__num">11.4 km</span><span class="gps__avg">avg 9.8</span></span>
+      </div>
+      <div class="gps__row">
+        <span class="gps__metric">Top sprint</span>
+        <span class="gps__num">32.6 km/h</span>
+      </div>
+      <div class="gps__row">
+        <span class="gps__metric">High-int bursts</span>
+        <span><span class="gps__num">24</span><span class="gps__avg" style="color: var(--signal);">+3</span></span>
+      </div>
+      <div class="gps__row">
+        <span class="gps__metric">Player load</span>
+        <span class="gps__num">412</span>
+      </div>
+    </div>
+    <p class="muted" style="font-size: 13px; margin-top: 12px;">
+      The <code class="mono">EXAMPLE</code> label is required by content-authenticity
+      requirement § 6 of the spec. Real numbers without it are a non-starter.
+    </p>
+  </article>
+
+  <!-- ============== TACTICBOARD ============== -->
+  <article class="comp">
+    <header class="comp__head">
+      <span class="comp__num">04</span>
+      <h2 class="comp__name">TacticBoard</h2>
+      <div class="comp__meta">
+        <span class="comp__where comp__where--page">Home · Services/Scouting</span>
+        <span class="comp__where">positional dots animate in</span>
+      </div>
+    </header>
+
+    <span class="comp__state-label">Default — focused on #8 (box-to-box), arrows show role movement</span>
+    <div class="tactic">
+      <div class="tactic__pitch"></div>
+      <!-- defenders -->
+      <div class="tactic__player" style="left: 15%; top: 30%;"></div>
+      <div class="tactic__player" style="left: 15%; top: 50%;"></div>
+      <div class="tactic__player" style="left: 15%; top: 70%;"></div>
+      <!-- midfield -->
+      <div class="tactic__player tactic__player--focus" style="left: 45%; top: 55%;"></div>
+      <div class="tactic__player" style="left: 50%; top: 30%;"></div>
+      <div class="tactic__player" style="left: 50%; top: 80%;"></div>
+      <!-- forwards -->
+      <div class="tactic__player" style="left: 78%; top: 40%;"></div>
+      <div class="tactic__player" style="left: 78%; top: 60%;"></div>
+      <!-- arrows -->
+      <div class="tactic__arrow" style="left: 45%; top: 55%; width: 18%; transform: rotate(-25deg);"></div>
+      <div class="tactic__arrow" style="left: 45%; top: 55%; width: 14%; transform: rotate(20deg);"></div>
+      <span class="tactic__label">ROLE · #8 · box-to-box</span>
+    </div>
+  </article>
+
+  <!-- ============== MARQUEE ============== -->
+  <article class="comp">
+    <header class="comp__head">
+      <span class="comp__num">05</span>
+      <h2 class="comp__name">Marquee</h2>
+      <div class="comp__meta">
+        <span class="comp__where comp__where--page">Home</span>
+        <span class="comp__where">linear infinite scroll</span>
+      </div>
+    </header>
+
+    <span class="comp__state-label">Scope variant — used at launch (no unverified third-party marks)</span>
+    <div class="comp__demo" style="padding: 0;">
+      <div class="marquee">
+        <div class="marquee__track">
+          <span class="marquee__item">FIFA Licensed</span>
+          <span class="marquee__item">Toronto · Canada</span>
+          <span class="marquee__item">U17–U23</span>
+          <span class="marquee__item">Ontario Network</span>
+          <span class="marquee__item">GPS Backed</span>
+          <span class="marquee__item">Independent Representation</span>
+          <span class="marquee__item">Family-First Advisory</span>
+          <!-- duplicate set for seamless loop -->
+          <span class="marquee__item">FIFA Licensed</span>
+          <span class="marquee__item">Toronto · Canada</span>
+          <span class="marquee__item">U17–U23</span>
+          <span class="marquee__item">Ontario Network</span>
+          <span class="marquee__item">GPS Backed</span>
+          <span class="marquee__item">Independent Representation</span>
+          <span class="marquee__item">Family-First Advisory</span>
+        </div>
+      </div>
+    </div>
+    <p class="muted" style="font-size: 13px; margin-top: 12px;">
+      Federation/league marks (CPL · MLS Next · etc) get swapped in once Burak
+      verifies the relationships. Default is the scope-of-practice version above.
+    </p>
+  </article>
+
+  <!-- ============== BENTO ============== -->
+  <article class="comp">
+    <header class="comp__head">
+      <span class="comp__num">06</span>
+      <h2 class="comp__name">Bento</h2>
+      <div class="comp__meta">
+        <span class="comp__where comp__where--page">Home · Services</span>
+        <span class="comp__where">6×4 grid · spans 2x2 / 3x2 / 2x4 / 4x2</span>
+      </div>
+    </header>
+
+    <div class="bento">
+      <div class="bento__cell tier-glass" data-span="2x2">
+        <p class="eyebrow eyebrow--signal">Approach</p>
+        <h3 style="font-size: 28px;">Evidence-led representation.</h3>
+        <p class="muted" style="font-size: 13px; margin: 0;">Scout, measure, advise — in that order.</p>
+      </div>
+      <div class="bento__cell tier-flat" data-span="2x2" style="padding: 0;">
+        <div class="gps" style="border: none; background: transparent; max-width: none;">
+          <div class="gps__head">
+            <span class="gps__title">GPS · last match</span>
+            <span class="gps__example">EXAMPLE</span>
+          </div>
+          <div class="gps__row"><span class="gps__metric">Top sprint</span><span class="gps__num">32.6</span></div>
+          <div class="gps__row"><span class="gps__metric">Distance</span><span class="gps__num">11.4</span></div>
+          <div class="gps__row"><span class="gps__metric">Bursts</span><span class="gps__num">24</span></div>
+        </div>
+      </div>
+      <div class="bento__cell tier-lit" data-span="2x4">
+        <div>
+          <p class="eyebrow eyebrow--gold">Credentials</p>
+          <h3 style="margin-top: 8px;">FIFA</h3>
+          <p class="muted" style="font-size: 13px;">Licensed agent · valid 2026</p>
+        </div>
+        <div>
+          <p class="dim mono" style="font-size: 10px;">REGION · Ontario</p>
+          <p class="dim mono" style="font-size: 10px;">BASE · Toronto</p>
+          <p class="dim mono" style="font-size: 10px;">METHOD · scout + GPS</p>
+        </div>
+      </div>
+      <div class="bento__cell tier-glass" data-span="4x2">
+        <div>
+          <p class="eyebrow eyebrow--electric">Tactic board</p>
+        </div>
+        <div class="tactic" style="margin-top: 12px; max-width: 100%;">
+          <div class="tactic__pitch"></div>
+          <div class="tactic__player" style="left: 20%; top: 50%;"></div>
+          <div class="tactic__player tactic__player--focus" style="left: 50%; top: 50%;"></div>
+          <div class="tactic__player" style="left: 80%; top: 50%;"></div>
+          <div class="tactic__arrow" style="left: 50%; top: 50%; width: 28%; transform: rotate(0);"></div>
+        </div>
+      </div>
+    </div>
+    <p class="muted" style="font-size: 13px; margin-top: 12px;">
+      Cells span any combination of 2x2 / 2x4 / 3x2 / 4x2. Collapses to single
+      column on mobile.
+    </p>
+  </article>
+
+  <!-- ============== PATHWAYTABS ============== -->
+  <article class="comp">
+    <header class="comp__head">
+      <span class="comp__num">07</span>
+      <h2 class="comp__name">PathwayTabs</h2>
+      <div class="comp__meta">
+        <span class="comp__where comp__where--page">Home</span>
+        <span class="comp__where">React island · keyboard arrows</span>
+      </div>
+    </header>
+
+    <div class="ptabs">
+      <div class="ptabs__tabs" role="tablist">
+        <button class="ptabs__tab" role="tab" data-active="true" data-tab="u1719">
+          U17-U19 <strong>Academy / Showcase</strong>
+        </button>
+        <button class="ptabs__tab" role="tab" data-tab="u2023">
+          U20-U23 <strong>College / Semi-Pro</strong>
+        </button>
+      </div>
+      <div class="ptabs__panel" data-active="true" data-panel="u1719">
+        <div>
+          <h4>Evaluate</h4>
+          <ul>
+            <li>Match influence</li>
+            <li>Technical floor</li>
+            <li>Coachability</li>
+            <li>Physical output</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Family needs</h4>
+          <p>Which events, academies, and introductions are worth the time, money, and risk.</p>
+        </div>
+        <div>
+          <h4>Next move</h4>
+          <p>Build an evidence-backed player file and target the right showcase or trial path.</p>
+        </div>
+      </div>
+      <div class="ptabs__panel" data-panel="u2023">
+        <div>
+          <h4>Evaluate</h4>
+          <ul>
+            <li>Role clarity</li>
+            <li>Game model fit</li>
+            <li>Data consistency</li>
+            <li>Contract timing</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Family needs</h4>
+          <p>How to compare CPL, MLS Next Pro, European trial, college, and semi-pro routes.</p>
+        </div>
+        <div>
+          <h4>Next move</h4>
+          <p>Package the player for serious conversations with clubs, scouts, and decision-makers.</p>
+        </div>
+      </div>
+    </div>
+    <p class="muted" style="font-size: 13px; margin-top: 12px;">
+      Click a tab. Electric underline on active, content swaps with a fade.
+    </p>
+  </article>
+
+  <!-- ============== PLAYERCARD ============== -->
+  <article class="comp">
+    <header class="comp__head">
+      <span class="comp__num">08</span>
+      <h2 class="comp__name">PlayerCard</h2>
+      <div class="comp__meta">
+        <span class="comp__where comp__where--page">Players</span>
+        <span class="comp__where">mode: "anonymized" | "real"</span>
+      </div>
+    </header>
+
+    <span class="comp__state-label">Anonymized variant — silhouette, no name, no club. Hover for lift.</span>
+    <div class="grid-4">
+      <div class="pcard">
+        <div class="pcard__photo"><div class="pcard__silhouette"></div></div>
+        <div class="pcard__body">
+          <p class="pcard__status">Watched</p>
+          <h3 class="pcard__name">U19 winger</h3>
+          <p class="pcard__meta">RW · 2007 · Ontario</p>
+        </div>
+      </div>
+      <div class="pcard">
+        <div class="pcard__photo"><div class="pcard__silhouette"></div></div>
+        <div class="pcard__body">
+          <p class="pcard__status" style="color: var(--signal);">Trialing</p>
+          <h3 class="pcard__name">U21 #8</h3>
+          <p class="pcard__meta">CM · 2005 · Toronto</p>
+        </div>
+      </div>
+      <div class="pcard">
+        <div class="pcard__photo"><div class="pcard__silhouette"></div></div>
+        <div class="pcard__body">
+          <p class="pcard__status" style="color: var(--gold);">Signed</p>
+          <h3 class="pcard__name">U23 centre-back</h3>
+          <p class="pcard__meta">CB · 2003 · L1O</p>
+        </div>
+      </div>
+      <div class="pcard">
+        <div class="pcard__photo"><div class="pcard__silhouette"></div></div>
+        <div class="pcard__body">
+          <p class="pcard__status" style="color: var(--warn);">Placed</p>
+          <h3 class="pcard__name">U20 striker</h3>
+          <p class="pcard__meta">ST · 2006 · European trial</p>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- ============== COMMANDBAR (link to dedicated preview) ============== -->
+  <article class="comp">
+    <header class="comp__head">
+      <span class="comp__num">09</span>
+      <h2 class="comp__name">CommandBar</h2>
+      <div class="comp__meta">
+        <span class="comp__where comp__where--page">global</span>
+        <span class="comp__where">pending sign-off</span>
+      </div>
+    </header>
+
+    <div class="comp__demo">
+      <p class="muted" style="margin: 0 0 16px;">
+        Full interactive prototype lives at
+        <a href="./command-bar.html" style="color: var(--electric);">A4 · Command bar →</a>
+      </p>
+      <p class="dim" style="font-size: 13px; margin: 0;">
+        Static preview placed here to keep the component list complete.
+        Press ⌘K / Ctrl-K once you're on that page.
+      </p>
+    </div>
+  </article>
+
+  <!-- ============== CTAPANEL ============== -->
+  <article class="comp">
+    <header class="comp__head">
+      <span class="comp__num">10</span>
+      <h2 class="comp__name">CTAPanel</h2>
+      <div class="comp__meta">
+        <span class="comp__where comp__where--page">closes every page</span>
+        <span class="comp__where">stamp · gradient · grid</span>
+      </div>
+    </header>
+
+    <div class="cta-panel">
+      <span class="cta-panel__stamp">PKT · 2026 · EVAL REQUEST</span>
+      <p style="font: 600 11px/1 'Inter'; text-transform: uppercase; letter-spacing: 0.22em; margin: 0 0 16px;">Evaluation request</p>
+      <h2 style="color: #0A0A0A; font-size: clamp(40px, 5vw, 64px);">Ready to build the player file?</h2>
+      <p style="max-width: 540px; margin: 16px auto 0; color: rgba(0,0,0,0.7); font-size: 16px;">
+        Send the context, the questions, and the next decision in front of you.
+      </p>
+      <div class="cta-panel__btn-row">
+        <button class="cta-panel__btn--primary">Start a player evaluation</button>
+        <button class="cta-panel__btn--ghost">Email Burak</button>
+      </div>
+    </div>
+  </article>
+
+</main>
+
+<script>
+  // PathwayTabs interactivity
+  document.querySelectorAll('.ptabs__tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      const targetId = tab.dataset.tab;
+      const parent = tab.closest('.ptabs');
+      parent.querySelectorAll('.ptabs__tab').forEach(t => t.removeAttribute('data-active'));
+      parent.querySelectorAll('.ptabs__panel').forEach(p => p.removeAttribute('data-active'));
+      tab.setAttribute('data-active', 'true');
+      parent.querySelector(`[data-panel="${targetId}"]`).setAttribute('data-active', 'true');
+    });
+  });
+</script>
+
+</body>
+</html>

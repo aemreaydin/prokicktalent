@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>v2 · Players — editorial</title>
+  <meta name="description" content="The players ProKickTalent evaluates — anonymized roster of U17–U23 Canadian footballers. Real names appear only with consent." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><path d='M3 27 Q 16 -1 29 27' stroke='%23CBA257' stroke-width='2' fill='none' stroke-linecap='round'/><circle cx='16' cy='6' r='3.5' fill='%23CBA257'/></svg>" />
+  <link rel="stylesheet" href="./_system.css" />
+  <style>
+    .pl-hero { position: relative; min-height: 56vh; display: flex; align-items: flex-end; overflow: hidden; }
+    .pl-hero .photo { position: absolute; inset: 0; }
+    .pl-hero__scrim { position: absolute; inset: 0; z-index: 1; background: linear-gradient(0deg, rgba(11,11,12,0.9), transparent 70%); }
+    .pl-hero__in { position: relative; z-index: 2; width: 100%; padding-bottom: clamp(36px, 6vh, 72px); }
+    .pl-hero p { color: rgba(236,234,227,0.75); max-width: 48ch; margin-top: 20px; }
+
+    .notice { font: 500 12px/1.5 var(--mono); color: var(--mute); padding: 14px 18px; border: 1px solid var(--line); border-radius: var(--r-md); margin-bottom: 36px; }
+    .notice b { color: var(--gold); }
+
+    .filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 40px; }
+    .filter { font: 600 11px/1 var(--sans); letter-spacing: 0.12em; text-transform: uppercase; color: var(--mute); padding: 10px 16px; border: 1px solid var(--line-2); border-radius: 100px; background: transparent; cursor: pointer; transition: all 250ms var(--ease); }
+    .filter:hover { color: var(--ink); border-color: var(--ink); }
+    .filter[data-active="true"] { color: var(--bg); background: var(--ink); border-color: var(--ink); }
+    .filter span { color: var(--dim); margin-left: 6px; font-family: var(--mono); }
+    .filter[data-active="true"] span { color: var(--bg); opacity: 0.6; }
+
+    .roster { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    @media (max-width: 900px) { .roster { grid-template-columns: repeat(3,1fr); } }
+    @media (max-width: 600px) { .roster { grid-template-columns: repeat(2,1fr); } }
+
+    .pcard { border: 1px solid var(--line); border-radius: var(--r-md); overflow: hidden; background: var(--bg-2); transition: border-color 300ms var(--ease), transform 300ms var(--ease); }
+    .pcard:hover { border-color: var(--line-2); transform: translateY(-3px); }
+    .pcard__photo { aspect-ratio: 3/4; position: relative; display: flex; align-items: flex-end; justify-content: center; background: linear-gradient(180deg, var(--bg-3), var(--bg-2)); overflow: hidden; }
+    .pcard__sil { width: 64%; height: 80%; background: var(--line-2); mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 130'><ellipse cx='50' cy='28' rx='17' ry='21'/><path d='M22 130 Q22 62 50 57 Q78 62 78 130 Z'/></svg>") no-repeat center/contain; -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 130'><ellipse cx='50' cy='28' rx='17' ry='21'/><path d='M22 130 Q22 62 50 57 Q78 62 78 130 Z'/></svg>") no-repeat center/contain; }
+    .pcard__body { padding: 16px; }
+    .pcard__status { display: inline-flex; align-items: center; gap: 6px; font: 600 10px/1 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--mute); margin-bottom: 10px; }
+    .pcard__status::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+    .pcard__status[data-s="watched"] { color: var(--mute); }
+    .pcard__status[data-s="trial"] { color: var(--data); }
+    .pcard__status[data-s="signed"] { color: var(--gold); }
+    .pcard__status[data-s="placed"] { color: var(--ink); }
+    .pcard__name { font-family: var(--serif); font-weight: 500; font-size: 21px; margin: 0 0 4px; }
+    .pcard__meta { font: 500 12px/1.4 var(--mono); color: var(--mute); margin: 0; }
+
+    .wlf { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--r-md); overflow: hidden; }
+    @media (max-width: 760px) { .wlf { grid-template-columns: 1fr; } }
+    .wlf__c { background: var(--bg); padding: 32px; }
+    .wlf__n { font: 500 12px/1 var(--mono); color: var(--gold); }
+    .wlf__c h3 { margin: 14px 0 8px; }
+    .wlf__c p { color: var(--mute); font-size: 14px; margin: 0; }
+
+    .recruit { text-align: center; position: relative; }
+    .recruit .display-2 em { color: var(--gold); }
+  </style>
+</head>
+<body>
+
+<nav class="pchrome">
+  <div class="pchrome__in">
+    <span class="pchrome__brand">PKT · <b>v2 editorial</b></span>
+    <a href="./index.html">Index</a>
+    <a href="./home.html">Home</a>
+    <a href="./about.html">About</a>
+    <a href="./players.html" aria-current="page">Players</a>
+    <a href="./services.html">Services</a>
+    <a href="./contract-analysis.html">Contract</a>
+    <a href="./media.html">Media</a>
+    <a href="./contact.html">Contact</a>
+    <a href="./hero.html">Hero</a>
+    <button class="theme-toggle" id="themeToggle" type="button">◐ light</button>
+  </div>
+</nav>
+<script>
+  (function () {
+    const tg = document.getElementById('themeToggle'), root = document.documentElement;
+    if (localStorage.getItem('pkt-v2-theme') === 'dark') { root.setAttribute('data-theme','dark'); tg.textContent='◐ dark'; }
+    tg.addEventListener('click', () => { const d = root.getAttribute('data-theme') !== 'dark'; if (d) root.setAttribute('data-theme','dark'); else root.removeAttribute('data-theme'); tg.textContent = d ? '◐ dark' : '◐ light'; localStorage.setItem('pkt-v2-theme', d ? 'dark' : 'light'); });
+  })();
+</script>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="m" viewBox="0 0 32 32"><path d="M3 27 Q 16 -1 29 27" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-dasharray="2.5 3"/><circle cx="16" cy="6" r="3.5" fill="currentColor"/></symbol>
+</svg>
+
+<nav class="nav" id="nav">
+  <div class="nav__in">
+    <a href="./home.html" class="nav__brand"><svg width="22" height="22"><use href="#m"/></svg><b>ProKickTalent</b></a>
+    <a href="./home.html" class="nav__link">Home</a>
+    <a href="./about.html" class="nav__link">About</a>
+    <a href="./players.html" class="nav__link" aria-current="page">Players</a>
+    <a href="./services.html" class="nav__link">Services</a>
+    <a href="./media.html" class="nav__link">Media</a>
+    <a href="./contact.html" class="nav__cta">Start an evaluation</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- HERO (dark band) -->
+  <section class="pl-hero" data-theme="dark">
+    <div class="photo"><span class="photo__tag">PLACEHOLDER · matchday wide shot</span></div>
+    <div class="pl-hero__scrim"></div>
+    <div class="pl-hero__in">
+      <div class="wrap">
+        <p class="eyebrow eyebrow--gold" style="margin-bottom: 22px;">Roster · 2026</p>
+        <h1 class="display-1">The players<br/>we <em>evaluate.</em></h1>
+        <p>Anonymized at launch — every card is a real evaluation footprint with no identifying details. Names and faces appear only with written player and family consent.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <p class="notice"><b>⚠ Anonymized roster.</b> The card component supports a real-player mode the moment consent is in place.</p>
+
+      <div class="filters" role="group" aria-label="Filter roster by status">
+        <button class="filter" data-active="true" data-f="all">All <span>12</span></button>
+        <button class="filter" data-f="watched">Watched <span>5</span></button>
+        <button class="filter" data-f="trial">Trialing <span>3</span></button>
+        <button class="filter" data-f="signed">Signed <span>2</span></button>
+        <button class="filter" data-f="placed">Placed <span>2</span></button>
+      </div>
+
+      <div class="roster" id="roster">
+        <article class="pcard" data-status="watched"><div class="pcard__photo"><div class="pcard__sil"></div></div><div class="pcard__body"><p class="pcard__status" data-s="watched">Watched</p><p class="pcard__name">U19 winger</p><p class="pcard__meta">RW · 2007 · Ontario</p></div></article>
+        <article class="pcard" data-status="trial"><div class="pcard__photo"><div class="pcard__sil"></div></div><div class="pcard__body"><p class="pcard__status" data-s="trial">Trialing</p><p class="pcard__name">U21 #8</p><p class="pcard__meta">CM · 2005 · Toronto</p></div></article>
+        <article class="pcard" data-status="signed"><div class="pcard__photo"><div class="pcard__sil"></div></div><div class="pcard__body"><p class="pcard__status" data-s="signed">Signed</p><p class="pcard__name">U23 centre-back</p><p class="pcard__meta">CB · 2003 · L1O</p></div></article>
+        <article class="pcard" data-status="placed"><div class="pcard__photo"><div class="pcard__sil"></div></div><div class="pcard__body"><p class="pcard__status" data-s="placed">Placed</p><p class="pcard__name">U20 striker</p><p class="pcard__meta">ST · 2006 · European trial</p></div></article>
+        <article class="pcard" data-status="watched"><div class="pcard__photo"><div class="pcard__sil"></div></div><div class="pcard__body"><p class="pcard__status" data-s="watched">Watched</p><p class="pcard__name">U18 keeper</p><p class="pcard__meta">GK · 2008 · GTA</p></div></article>
+        <article class="pcard" data-status="trial"><div class="pcard__photo"><div class="pcard__sil"></div></div><div class="pcard__body"><p class="pcard__status" data-s="trial">Trialing</p><p class="pcard__name">U22 fullback</p><p class="pcard__meta">LB · 2004 · MLS Next Pro</p></div></article>
+        <article class="pcard" data-status="watched"><div class="pcard__photo"><div class="pcard__sil"></div></div><div class="pcard__body"><p class="pcard__status" data-s="watched">Watched</p><p class="pcard__name">U17 midfielder</p><p class="pcard__meta">AM · 2009 · Ontario</p></div></article>
+        <article class="pcard" data-status="placed"><div class="pcard__photo"><div class="pcard__sil"></div></div><div class="pcard__body"><p class="pcard__status" data-s="placed">Placed</p><p class="pcard__name">U23 winger</p><p class="pcard__meta">LW · 2003 · USL Championship</p></div></article>
+        <article class="pcard" data-status="watched"><div class="pcard__photo"><div class="pcard__sil"></div></div><div class="pcard__body"><p class="pcard__status" data-s="watched">Watched</p><p class="pcard__name">U19 #6</p><p class="pcard__meta">DM · 2007 · L1O reserve</p></div></article>
+        <article class="pcard" data-status="trial"><div class="pcard__photo"><div class="pcard__sil"></div></div><div class="pcard__body"><p class="pcard__status" data-s="trial">Trialing</p><p class="pcard__name">U20 forward</p><p class="pcard__meta">ST · 2006 · CPL combine</p></div></article>
+        <article class="pcard" data-status="signed"><div class="pcard__photo"><div class="pcard__sil"></div></div><div class="pcard__body"><p class="pcard__status" data-s="signed">Signed</p><p class="pcard__name">U21 fullback</p><p class="pcard__meta">RB · 2005 · CPL Y2</p></div></article>
+        <article class="pcard" data-status="watched"><div class="pcard__photo"><div class="pcard__sil"></div></div><div class="pcard__body"><p class="pcard__status" data-s="watched">Watched</p><p class="pcard__name">U18 winger</p><p class="pcard__meta">LW · 2008 · Showcase 2026</p></div></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT WE LOOK FOR -->
+  <section class="section section--hair">
+    <div class="wrap">
+      <div class="shead">
+        <p class="eyebrow eyebrow--gold">The standard</p>
+        <h2>What we look for.</h2>
+        <p class="shead__lede">Three filters run before any conversation. Anything that doesn't pass stays a watched profile until it does.</p>
+      </div>
+      <div class="wlf">
+        <div class="wlf__c"><span class="wlf__n">01</span><h3>Skill &amp; potential</h3><p>Ability on the ball, tactical awareness, and the physical tools to compete at the next level — evaluated across all positions.</p></div>
+        <div class="wlf__c"><span class="wlf__n">02</span><h3>Drive &amp; dedication</h3><p>Talent is the starting point. What separates professionals is the commitment to improve every day, on and off the pitch.</p></div>
+        <div class="wlf__c"><span class="wlf__n">03</span><h3>Character &amp; coachability</h3><p>Clubs look at the whole player. We represent athletes with the mindset to accept feedback, grow, and lead.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RECRUITMENT -->
+  <section class="section section--hair recruit">
+    <div class="wrap wrap--narrow">
+      <p class="eyebrow eyebrow--gold" style="margin-bottom: 24px;">For players</p>
+      <h2 class="display-2">Are you <em>next?</em></h2>
+      <p class="lede" style="margin: 20px auto 32px; max-width: 46ch;">Submit your profile and a recent match. We evaluate and respond within seven days.</p>
+      <a href="./contact.html" class="btn btn--primary">Submit my profile <span class="arr">→</span></a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="foot__in">
+    <a href="./home.html" class="nav__brand"><svg width="20" height="20" style="color:var(--gold)"><use href="#m"/></svg><b style="font-size:16px">ProKickTalent</b></a>
+    <div class="foot__cred"><span>FIFA Licensed Agent</span><span>Toronto · Canada</span><span>© 2026 ProKickTalent</span></div>
+  </div>
+</footer>
+
+<script>
+  const nav=document.getElementById('nav');addEventListener('scroll',()=>{nav.dataset.scrolled=scrollY>16;},{passive:true});
+  const filters=document.querySelectorAll('.filter'), cards=document.querySelectorAll('#roster .pcard');
+  filters.forEach(f=>f.addEventListener('click',()=>{ filters.forEach(x=>x.removeAttribute('data-active')); f.setAttribute('data-active','true'); const w=f.dataset.f; cards.forEach(c=>{ c.style.display=(w==='all'||c.dataset.status===w)?'':'none'; }); }));
+</script>
+
+</body>
+</html>

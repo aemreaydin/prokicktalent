@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>A2 · Logo concepts</title>
+  <link rel="stylesheet" href="./_preview-system.css" />
+  <style>
+    .concept {
+      background: var(--surface-1);
+      border: 1px solid var(--hairline);
+      border-radius: var(--r-md);
+      padding: 32px;
+      position: relative;
+      cursor: pointer;
+      transition: border-color 250ms var(--ease-out-expo), background 250ms;
+    }
+    .concept:hover { border-color: var(--electric); }
+    .concept[data-selected="true"] {
+      border-color: var(--gold);
+      background:
+        radial-gradient(ellipse at top, rgba(212, 175, 55, 0.12), transparent 60%),
+        var(--surface-1);
+    }
+    .concept[data-selected="true"]::after {
+      content: "✓ selected";
+      position: absolute;
+      top: 12px; right: 12px;
+      font: 600 11px/1 'JetBrains Mono', monospace;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+      padding: 6px 10px;
+      border: 1px solid var(--gold);
+      border-radius: var(--r-sm);
+    }
+    .concept__head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 24px; }
+    .concept__num { font: 500 11px/1 'JetBrains Mono', monospace; color: var(--gold); }
+    .concept__name { font: 600 14px/1 'Inter', sans-serif; color: var(--bone); text-transform: uppercase; letter-spacing: 0.18em; }
+
+    .concept__hero {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 0;
+      background: var(--bg);
+      border-radius: var(--r-sm);
+      margin-bottom: 24px;
+      min-height: 200px;
+      gap: 20px;
+    }
+    .concept__hero svg { display: block; }
+    .concept__hero-wordmark {
+      font: 700 36px/1 'Bebas Neue', sans-serif;
+      letter-spacing: 0.06em;
+      color: var(--bone);
+    }
+
+    .concept__row {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      padding: 16px 0;
+      border-top: 1px solid var(--hairline);
+    }
+    .concept__row-label {
+      font: 500 10px/1.2 'JetBrains Mono', monospace;
+      color: var(--mute);
+      width: 100px;
+      flex-shrink: 0;
+    }
+    .concept__sizes {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .size-cell {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+    .size-cell span {
+      font: 500 9px/1 'JetBrains Mono', monospace;
+      color: var(--dim);
+    }
+    .size-cell .icon-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .concept__inverted {
+      background: var(--bone);
+      padding: 12px 16px;
+      border-radius: var(--r-sm);
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .concept__inverted-text {
+      font: 700 18px/1 'Bebas Neue', sans-serif;
+      letter-spacing: 0.06em;
+      color: #0A0A0A;
+    }
+
+    .concept__desc {
+      color: var(--mute);
+      font-size: 13px;
+      margin: 16px 0 0;
+    }
+
+    .decision-bar {
+      position: sticky;
+      bottom: 16px;
+      margin-top: 64px;
+      padding: 16px 24px;
+      background: var(--surface-glass);
+      backdrop-filter: blur(20px) saturate(140%);
+      border: 1px solid var(--hairline-strong);
+      border-radius: var(--r-md);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+      box-shadow: var(--shadow-1);
+      z-index: 10;
+    }
+    .decision-bar__label { color: var(--mute); font-size: 13px; }
+    .decision-bar__value { font: 500 13px/1 'JetBrains Mono', monospace; color: var(--electric); }
+    .decision-bar button {
+      background: var(--gold);
+      color: #0A0A0A;
+      border: none;
+      padding: 10px 16px;
+      font: 600 11px/1 'Inter', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      border-radius: var(--r-sm);
+      cursor: pointer;
+    }
+    .decision-bar button[disabled] { opacity: 0.4; cursor: not-allowed; }
+  </style>
+</head>
+<body>
+
+<nav class="preview-chrome" aria-label="Preview index">
+  <div class="preview-chrome__inner">
+    <span class="preview-chrome__brand">PKT design previews · <b>Phase A</b></span>
+    <a class="preview-chrome__link" href="./index.html">Index</a>
+    <a class="preview-chrome__link" href="./style-tile.html">Style tile</a>
+    <a class="preview-chrome__link" href="./logo-concepts.html" aria-current="page">Logo</a>
+    <a class="preview-chrome__link" href="./components.html">Components</a>
+    <a class="preview-chrome__link" href="./command-bar.html">⌘K bar</a>
+    <a class="preview-chrome__link" href="./hero-animation.html">Hero</a>
+    <a class="preview-chrome__link" href="./page-home.html">Home</a>
+    <a class="preview-chrome__link" href="./page-about.html">About</a>
+    <a class="preview-chrome__link" href="./page-players.html">Players</a>
+    <a class="preview-chrome__link" href="./page-services.html">Services</a>
+    <a class="preview-chrome__link" href="./page-media.html">Media</a>
+    <a class="preview-chrome__link" href="./page-contact.html">Contact</a>
+  </div>
+</nav>
+
+<!-- 5 SVG concepts as <symbol> for clean reuse at every size -->
+<svg width="0" height="0" style="position: absolute;" aria-hidden="true">
+  <defs>
+    <!-- 1. ARC — single quarter-arc, the most minimal -->
+    <symbol id="logo-arc" viewBox="0 0 32 32">
+      <path d="M3 29 Q 3 3 29 3" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round"/>
+    </symbol>
+
+    <!-- 2. BALL — geometric pentagon-on-circle -->
+    <symbol id="logo-ball" viewBox="0 0 32 32">
+      <circle cx="16" cy="16" r="13" stroke="currentColor" stroke-width="2" fill="none"/>
+      <polygon points="16,9 22.5,13.5 20,20.5 12,20.5 9.5,13.5" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
+    </symbol>
+
+    <!-- 3. GOALMOUTH — two posts + crossbar -->
+    <symbol id="logo-goal" viewBox="0 0 32 32">
+      <path d="M5 28 L5 6 L27 6 L27 28" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <line x1="5" y1="28" x2="27" y2="28" stroke="currentColor" stroke-width="1" stroke-dasharray="2 3" opacity="0.5"/>
+    </symbol>
+
+    <!-- 4. TRAJECTORY — parabolic dashed arc with ball at apex -->
+    <symbol id="logo-trajectory" viewBox="0 0 32 32">
+      <path d="M3 27 Q 16 -1 29 27" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-dasharray="2.5 3"/>
+      <circle cx="16" cy="6" r="3.5" fill="currentColor"/>
+    </symbol>
+
+    <!-- 5. CONTACT — dot with two radiating arcs (impact) -->
+    <symbol id="logo-contact" viewBox="0 0 32 32">
+      <circle cx="16" cy="16" r="4" fill="currentColor"/>
+      <path d="M16 5 A 11 11 0 0 1 27 16" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+      <path d="M16 27 A 11 11 0 0 1 5 16" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+    </symbol>
+  </defs>
+</svg>
+
+<main class="shell">
+
+  <header style="margin-bottom: 64px;">
+    <p class="eyebrow eyebrow--electric">A2 · Logo concepts</p>
+    <h1 style="margin: 16px 0 24px;">Pick a mark.</h1>
+    <p class="muted" style="max-width: 640px; font-size: 18px;">
+      Five geometric variations. Single-color, monoline, designed to read at 16px.
+      Click a concept to mark it as your pick — the bar at the bottom captures
+      the decision.
+    </p>
+    <p class="dim mono" style="font-size: 12px; margin-top: 16px;">
+      Hover for the electric border · click to select · all 5 are real SVG, not mockups.
+    </p>
+  </header>
+
+  <div class="stack" style="--stack: 32px;">
+
+    <!-- =================== CONCEPT 1: ARC =================== -->
+    <article class="concept" data-id="arc">
+      <div class="concept__head">
+        <span class="concept__num">01</span>
+        <span class="concept__name">Arc — pitch curve</span>
+      </div>
+
+      <div class="concept__hero">
+        <svg width="80" height="80" style="color: var(--gold);"><use href="#logo-arc"/></svg>
+        <span class="concept__hero-wordmark">PROKICKTALENT</span>
+      </div>
+
+      <div class="concept__row">
+        <span class="concept__row-label">Gold on dark</span>
+        <div class="concept__sizes">
+          <div class="size-cell"><div class="icon-wrap"><svg width="16" height="16" style="color: var(--gold);"><use href="#logo-arc"/></svg></div><span>16</span></div>
+          <div class="size-cell"><div class="icon-wrap"><svg width="24" height="24" style="color: var(--gold);"><use href="#logo-arc"/></svg></div><span>24</span></div>
+          <div class="size-cell"><div class="icon-wrap"><svg width="32" height="32" style="color: var(--gold);"><use href="#logo-arc"/></svg></div><span>32</span></div>
+          <div class="size-cell"><div class="icon-wrap"><svg width="64" height="64" style="color: var(--gold);"><use href="#logo-arc"/></svg></div><span>64</span></div>
+          <div class="size-cell"><div class="icon-wrap"><svg width="128" height="128" style="color: var(--gold);"><use href="#logo-arc"/></svg></div><span>128</span></div>
+        </div>
+      </div>
+
+      <div class="concept__row">
+        <span class="concept__row-label">Inverted</span>
+        <div class="concept__inverted">
+          <svg width="24" height="24" style="color: #0A0A0A;"><use href="#logo-arc"/></svg>
+          <span class="concept__inverted-text">PROKICKTALENT</span>
+        </div>
+      </div>
+
+      <p class="concept__desc">
+        Most minimal. Reads as "a curve" — the centre-circle, a goalpost arc,
+        a striker's run. Most ambiguous; depends entirely on context.
+      </p>
+    </article>
+
+    <!-- =================== CONCEPT 2: BALL =================== -->
+    <article class="concept" data-id="ball">
+      <div class="concept__head">
+        <span class="concept__num">02</span>
+        <span class="concept__name">Ball — geometric</span>
+      </div>
+
+      <div class="concept__hero">
+        <svg width="80" height="80" style="color: var(--gold);"><use href="#logo-ball"/></svg>
+        <span class="concept__hero-wordmark">PROKICKTALENT</span>
+      </div>
+
+      <div class="concept__row">
+        <span class="concept__row-label">Gold on dark</span>
+        <div class="concept__sizes">
+          <div class="size-cell"><div class="icon-wrap"><svg width="16" height="16" style="color: var(--gold);"><use href="#logo-ball"/></svg></div><span>16</span></div>
+          <div class="size-cell"><div class="icon-wrap"><svg width="24" height="24" style="color: var(--gold);"><use href="#logo-ball"/></svg></div><span>24</span></div>
+          <div class="size-cell"><div class="icon-wrap"><svg width="32" height="32" style="color: var(--gold);"><use href="#logo-ball"/></svg></div><span>32</span></div>
+          <div class="size-cell"><div class="icon-wrap"><svg width="64" height="64" style="color: var(--gold);"><use href="#logo-ball"/></svg></div><span>64</span></div>
+          <div class="size-cell"><div class="icon-wrap"><svg width="128" height="128" style="color: var(--gold);"><use href="#logo-ball"/></svg></div><span>128</span></div>
+        </div>
+      </div>
+
+      <div class="concept__row">
+        <span class="concept__row-label">Inverted</span>
+        <div class="concept__inverted">
+          <svg width="24" height="24" style="color: #0A0A0A;"><use href="#logo-ball"/></svg>
+          <span class="concept__inverted-text">PROKICKTALENT</span>
+        </div>
+      </div>
+
+      <p class="concept__desc">
+        Most literal. Unmistakably football. Risk: every football brand uses
+        a ball — the pentagon-circle motif is well-trodden territory.
+      </p>
+    </article>
+
+    <!-- =================== CONCEPT 3: GOALMOUTH =================== -->
+    <article class="concept" data-id="goal">
+      <div class="concept__head">
+        <span class="concept__num">03</span>
+        <span class="concept__name">Goalmouth — architectural</span>
+      </div>
+
+      <div class="concept__hero">
+        <svg width="80" height="80" style="color: var(--gold);"><use href="#logo-goal"/></svg>
+        <span class="concept__hero-wordmark">PROKICKTALENT</span>
+      </div>
+
+      <div class="concept__row">
+        <span class="concept__row-label">Gold on dark</span>
+        <div class="concept__sizes">
+          <div class="size-cell"><div class="icon-wrap"><svg width="16" height="16" style="color: var(--gold);"><use href="#logo-goal"/></svg></div><span>16</span></div>
+          <div class="size-cell"><div class="icon-wrap"><svg width="24" height="24" style="color: var(--gold);"><use href="#logo-goal"/></svg></div><span>24</span></div>
+          <div class="size-cell"><div class="icon-wrap"><svg width="32" height="32" style="color: var(--gold);"><use href="#logo-goal"/></svg></div><span>32</span></div>
+          <div class="size-cell"><div class="icon-wrap"><svg width="64" height="64" style="color: var(--gold);"><use href="#logo-goal"/></svg></div><span>64</span></div>
+          <div class="size-cell"><div class="icon-wrap"><svg width="128" height="128" style="color: var(--gold);"><use href="#logo-goal"/></svg></div><span>128</span></div>
+        </div>
+      </div>
+
+      <div class="concept__row">
+        <span class="concept__row-label">Inverted</span>
+        <div class="concept__inverted">
+          <svg width="24" height="24" style="color: #0A0A0A;"><use href="#logo-goal"/></svg>
+          <span class="concept__inverted-text">PROKICKTALENT</span>
+        </div>
+      </div>
+
+      <p class="concept__desc">
+        Two posts + crossbar with a dotted goal-line. Architectural and rare in
+        the category. Reads as "the target" — fits the agent-as-pathway narrative.
+      </p>
+    </article>
+
+    <!-- =================== CONCEPT 4: TRAJECTORY =================== -->
+    <article class="concept" data-id="trajectory">
+      <div class="concept__head">
+        <span class="concept__num">04</span>
+        <span class="concept__name">Trajectory — ball-in-flight</span>
+      </div>
+
+      <div class="concept__hero">
+        <svg width="80" height="80" style="color: var(--gold);"><use href="#logo-trajectory"/></svg>
+        <span class="concept__hero-wordmark">PROKICKTALENT</span>
+      </div>
+
+      <div class="concept__row">
+        <span class="concept__row-label">Gold on dark</span>
+        <div class="concept__sizes">
+          <div class="size-cell"><div class="icon-wrap"><svg width="16" height="16" style="color: var(--gold);"><use href="#logo-trajectory"/></svg></div><span>16</span></div>
+          <div class="size-cell"><div class="icon-wrap"><svg width="24" height="24" style="color: var(--gold);"><use href="#logo-trajectory"/></svg></div><span>24</span></div>
+          <div class="size-cell"><div class="icon-wrap"><svg width="32" height="32" style="color: var(--gold);"><use href="#logo-trajectory"/></svg></div><span>32</span></div>
+          <div class="size-cell"><div class="icon-wrap"><svg width="64" height="64" style="color: var(--gold);"><use href="#logo-trajectory"/></svg></div><span>64</span></div>
+          <div class="size-cell"><div class="icon-wrap"><svg width="128" height="128" style="color: var(--gold);"><use href="#logo-trajectory"/></svg></div><span>128</span></div>
+        </div>
+      </div>
+
+      <div class="concept__row">
+        <span class="concept__row-label">Inverted</span>
+        <div class="concept__inverted">
+          <svg width="24" height="24" style="color: #0A0A0A;"><use href="#logo-trajectory"/></svg>
+          <span class="concept__inverted-text">PROKICKTALENT</span>
+        </div>
+      </div>
+
+      <p class="concept__desc">
+        Dashed parabolic arc with a filled ball at apex. Tightly aligned with
+        the hero animation concept — the brand mark and the hero say the same
+        thing. Risk: most "concept-loaded" of the five.
+      </p>
+    </article>
+
+    <!-- =================== CONCEPT 5: CONTACT =================== -->
+    <article class="concept" data-id="contact">
+      <div class="concept__head">
+        <span class="concept__num">05</span>
+        <span class="concept__name">Contact — strike moment</span>
+      </div>
+
+      <div class="concept__hero">
+        <svg width="80" height="80" style="color: var(--gold);"><use href="#logo-contact"/></svg>
+        <span class="concept__hero-wordmark">PROKICKTALENT</span>
+      </div>
+
+      <div class="concept__row">
+        <span class="concept__row-label">Gold on dark</span>
+        <div class="concept__sizes">
+          <div class="size-cell"><div class="icon-wrap"><svg width="16" height="16" style="color: var(--gold);"><use href="#logo-contact"/></svg></div><span>16</span></div>
+          <div class="size-cell"><div class="icon-wrap"><svg width="24" height="24" style="color: var(--gold);"><use href="#logo-contact"/></svg></div><span>24</span></div>
+          <div class="size-cell"><div class="icon-wrap"><svg width="32" height="32" style="color: var(--gold);"><use href="#logo-contact"/></svg></div><span>32</span></div>
+          <div class="size-cell"><div class="icon-wrap"><svg width="64" height="64" style="color: var(--gold);"><use href="#logo-contact"/></svg></div><span>64</span></div>
+          <div class="size-cell"><div class="icon-wrap"><svg width="128" height="128" style="color: var(--gold);"><use href="#logo-contact"/></svg></div><span>128</span></div>
+        </div>
+      </div>
+
+      <div class="concept__row">
+        <span class="concept__row-label">Inverted</span>
+        <div class="concept__inverted">
+          <svg width="24" height="24" style="color: #0A0A0A;"><use href="#logo-contact"/></svg>
+          <span class="concept__inverted-text">PROKICKTALENT</span>
+        </div>
+      </div>
+
+      <p class="concept__desc">
+        Filled dot with two radiating arcs. Reads as "impact" and "broadcast"
+        simultaneously. Most abstract — works as a pure mark independent of
+        football, which is either a strength or a weakness depending on intent.
+      </p>
+    </article>
+
+  </div>
+
+  <!-- DECISION BAR -->
+  <aside class="decision-bar" role="status" aria-live="polite">
+    <div>
+      <span class="decision-bar__label">Your pick: </span>
+      <span class="decision-bar__value" id="pick">— none yet —</span>
+    </div>
+    <button id="copy-decision" disabled>Copy decision text</button>
+  </aside>
+
+</main>
+
+<script>
+  const concepts = document.querySelectorAll('.concept');
+  const pickLabel = document.getElementById('pick');
+  const copyBtn = document.getElementById('copy-decision');
+  let currentPick = null;
+
+  const labels = {
+    arc: '01 · Arc (pitch curve)',
+    ball: '02 · Ball (geometric)',
+    goal: '03 · Goalmouth (architectural)',
+    trajectory: '04 · Trajectory (ball-in-flight)',
+    contact: '05 · Contact (strike moment)'
+  };
+
+  concepts.forEach(el => {
+    el.addEventListener('click', () => {
+      concepts.forEach(c => c.removeAttribute('data-selected'));
+      el.setAttribute('data-selected', 'true');
+      currentPick = el.dataset.id;
+      pickLabel.textContent = labels[currentPick];
+      copyBtn.disabled = false;
+    });
+  });
+
+  copyBtn.addEventListener('click', () => {
+    if (!currentPick) return;
+    const text = `Logo decision (A2): ${labels[currentPick]}`;
+    navigator.clipboard?.writeText(text).then(() => {
+      const orig = copyBtn.textContent;
+      copyBtn.textContent = 'Copied ✓';
+      setTimeout(() => copyBtn.textContent = orig, 1500);
+    });
+  });
+</script>
+
+</body>
+</html>

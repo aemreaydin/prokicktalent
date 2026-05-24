@@ -10,7 +10,7 @@ interface Props {
 
 const {
   title,
-  description = 'ProKickTalent Sports Group — FIFA-licensed football agent guiding young Canadian players to professional careers.'
+  description = 'ProKickTalent Sports Group — FIFA-licensed football agent guiding U17–U23 Canadian players to professional careers through evidence-led representation.'
 } = Astro.props;
 ---
 
@@ -21,17 +21,28 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <title>{title} | ProKickTalent Sports Group</title>
+
+    <!-- no-FOUC theme init: light is default, dark is opt-in -->
+    <script is:inline>
+      try {
+        if (localStorage.getItem('pkt-theme') === 'dark') {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        }
+      } catch (e) {}
+    </script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <slot name="head" />
   </head>
   <body>
     <Nav />
-    <main class="pt-16">
+    <main>
       <slot />
     </main>
     <Footer />

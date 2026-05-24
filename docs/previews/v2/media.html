@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>v2 · Media — editorial</title>
+  <meta name="description" content="Media and moments from ProKickTalent — matchdays, sessions, and press coverage." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><path d='M3 27 Q 16 -1 29 27' stroke='%23CBA257' stroke-width='2' fill='none' stroke-linecap='round'/><circle cx='16' cy='6' r='3.5' fill='%23CBA257'/></svg>" />
+  <link rel="stylesheet" href="./_system.css" />
+  <style>
+    .md-hero { position: relative; min-height: 50vh; display: flex; align-items: flex-end; overflow: hidden; }
+    .md-hero .photo { position: absolute; inset: 0; }
+    .md-hero__scrim { position: absolute; inset: 0; z-index: 1; background: linear-gradient(0deg, rgba(11,11,12,0.9), transparent 70%); }
+    .md-hero__in { position: relative; z-index: 2; width: 100%; padding-bottom: clamp(32px,5vh,64px); display:flex; justify-content:space-between; align-items:flex-end; gap:24px; flex-wrap:wrap; }
+
+    .ig { display:inline-flex; align-items:center; gap:9px; padding:11px 16px; border:1px solid rgba(236,234,227,0.3); border-radius:100px; color:#ECEAE3; font:600 11px/1 var(--sans); letter-spacing:0.14em; text-transform:uppercase; text-decoration:none; transition:border-color 250ms var(--ease); }
+    .ig:hover { border-color: var(--gold); color: var(--gold); }
+
+    .masonry { display:grid; grid-template-columns:repeat(4,1fr); grid-auto-rows:170px; grid-auto-flow:dense; gap:12px; }
+    @media (max-width:900px){.masonry{grid-template-columns:repeat(3,1fr);}}
+    @media (max-width:600px){.masonry{grid-template-columns:repeat(2,1fr);}}
+    .tile { position:relative; overflow:hidden; border-radius:var(--r-md); border:1px solid var(--line); cursor:pointer; transition:transform 300ms var(--ease),border-color 300ms; }
+    .tile:hover{ transform:translateY(-2px); border-color:var(--line-2); }
+    .tile[data-s="wide"]{grid-column:span 2;}
+    .tile[data-s="tall"]{grid-row:span 2;}
+    .tile[data-s="big"]{grid-column:span 2; grid-row:span 2;}
+    .tile .photo{ position:absolute; inset:0; }
+    .tile__cap { position:absolute; left:0; right:0; bottom:0; padding:28px 14px 14px; background:linear-gradient(0deg,rgba(0,0,0,0.85),transparent); opacity:0; transform:translateY(15%); transition:opacity 300ms var(--ease),transform 300ms; }
+    .tile:hover .tile__cap{ opacity:1; transform:none; }
+    .tile__cap p{ margin:0; font:500 12px/1.4 var(--sans); color:#ECEAE3; }
+    .tile__cap small{ display:block; margin-top:3px; font:500 10px/1 var(--mono); color:rgba(236,234,227,0.6); }
+    .tile__badge { position:absolute; top:8px; left:8px; font:500 9px/1 var(--mono); color:rgba(236,234,227,0.7); padding:3px 6px; border:1px solid rgba(236,234,227,0.25); border-radius:3px; background:rgba(0,0,0,0.4); z-index:2; }
+
+    .press__row { display:flex; gap:16px; overflow-x:auto; padding:8px 0 16px; scroll-snap-type:x mandatory; }
+    .press-card { flex:0 0 320px; scroll-snap-align:start; padding:24px; border:1px solid var(--line); border-radius:var(--r-md); background:var(--bg-2); text-decoration:none; color:inherit; transition:border-color 250ms var(--ease); }
+    .press-card:hover{ border-color:var(--line-2); }
+    .press-card__top { display:flex; justify-content:space-between; align-items:baseline; }
+    .press-card__src { font:500 10px/1 var(--mono); color:var(--gold); letter-spacing:0.1em; text-transform:uppercase; }
+    .press-card__date { font:500 10px/1 var(--mono); color:var(--mute); }
+    .press-card h3 { margin:16px 0 8px; font-size:21px; line-height:1.2; }
+    .press-card p { margin:0; color:var(--mute); font-size:13px; }
+  </style>
+</head>
+<body>
+
+<nav class="pchrome">
+  <div class="pchrome__in">
+    <span class="pchrome__brand">PKT · <b>v2 editorial</b></span>
+    <a href="./index.html">Index</a>
+    <a href="./home.html">Home</a>
+    <a href="./about.html">About</a>
+    <a href="./players.html">Players</a>
+    <a href="./services.html">Services</a>
+    <a href="./contract-analysis.html">Contract</a>
+    <a href="./media.html" aria-current="page">Media</a>
+    <a href="./contact.html">Contact</a>
+    <a href="./hero.html">Hero</a>
+    <button class="theme-toggle" id="themeToggle" type="button">◐ light</button>
+  </div>
+</nav>
+<script>
+  (function () {
+    const tg = document.getElementById('themeToggle'), root = document.documentElement;
+    if (localStorage.getItem('pkt-v2-theme') === 'dark') { root.setAttribute('data-theme','dark'); tg.textContent='◐ dark'; }
+    tg.addEventListener('click', () => { const d = root.getAttribute('data-theme') !== 'dark'; if (d) root.setAttribute('data-theme','dark'); else root.removeAttribute('data-theme'); tg.textContent = d ? '◐ dark' : '◐ light'; localStorage.setItem('pkt-v2-theme', d ? 'dark' : 'light'); });
+  })();
+</script>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="m" viewBox="0 0 32 32"><path d="M3 27 Q 16 -1 29 27" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-dasharray="2.5 3"/><circle cx="16" cy="6" r="3.5" fill="currentColor"/></symbol>
+  <symbol id="ig" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4" stroke="currentColor" stroke-width="1.5" fill="none"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.5" fill="none"/><circle cx="17" cy="7" r="1" fill="currentColor"/></symbol>
+</svg>
+
+<nav class="nav" id="nav">
+  <div class="nav__in">
+    <a href="./home.html" class="nav__brand"><svg width="22" height="22"><use href="#m"/></svg><b>ProKickTalent</b></a>
+    <a href="./home.html" class="nav__link">Home</a>
+    <a href="./about.html" class="nav__link">About</a>
+    <a href="./players.html" class="nav__link">Players</a>
+    <a href="./services.html" class="nav__link">Services</a>
+    <a href="./media.html" class="nav__link" aria-current="page">Media</a>
+    <a href="./contact.html" class="nav__cta">Start an evaluation</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- HERO (dark band) -->
+  <section class="md-hero" data-theme="dark">
+    <div class="photo"><span class="photo__tag">PLACEHOLDER · matchday</span></div>
+    <div class="md-hero__scrim"></div>
+    <div class="md-hero__in">
+      <div class="wrap" style="display:contents;">
+        <div style="padding-inline: var(--gutter);">
+          <p class="eyebrow eyebrow--gold" style="margin-bottom: 20px;">Gallery</p>
+          <h1 class="display-1">Media &amp;<br/><em>moments.</em></h1>
+        </div>
+        <div style="padding-inline: var(--gutter);">
+          <a href="https://instagram.com/prokicktalent" class="ig" target="_blank" rel="noopener"><svg width="18" height="18"><use href="#ig"/></svg> Follow on Instagram</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MASONRY -->
+  <section class="section">
+    <div class="wrap">
+      <div class="masonry">
+        <div class="tile" data-s="big"><div class="photo"></div><span class="tile__badge">PLACEHOLDER</span><div class="tile__cap"><p>U21 trial · Liverpool training facility</p><small>2026 · March</small></div></div>
+        <div class="tile"><div class="photo"></div><span class="tile__badge">PLACEHOLDER</span><div class="tile__cap"><p>Match scouting · L1O round 8</p><small>2026 · April</small></div></div>
+        <div class="tile" data-s="tall"><div class="photo"></div><span class="tile__badge">PLACEHOLDER</span><div class="tile__cap"><p>Manchester United youth fixture</p><small>2025 · December</small></div></div>
+        <div class="tile"><div class="photo"></div><span class="tile__badge">PLACEHOLDER</span><div class="tile__cap"><p>GPS session debrief</p><small>2026 · February</small></div></div>
+        <div class="tile" data-s="wide"><div class="photo"></div><span class="tile__badge">PLACEHOLDER</span><div class="tile__cap"><p>Toronto FC II training observation</p><small>2026 · January</small></div></div>
+        <div class="tile"><div class="photo"></div><span class="tile__badge">PLACEHOLDER</span><div class="tile__cap"><p>Family meeting · downtown Toronto</p><small>2026 · February</small></div></div>
+        <div class="tile"><div class="photo"></div><span class="tile__badge">PLACEHOLDER</span><div class="tile__cap"><p>CPL combine attendance</p><small>2026 · March</small></div></div>
+        <div class="tile" data-s="wide"><div class="photo"></div><span class="tile__badge">PLACEHOLDER</span><div class="tile__cap"><p>Showcase tournament · regional</p><small>2026 · February</small></div></div>
+        <div class="tile"><div class="photo"></div><span class="tile__badge">PLACEHOLDER</span><div class="tile__cap"><p>Match recap · player development</p><small>2026 · April</small></div></div>
+        <div class="tile"><div class="photo"></div><span class="tile__badge">PLACEHOLDER</span><div class="tile__cap"><p>GPS unit calibration</p><small>2026 · January</small></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRESS -->
+  <section class="section section--hair">
+    <div class="wrap">
+      <div class="shead">
+        <p class="eyebrow eyebrow--gold">In the press</p>
+        <h2>Where PKT shows up.</h2>
+      </div>
+      <div class="press__row">
+        <a href="#" class="press-card"><div class="press-card__top"><span class="press-card__src">L1O Newsletter</span><span class="press-card__date">Jun 2026</span></div><h3>"Independent agents and the new player pathway"</h3><p>League1 Ontario monthly · feature</p></a>
+        <a href="#" class="press-card"><div class="press-card__top"><span class="press-card__src">Canadian Premier Pod</span><span class="press-card__date">May 2026</span></div><h3>"What U23 evaluation actually looks like"</h3><p>Episode 47 · 38 min</p></a>
+        <a href="#" class="press-card"><div class="press-card__top"><span class="press-card__src">Ontario Soccer</span><span class="press-card__date">Mar 2026</span></div><h3>"GPS performance in youth development"</h3><p>Panel · Toronto convention</p></a>
+        <a href="#" class="press-card"><div class="press-card__top"><span class="press-card__src">Across The Lake</span><span class="press-card__date">Feb 2026</span></div><h3>"Building a Canadian pathway file"</h3><p>Longform interview · 4,500 words</p></a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="foot__in">
+    <a href="./home.html" class="nav__brand"><svg width="20" height="20" style="color:var(--gold)"><use href="#m"/></svg><b style="font-size:16px">ProKickTalent</b></a>
+    <div class="foot__cred"><span>FIFA Licensed Agent</span><span>Toronto · Canada</span><span>© 2026 ProKickTalent</span></div>
+  </div>
+</footer>
+
+<script>const nav=document.getElementById('nav');addEventListener('scroll',()=>{nav.dataset.scrolled=scrollY>16;},{passive:true});</script>
+
+</body>
+</html>

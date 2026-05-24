@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>A6.2 · About — page mockup</title>
+  <link rel="stylesheet" href="./_preview-system.css" />
+  <link rel="stylesheet" href="./_preview-components.css" />
+  <style>
+    .about-hero {
+      padding: 96px 24px 64px;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    .about-hero h1 { font-size: clamp(72px, 9vw, 144px); }
+    .about-hero h1 span { color: var(--gold); }
+
+    .mission {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    .mission p { font-size: 18px; line-height: 1.7; color: var(--mute); }
+    .mission .pullquote {
+      font: italic 500 32px/1.4 'Inter';
+      color: var(--bone);
+      padding: 32px 0;
+      border-top: 1px solid var(--hairline);
+      border-bottom: 1px solid var(--hairline);
+      margin: 32px 0;
+    }
+    .mission .pullquote::before { content: "“ "; color: var(--gold); }
+
+    /* timeline */
+    .timeline {
+      position: relative;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 24px 0 80px;
+    }
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 38px; top: 8px; bottom: 8px;
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, var(--hairline-strong) 10%, var(--hairline-strong) 90%, transparent);
+    }
+    .t-node {
+      position: relative;
+      margin-bottom: 32px;
+    }
+    .t-node::before {
+      content: "";
+      position: absolute;
+      left: -50px;
+      top: 24px;
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 0 4px var(--bg), 0 0 0 5px var(--gold);
+    }
+    .t-node__year {
+      font: 500 11px/1 'JetBrains Mono', monospace;
+      color: var(--gold);
+      letter-spacing: 0.12em;
+      margin: 0 0 8px;
+    }
+    .t-node__card {
+      padding: 20px;
+    }
+    .t-node__card h3 { font-size: 28px; margin: 0 0 8px; }
+    .t-node__card p { color: var(--mute); font-size: 14px; margin: 0; }
+
+    /* credentials bento */
+    .creds {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    .creds-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+    @media (max-width: 768px) { .creds-grid { grid-template-columns: repeat(2, 1fr); } }
+    .cred {
+      padding: 24px;
+    }
+    .cred .eyebrow { display: block; margin-bottom: 12px; }
+    .cred h3 { font-size: 32px; margin: 0 0 8px; }
+    .cred p { color: var(--mute); font-size: 13px; margin: 0; }
+
+    /* partners */
+    .partners {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+      text-align: center;
+    }
+    .partners-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 16px;
+      margin-top: 32px;
+    }
+    .partners-grid > div {
+      padding: 24px 16px;
+      text-align: center;
+      font: 700 14px/1 'Bebas Neue';
+      letter-spacing: 0.1em;
+      color: var(--mute);
+    }
+  </style>
+</head>
+<body>
+
+<nav class="preview-chrome" aria-label="Preview index">
+  <div class="preview-chrome__inner">
+    <span class="preview-chrome__brand">PKT design previews · <b>Phase A</b></span>
+    <a class="preview-chrome__link" href="./index.html">Index</a>
+    <a class="preview-chrome__link" href="./style-tile.html">Style tile</a>
+    <a class="preview-chrome__link" href="./logo-concepts.html">Logo</a>
+    <a class="preview-chrome__link" href="./components.html">Components</a>
+    <a class="preview-chrome__link" href="./command-bar.html">⌘K bar</a>
+    <a class="preview-chrome__link" href="./hero-animation.html">Hero</a>
+    <a class="preview-chrome__link" href="./page-home.html">Home</a>
+    <a class="preview-chrome__link" href="./page-about.html" aria-current="page">About</a>
+    <a class="preview-chrome__link" href="./page-players.html">Players</a>
+    <a class="preview-chrome__link" href="./page-services.html">Services</a>
+    <a class="preview-chrome__link" href="./page-media.html">Media</a>
+    <a class="preview-chrome__link" href="./page-contact.html">Contact</a>
+  </div>
+</nav>
+
+<svg width="0" height="0" style="position: absolute;" aria-hidden="true">
+  <symbol id="m" viewBox="0 0 32 32"><path d="M3 27 Q 16 -1 29 27" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-dasharray="2.5 3"/><circle cx="16" cy="6" r="3.5" fill="currentColor"/></symbol>
+</svg>
+
+<nav class="c-gnav" aria-label="Main">
+  <div class="c-gnav__inner">
+    <a href="./page-home.html" class="c-gnav__brand"><svg width="24" height="24"><use href="#m"/></svg><span>PROKICKTALENT</span></a>
+    <a href="./page-home.html" class="c-gnav__link">Home</a>
+    <a href="./page-about.html" class="c-gnav__link" aria-current="page">About</a>
+    <a href="./page-players.html" class="c-gnav__link">Players</a>
+    <a href="./page-services.html" class="c-gnav__link">Services</a>
+    <a href="./page-media.html" class="c-gnav__link">Media</a>
+    <a href="./page-contact.html" class="c-gnav__link">Contact</a>
+    <button class="c-gnav__kbd" type="button">⌘K</button>
+  </div>
+</nav>
+
+<main>
+  <!-- HERO -->
+  <section class="about-hero">
+    <p class="eyebrow eyebrow--gold">Our story</p>
+    <h1 style="margin-top: 16px;">About<br/><span>ProKickTalent.</span></h1>
+  </section>
+
+  <!-- MISSION -->
+  <section class="page-section page-section--tight">
+    <div class="mission">
+      <p class="eyebrow eyebrow--signal">Mission</p>
+      <h2 style="margin: 16px 0 32px;">Built for Canadian youth football.</h2>
+      <p>
+        ProKickTalent represents serious U17–U23 Canadian footballers. Independent
+        of any club or academy. Aligned to one outcome: the right next move for
+        the player.
+      </p>
+      <div class="pullquote">
+        Representation starts with evaluation. The player file is built before any
+        introduction is made.
+      </div>
+      <p>
+        The agency exists because families navigating academy exposure, college,
+        semi-pro, CPL, and European trials deserve clear guidance grounded in
+        scouting, GPS data, and FIFA-aligned representation standards.
+      </p>
+    </div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section class="page-section page-section--bg">
+    <div style="max-width: 1280px; margin: 0 auto; padding: 0 24px;">
+      <div class="page-section__head">
+        <div>
+          <p class="eyebrow eyebrow--gold">Path</p>
+          <h2>From the ground up.</h2>
+        </div>
+        <p>No shortcuts. Each chapter of the agency is anchored to evidence and decisions made for actual players.</p>
+      </div>
+
+      <div class="timeline">
+        <div class="t-node">
+          <p class="t-node__year">2018</p>
+          <article class="t-node__card tier-glass">
+            <h3>Player advisory begins.</h3>
+            <p>Started informally advising Ontario players and families on academy exposure, trial decisions, and family-side red flags.</p>
+          </article>
+        </div>
+        <div class="t-node">
+          <p class="t-node__year">2021</p>
+          <article class="t-node__card tier-glass">
+            <h3>FIFA-aligned representation.</h3>
+            <p>Built representation practice around FIFA standards: contract awareness, advocacy through trials and offers, professional independence.</p>
+          </article>
+        </div>
+        <div class="t-node">
+          <p class="t-node__year">2024</p>
+          <article class="t-node__card tier-glass">
+            <h3>ProKickTalent Sports Group founded.</h3>
+            <p>Formalized as a dedicated agency with scouting + GPS + advisory under one practice. Based in Toronto, serving Ontario and broader Canada.</p>
+          </article>
+        </div>
+        <div class="t-node">
+          <p class="t-node__year">2026</p>
+          <article class="t-node__card tier-lit">
+            <h3>GPS analytics integrated into evaluations.</h3>
+            <p>Every active player file pairs match scouting with GPS performance reporting — distance, sprint output, intensity, workload.</p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CREDENTIALS BENTO -->
+  <section class="page-section">
+    <div class="creds">
+      <div class="page-section__head">
+        <div>
+          <p class="eyebrow eyebrow--gold">Credentials</p>
+          <h2>What the practice stands on.</h2>
+        </div>
+        <p>Every claim below is verifiable. Nothing else gets a card.</p>
+      </div>
+
+      <div class="creds-grid">
+        <article class="cred tier-flat">
+          <span class="eyebrow eyebrow--signal">License</span>
+          <h3>FIFA</h3>
+          <p>Licensed agent · professional representation standards.</p>
+        </article>
+        <article class="cred tier-flat">
+          <span class="eyebrow eyebrow--signal">Base</span>
+          <h3>Toronto</h3>
+          <p>Ontario · operating across Canadian football pathways.</p>
+        </article>
+        <article class="cred tier-flat">
+          <span class="eyebrow eyebrow--signal">Focus</span>
+          <h3>U17–U23</h3>
+          <p>Serious players approaching exposure, transition, or contract decisions.</p>
+        </article>
+        <article class="cred tier-flat">
+          <span class="eyebrow eyebrow--signal">Method</span>
+          <h3>Scout + GPS</h3>
+          <p>Field evaluation paired with objective performance data.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARTNERS -->
+  <section class="page-section page-section--bg">
+    <div class="partners">
+      <p class="eyebrow eyebrow--signal">Who we work with</p>
+      <h2 style="margin: 16px 0;">Across the Canadian pathway.</h2>
+      <p class="muted" style="max-width: 540px; margin: 0 auto;">
+        Federation, league, club, and media marks appear only as relationships
+        are verified. Until then: scope of practice.
+      </p>
+      <div class="partners-grid">
+        <div class="tier-flat">FIFA · LICENSED</div>
+        <div class="tier-flat">CANADA SOCCER</div>
+        <div class="tier-flat">ONTARIO</div>
+        <div class="tier-flat">LEAGUE1 ONT</div>
+        <div class="tier-flat">CPL · ELIGIBLE</div>
+        <div class="tier-flat">MLS NEXT</div>
+        <div class="tier-flat">USL</div>
+        <div class="tier-flat">EUROPEAN TRIALS</div>
+      </div>
+      <p class="dim mono" style="font-size: 12px; margin-top: 24px;">
+        ⚠ MARQUEE LAUNCH SET PENDING AUDIT — see design.md open question 2
+      </p>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="page-section">
+    <div class="shell" style="padding: 0 24px;">
+      <div class="c-cta">
+        <span class="c-cta__stamp">PKT · 2026</span>
+        <p style="font: 600 11px/1 'Inter'; text-transform: uppercase; letter-spacing: 0.22em; margin: 0 0 16px;">Start the conversation</p>
+        <h2>Let's talk about your player.</h2>
+        <p style="max-width: 540px; margin: 16px auto 0; color: rgba(0,0,0,0.7); font-size: 16px;">
+          Send the context, the questions, and the next decision in front of you.
+        </p>
+        <div class="c-cta__btns">
+          <a href="./page-contact.html" class="c-cta__btn--primary">Start the evaluation</a>
+          <a href="mailto:burak@example.com" class="c-cta__btn--ghost">Email Burak</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="c-footer">
+  <div>
+    <a href="./page-home.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--bone);">
+      <svg width="20" height="20" style="color: var(--gold);"><use href="#m"/></svg>
+      <span style="font: 700 14px/1 'Bebas Neue'; letter-spacing: 0.06em;">PROKICKTALENT</span>
+    </a>
+  </div>
+  <div class="c-footer__cred">
+    <span>FIFA Licensed Agent</span>
+    <span>Toronto · Canada</span>
+    <span>© 2026 ProKickTalent Sports Group</span>
+  </div>
+</footer>
+
+</body>
+</html>

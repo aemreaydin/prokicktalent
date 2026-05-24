@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>v2 · Home — editorial</title>
+  <meta name="description" content="FIFA-licensed representation for U17–U23 Canadian footballers. Scout report, GPS performance, and the right next step — built on evidence, not promises." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><path d='M3 27 Q 16 -1 29 27' stroke='%23CBA257' stroke-width='2' fill='none' stroke-linecap='round'/><circle cx='16' cy='6' r='3.5' fill='%23CBA257'/></svg>" />
+  <link rel="stylesheet" href="./_system.css" />
+  <style>
+    /* ---- hero (static editorial statement) ---- */
+    .hero {
+      position: relative;
+      min-height: 92vh;
+      display: flex; align-items: flex-end;
+      overflow: hidden;
+    }
+    .hero .photo { position: absolute; inset: 0; }
+    .hero__scrim {
+      position: absolute; inset: 0; z-index: 1;
+      background: linear-gradient(90deg, rgba(11,11,12,0.92), rgba(11,11,12,0.55) 50%, rgba(11,11,12,0.3)),
+                  linear-gradient(0deg, rgba(11,11,12,0.9), transparent 60%);
+    }
+    .hero__in { position: relative; z-index: 2; width: 100%; padding-bottom: clamp(48px, 9vh, 110px); }
+    .hero__id { display: flex; gap: 16px; align-items: center; margin-bottom: 28px; font: 500 11px/1 var(--mono); letter-spacing: 0.08em; color: var(--mute); }
+    .hero__id .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--gold); }
+    .hero__sub { margin-top: 30px; max-width: 44ch; color: var(--mute); font-size: 19px; line-height: 1.55; }
+    .hero__cta { margin-top: 32px; display: flex; gap: 14px; flex-wrap: wrap; }
+
+    /* ---- manifesto ---- */
+    .manifesto { max-width: 22ch; }
+    .manifesto .display-2 { margin-bottom: 0; }
+
+    /* ---- founder anchor (Gestifute model) ---- */
+    .founder { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: clamp(32px, 6vw, 88px); align-items: center; }
+    @media (max-width: 860px) { .founder { grid-template-columns: 1fr; } }
+    .founder__portrait { position: relative; aspect-ratio: 4/5; border-radius: var(--r-md); overflow: hidden; }
+    .founder__portrait .photo { position: absolute; inset: 0; }
+    .founder__name { position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; padding: 22px; background: linear-gradient(0deg, rgba(0,0,0,0.85), transparent); }
+    .founder__name b { font-family: var(--serif); font-weight: 500; font-size: 26px; display: block; }
+    .founder__name span { font: 600 11px/1 var(--sans); letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
+    .founder blockquote { margin: 0 0 32px; font-family: var(--serif); font-style: italic; font-size: clamp(24px, 3vw, 36px); line-height: 1.35; color: var(--ink); }
+    .founder blockquote::before { content: "“"; color: var(--gold); }
+    .creds { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--r-md); overflow: hidden; }
+    .cred { background: var(--bg); padding: 20px; }
+    .cred .eyebrow { margin-bottom: 8px; }
+    .cred b { font-family: var(--serif); font-weight: 500; font-size: 22px; display: block; }
+    .cred span { color: var(--mute); font-size: 13px; }
+
+    /* ---- services as editorial list ---- */
+    .svc { border-top: 1px solid var(--line); }
+    .svc__row {
+      display: grid; grid-template-columns: 80px 1fr auto; gap: clamp(16px, 4vw, 56px);
+      align-items: baseline;
+      padding: clamp(28px, 4vh, 44px) 0;
+      border-bottom: 1px solid var(--line);
+      transition: padding-left 350ms var(--ease);
+    }
+    .svc__row:hover { padding-left: 12px; }
+    .svc__num { font: 500 13px/1 var(--mono); color: var(--gold); }
+    .svc__row h3 { margin: 0 0 8px; }
+    .svc__row p { margin: 0; color: var(--mute); font-size: 15px; max-width: 52ch; }
+    .svc__go { color: var(--mute); transition: color 250ms var(--ease), transform 300ms var(--ease); }
+    .svc__row:hover .svc__go { color: var(--gold); transform: translateX(4px); }
+    @media (max-width: 720px) { .svc__row { grid-template-columns: 48px 1fr; } .svc__go { display: none; } }
+
+    /* ---- pathway: two quiet columns ---- */
+    .paths { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--r-md); overflow: hidden; }
+    @media (max-width: 760px) { .paths { grid-template-columns: 1fr; } }
+    .path { background: var(--bg); padding: clamp(28px, 4vw, 44px); }
+    .path__code { font: 500 12px/1 var(--mono); color: var(--data); letter-spacing: 0.1em; }
+    .path h3 { margin: 14px 0 18px; }
+    .path p { color: var(--mute); font-size: 15px; }
+    .path ul { list-style: none; padding: 0; margin: 20px 0 0; }
+    .path li { padding: 8px 0; border-top: 1px solid var(--line); color: var(--mute); font-size: 14px; display: flex; gap: 10px; }
+    .path li::before { content: ""; width: 5px; height: 5px; margin-top: 8px; background: var(--data); border-radius: 50%; flex-shrink: 0; }
+
+    /* ---- closing CTA (editorial, NOT gold crayon block) ---- */
+    .close { text-align: center; }
+    .close .display-2 { max-width: 18ch; margin: 0 auto 28px; }
+    .close .display-2 em { color: var(--gold); }
+  </style>
+</head>
+<body>
+
+<nav class="pchrome">
+  <div class="pchrome__in">
+    <span class="pchrome__brand">PKT · <b>v2 editorial</b></span>
+    <a href="./index.html">Index</a>
+    <a href="./home.html" aria-current="page">Home</a>
+    <a href="./about.html">About</a>
+    <a href="./players.html">Players</a>
+    <a href="./services.html">Services</a>
+    <a href="./contract-analysis.html">Contract</a>
+    <a href="./media.html">Media</a>
+    <a href="./contact.html">Contact</a>
+    <a href="./hero.html">Hero</a>
+    <button class="theme-toggle" id="themeToggle" type="button">◐ light</button>
+  </div>
+</nav>
+<script>
+  (function () {
+    // Default = light (CSS :root). Dark is opt-in via [data-theme="dark"].
+    const tg = document.getElementById('themeToggle');
+    const root = document.documentElement;
+    if (localStorage.getItem('pkt-v2-theme') === 'dark') { root.setAttribute('data-theme', 'dark'); tg.textContent = '◐ dark'; }
+    tg.addEventListener('click', () => {
+      const dark = root.getAttribute('data-theme') !== 'dark';
+      if (dark) root.setAttribute('data-theme', 'dark'); else root.removeAttribute('data-theme');
+      tg.textContent = dark ? '◐ dark' : '◐ light';
+      localStorage.setItem('pkt-v2-theme', dark ? 'dark' : 'light');
+    });
+  })();
+</script>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="m" viewBox="0 0 32 32"><path d="M3 27 Q 16 -1 29 27" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-dasharray="2.5 3"/><circle cx="16" cy="6" r="3.5" fill="currentColor"/></symbol>
+  <symbol id="ar" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+
+<nav class="nav" id="nav">
+  <div class="nav__in">
+    <a href="./home.html" class="nav__brand"><svg width="22" height="22"><use href="#m"/></svg><b>ProKickTalent</b></a>
+    <a href="./home.html" class="nav__link" aria-current="page">Home</a>
+    <a href="./about.html" class="nav__link">About</a>
+    <a href="./players.html" class="nav__link">Players</a>
+    <a href="./services.html" class="nav__link">Services</a>
+    <a href="./media.html" class="nav__link">Media</a>
+    <a href="./contact.html" class="nav__cta">Start an evaluation</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- HERO — always dark cinematic band (data-theme scoped) regardless of page theme -->
+  <section class="hero" data-theme="dark">
+    <div class="photo"><span class="photo__tag">PLACEHOLDER · AI HERO STILL</span></div>
+    <div class="hero__scrim"></div>
+    <div class="hero__in">
+      <div class="wrap">
+        <div class="hero__id"><span>PKT—001</span><span class="dot"></span><span>FIFA LICENSED</span><span class="dot"></span><span>TORONTO</span></div>
+        <h1 class="display-1">Make the<br/><em>move.</em></h1>
+        <p class="hero__sub">FIFA-licensed representation for U17–U23 Canadian footballers. Scout report, GPS performance, and the right next step — built on evidence, not promises.</p>
+        <div class="hero__cta">
+          <a href="#" class="btn btn--primary">Start an evaluation <span class="arr">→</span></a>
+          <a href="./hero.html" class="btn btn--ghost">See the opening sequence</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MANIFESTO -->
+  <section class="section section--hair">
+    <div class="wrap">
+      <p class="eyebrow eyebrow--gold" style="margin-bottom: 28px;">The approach</p>
+      <div class="manifesto">
+        <h2 class="display-2">Representation that starts with <em>evidence</em>, not introductions.</h2>
+      </div>
+      <p class="lede" style="margin-top: 32px; max-width: 54ch;">
+        Every player file is built before a single conversation happens. We
+        look at the player, the pathway, the timing, and the fit — then decide
+        what move is actually worth making.
+      </p>
+    </div>
+  </section>
+
+  <!-- FOUNDER ANCHOR (Gestifute model) -->
+  <section class="section">
+    <div class="wrap">
+      <div class="founder">
+        <div class="founder__portrait">
+          <div class="photo"><span class="photo__tag">PORTRAIT · Burak</span></div>
+          <div class="founder__name"><b>Burak Can Piroglu</b><span>FIFA™ Licensed Agent</span></div>
+        </div>
+        <div>
+          <p class="eyebrow eyebrow--gold" style="margin-bottom: 24px;">The agent</p>
+          <blockquote>The work starts before the trial. The trial only confirms what the evidence already shows.”</blockquote>
+          <div class="creds">
+            <div class="cred"><p class="eyebrow">License</p><b>FIFA</b><span>Professional standards</span></div>
+            <div class="cred"><p class="eyebrow">Base</p><b>Toronto</b><span>Ontario · Canada</span></div>
+            <div class="cred"><p class="eyebrow">Method</p><b>Scout + GPS</b><span>Judgment + data</span></div>
+            <div class="cred"><p class="eyebrow">Focus</p><b>U17–U23</b><span>Serious players only</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES (editorial list) -->
+  <section class="section section--hair">
+    <div class="wrap">
+      <div class="shead">
+        <p class="eyebrow eyebrow--gold">What we do</p>
+        <h2>Four parts of one player file.</h2>
+      </div>
+      <div class="svc">
+        <a href="#" class="svc__row">
+          <span class="svc__num">01</span>
+          <div><h3>Representation</h3><p>Advocacy through trials, offers, and contract terms — on FIFA-aligned standards, from the player's side of the table.</p></div>
+          <svg class="svc__go" width="24" height="24"><use href="#ar"/></svg>
+        </a>
+        <a href="#" class="svc__row">
+          <span class="svc__num">02</span>
+          <div><h3>GPS Analysis</h3><p>Match-by-match performance data that turns speed, workload, and intensity into evidence scouts can read.</p></div>
+          <svg class="svc__go" width="24" height="24"><use href="#ar"/></svg>
+        </a>
+        <a href="#" class="svc__row">
+          <span class="svc__num">03</span>
+          <div><h3>Scouting</h3><p>On-field evaluation across real competitive environments — body shape, decision speed, role fit, response to pressure.</p></div>
+          <svg class="svc__go" width="24" height="24"><use href="#ar"/></svg>
+        </a>
+        <a href="#" class="svc__row">
+          <span class="svc__num">04</span>
+          <div><h3>Career Guidance</h3><p>Mapping academy, college, CPL, MLS Next Pro, and European routes against the player's profile, timing, and realistic outcomes.</p></div>
+          <svg class="svc__go" width="24" height="24"><use href="#ar"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PATHWAY (two quiet columns) -->
+  <section class="section">
+    <div class="wrap">
+      <div class="shead">
+        <p class="eyebrow eyebrow--data">Pathway</p>
+        <h2>Two stages. Two different problems.</h2>
+        <p class="shead__lede">The work is understanding what the player is ready for — and what move creates the strongest next opportunity.</p>
+      </div>
+      <div class="paths">
+        <div class="path">
+          <span class="path__code">U17—U19</span>
+          <h3>Academy &amp; showcase window.</h3>
+          <p>Exposure decisions, trial readiness, and performance proof. Which events, academies, and introductions are worth the time, money, and risk.</p>
+          <ul>
+            <li>Match influence &amp; technical floor</li>
+            <li>Coachability &amp; physical output</li>
+            <li>Evidence-backed player file</li>
+            <li>The right showcase or trial path</li>
+          </ul>
+        </div>
+        <div class="path">
+          <span class="path__code">U20—U23</span>
+          <h3>College &amp; semi-pro transition.</h3>
+          <p>Contract readiness, market fit, and the next credible professional step. How to compare CPL, MLS Next Pro, European trial, college, and semi-pro routes.</p>
+          <ul>
+            <li>Role clarity &amp; game-model fit</li>
+            <li>Data consistency &amp; contract timing</li>
+            <li>Packaging for serious conversations</li>
+            <li>Clubs, scouts, decision-makers</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLOSING CTA (editorial, restrained) -->
+  <section class="section section--hair close">
+    <div class="wrap wrap--narrow">
+      <p class="eyebrow eyebrow--gold" style="margin-bottom: 28px;">Evaluation request</p>
+      <h2 class="display-2">Ready to build the <em>player file?</em></h2>
+      <p class="lede" style="margin: 0 auto 36px; max-width: 48ch;">Send the context, the questions, and the next decision in front of you. We'll evaluate the pathway before the move is made.</p>
+      <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;">
+        <a href="#" class="btn btn--primary">Start a player evaluation <span class="arr">→</span></a>
+        <a href="#" class="btn btn--ghost">Email Burak</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="foot__in">
+    <a href="./home.html" class="nav__brand"><svg width="20" height="20" style="color:var(--gold)"><use href="#m"/></svg><b style="font-size:16px">ProKickTalent</b></a>
+    <div class="foot__cred">
+      <span>FIFA Licensed Agent</span>
+      <span>Toronto · Canada</span>
+      <span>© 2026 ProKickTalent Sports Group</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('nav');
+  addEventListener('scroll', () => { nav.dataset.scrolled = scrollY > 16; }, { passive: true });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,558 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>A6.4 · Services — page mockup</title>
+  <link rel="stylesheet" href="./_preview-system.css" />
+  <link rel="stylesheet" href="./_preview-components.css" />
+  <style>
+    .sv-hero {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 96px 24px 48px;
+    }
+    .sv-hero h1 { font-size: clamp(72px, 10vw, 144px); }
+    .sv-hero h1 span { color: var(--gold); }
+    .sv-hero p { max-width: 560px; color: var(--mute); font-size: 17px; margin: 24px 0 32px; }
+
+    .sv-chips {
+      display: flex; gap: 8px; flex-wrap: wrap;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    .sv-chip {
+      padding: 10px 18px;
+      border: 1px solid var(--hairline);
+      border-radius: 100px;
+      font: 600 11px/1 'Inter';
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--mute);
+      text-decoration: none;
+      transition: border-color 250ms var(--ease-out-expo), color 250ms;
+    }
+    .sv-chip:hover { color: var(--bone); border-color: var(--electric); }
+    .sv-chip::before { content: ""; display: inline-block; width: 6px; height: 6px; background: var(--signal); border-radius: 50%; margin-right: 8px; vertical-align: middle; }
+
+    /* hub grid */
+    .sv-hub {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 48px 24px 96px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    @media (max-width: 768px) { .sv-hub { grid-template-columns: 1fr; } }
+
+    .sv-card {
+      padding: 32px;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      transition: transform 250ms var(--ease-out-expo), border-color 250ms;
+      position: relative;
+    }
+    .sv-card:hover { transform: translateY(-3px); border-color: var(--electric); }
+    .sv-card__head {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      margin-bottom: 24px;
+    }
+    .sv-card__icon { width: 36px; height: 36px; color: var(--gold); }
+    .sv-card__num { font: 400 56px/1 'Bebas Neue'; color: rgba(255,255,255,0.08); }
+    .sv-card__phase {
+      font: 600 11px/1 'Inter';
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: var(--signal);
+      margin: 0 0 8px;
+    }
+    .sv-card__title { font-size: 40px; margin: 0 0 12px; }
+    .sv-card__desc { color: var(--mute); font-size: 14px; margin: 0 0 24px; }
+    .sv-card__link {
+      display: inline-flex; align-items: center; gap: 8px;
+      font: 600 11px/1 'Inter'; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--bone);
+    }
+
+    /* per-service section */
+    .sv-detail {
+      padding: 96px 0;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    .sv-detail--bg { background: var(--surface-1); max-width: 100%; padding-left: max(24px, calc((100% - 1280px) / 2)); padding-right: max(24px, calc((100% - 1280px) / 2)); }
+    .sv-detail__grid {
+      display: grid;
+      grid-template-columns: 0.55fr 0.45fr;
+      gap: 64px;
+      align-items: center;
+      padding: 0 24px;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    .sv-detail__grid--reverse > :first-child { order: 2; }
+    @media (max-width: 900px) {
+      .sv-detail__grid { grid-template-columns: 1fr; gap: 32px; }
+      .sv-detail__grid--reverse > :first-child { order: 0; }
+    }
+    .sv-detail__header { display: flex; align-items: baseline; gap: 16px; margin-bottom: 16px; }
+    .sv-detail__num { font: 400 48px/1 'Bebas Neue'; color: var(--mute); }
+    .sv-detail__phase {
+      font: 600 11px/1 'Inter';
+      text-transform: uppercase; letter-spacing: 0.22em;
+      color: var(--signal);
+    }
+    .sv-detail h2 { font-size: clamp(48px, 6vw, 72px); }
+    .sv-detail p { color: var(--mute); font-size: 16px; line-height: 1.65; margin: 16px 0; }
+    .sv-detail h2 + p { margin-top: 24px; }
+    .sv-detail__list {
+      list-style: none; padding: 0; margin: 24px 0 32px;
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;
+    }
+    .sv-detail__list li {
+      padding: 12px 16px;
+      background: var(--surface-2);
+      border: 1px solid var(--hairline);
+      border-radius: var(--r-sm);
+      font: 500 13px/1.4 'Inter';
+      color: var(--bone);
+    }
+    .sv-detail__list li::before {
+      content: "→ "; color: var(--gold); margin-right: 4px;
+    }
+
+    /* contract clauses (representation visual) */
+    .clauses {
+      padding: 24px;
+      background: var(--surface-2);
+      border: 1px solid var(--hairline-strong);
+      border-radius: var(--r-md);
+    }
+    .clause {
+      padding: 14px 0;
+      border-bottom: 1px dashed var(--hairline);
+      display: grid;
+      grid-template-columns: 80px 1fr 60px;
+      gap: 12px;
+      align-items: center;
+    }
+    .clause:last-child { border-bottom: none; }
+    .clause__num { font: 500 11px/1 'JetBrains Mono', monospace; color: var(--gold); letter-spacing: 0.08em; }
+    .clause__name { font: 500 13px/1.4 'Inter'; color: var(--bone); }
+    .clause__status {
+      font: 500 10px/1 'JetBrains Mono', monospace;
+      color: var(--signal);
+      text-align: right;
+      letter-spacing: 0.08em;
+    }
+    .clause__status--review { color: var(--warn); }
+    .clause__status--issue { color: #ff6b6b; }
+
+    /* pathway timeline (career visual) */
+    .pathway-graph {
+      padding: 24px;
+      background: var(--surface-2);
+      border: 1px solid var(--hairline-strong);
+      border-radius: var(--r-md);
+    }
+    .pathway-row {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 16px;
+      padding: 12px 0;
+      border-bottom: 1px dashed var(--hairline);
+      align-items: center;
+    }
+    .pathway-row:last-child { border-bottom: none; }
+    .pathway-row__age { font: 500 11px/1 'JetBrains Mono', monospace; color: var(--gold); }
+    .pathway-row__bar {
+      position: relative;
+      height: 32px;
+      background: var(--surface-1);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .pathway-row__seg {
+      position: absolute; top: 0; bottom: 0;
+      display: flex; align-items: center;
+      padding: 0 12px;
+      font: 500 11px/1 'Inter';
+      color: var(--bone);
+      border-right: 1px solid rgba(0,0,0,0.4);
+    }
+    .pathway-row__seg--academy { left: 0; width: 40%; background: rgba(100,217,138,0.25); }
+    .pathway-row__seg--college { left: 30%; width: 35%; background: rgba(110,231,255,0.2); }
+    .pathway-row__seg--semipro { left: 55%; width: 30%; background: rgba(212,175,55,0.25); }
+    .pathway-row__seg--pro     { left: 75%; width: 25%; background: rgba(245,177,76,0.3); }
+  </style>
+</head>
+<body>
+
+<nav class="preview-chrome" aria-label="Preview index">
+  <div class="preview-chrome__inner">
+    <span class="preview-chrome__brand">PKT design previews · <b>Phase A</b></span>
+    <a class="preview-chrome__link" href="./index.html">Index</a>
+    <a class="preview-chrome__link" href="./style-tile.html">Style tile</a>
+    <a class="preview-chrome__link" href="./logo-concepts.html">Logo</a>
+    <a class="preview-chrome__link" href="./components.html">Components</a>
+    <a class="preview-chrome__link" href="./command-bar.html">⌘K bar</a>
+    <a class="preview-chrome__link" href="./hero-animation.html">Hero</a>
+    <a class="preview-chrome__link" href="./page-home.html">Home</a>
+    <a class="preview-chrome__link" href="./page-about.html">About</a>
+    <a class="preview-chrome__link" href="./page-players.html">Players</a>
+    <a class="preview-chrome__link" href="./page-services.html" aria-current="page">Services</a>
+    <a class="preview-chrome__link" href="./page-media.html">Media</a>
+    <a class="preview-chrome__link" href="./page-contact.html">Contact</a>
+  </div>
+</nav>
+
+<svg width="0" height="0" style="position: absolute;" aria-hidden="true">
+  <symbol id="m" viewBox="0 0 32 32"><path d="M3 27 Q 16 -1 29 27" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-dasharray="2.5 3"/><circle cx="16" cy="6" r="3.5" fill="currentColor"/></symbol>
+  <symbol id="ic-rep" viewBox="0 0 24 24"><path d="M5 8h14M5 12h14M5 16h10" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/><rect x="3" y="4" width="18" height="16" rx="1.5" stroke="currentColor" stroke-width="1.5" fill="none"/></symbol>
+  <symbol id="ic-gps" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5" fill="none"/><circle cx="12" cy="12" r="3" fill="currentColor"/><path d="M3 12h3M18 12h3M12 3v3M12 18v3" stroke="currentColor" stroke-width="1.5"/></symbol>
+  <symbol id="ic-scout" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="1.5" fill="none"/><line x1="15.5" y1="15.5" x2="20" y2="20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></symbol>
+  <symbol id="ic-career" viewBox="0 0 24 24"><path d="M12 3l9 9-9 9-9-9z" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M8 12l3 3 5-5" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></symbol>
+</svg>
+
+<nav class="c-gnav">
+  <div class="c-gnav__inner">
+    <a href="./page-home.html" class="c-gnav__brand"><svg width="24" height="24"><use href="#m"/></svg><span>PROKICKTALENT</span></a>
+    <a href="./page-home.html" class="c-gnav__link">Home</a>
+    <a href="./page-about.html" class="c-gnav__link">About</a>
+    <a href="./page-players.html" class="c-gnav__link">Players</a>
+    <a href="./page-services.html" class="c-gnav__link" aria-current="page">Services</a>
+    <a href="./page-media.html" class="c-gnav__link">Media</a>
+    <a href="./page-contact.html" class="c-gnav__link">Contact</a>
+    <button class="c-gnav__kbd" type="button">⌘K</button>
+  </div>
+</nav>
+
+<main>
+  <section class="sv-hero">
+    <p class="eyebrow eyebrow--signal">What we do</p>
+    <h1 style="margin-top: 16px;">Four modules.<br/><span>One player file.</span></h1>
+    <p>Each service answers a different question in the same dossier. Together they form the evidence behind every introduction we make.</p>
+  </section>
+
+  <div class="sv-chips">
+    <a href="#representation" class="sv-chip">Representation</a>
+    <a href="#gps" class="sv-chip">GPS Analysis</a>
+    <a href="#scouting" class="sv-chip">Scouting</a>
+    <a href="#career" class="sv-chip">Career Guidance</a>
+  </div>
+
+  <!-- HUB GRID -->
+  <section class="sv-hub">
+    <a href="#representation" class="sv-card tier-lit">
+      <div class="sv-card__head">
+        <svg class="sv-card__icon"><use href="#ic-rep"/></svg>
+        <span class="sv-card__num">01</span>
+      </div>
+      <p class="sv-card__phase">Contract &amp; club fit</p>
+      <h3 class="sv-card__title">Representation</h3>
+      <p class="sv-card__desc">Professional advocacy through trials, offers, contract terms, and club conversations. FIFA-aligned.</p>
+      <span class="sv-card__link">Open module →</span>
+    </a>
+    <a href="#gps" class="sv-card tier-lit">
+      <div class="sv-card__head">
+        <svg class="sv-card__icon"><use href="#ic-gps"/></svg>
+        <span class="sv-card__num">02</span>
+      </div>
+      <p class="sv-card__phase">Performance evidence</p>
+      <h3 class="sv-card__title">GPS Analysis</h3>
+      <p class="sv-card__desc">Reports that turn speed, workload, and intensity into development signals scouts understand.</p>
+      <span class="sv-card__link">Open module →</span>
+    </a>
+    <a href="#scouting" class="sv-card tier-lit">
+      <div class="sv-card__head">
+        <svg class="sv-card__icon"><use href="#ic-scout"/></svg>
+        <span class="sv-card__num">03</span>
+      </div>
+      <p class="sv-card__phase">Talent identification</p>
+      <h3 class="sv-card__title">Scouting</h3>
+      <p class="sv-card__desc">Field evaluation across competitive environments, tournaments, and emerging pathways.</p>
+      <span class="sv-card__link">Open module →</span>
+    </a>
+    <a href="#career" class="sv-card tier-lit">
+      <div class="sv-card__head">
+        <svg class="sv-card__icon"><use href="#ic-career"/></svg>
+        <span class="sv-card__num">04</span>
+      </div>
+      <p class="sv-card__phase">Pathway planning</p>
+      <h3 class="sv-card__title">Career Guidance</h3>
+      <p class="sv-card__desc">Advisory for families comparing academy, college, CPL, MLS Next Pro, and European routes.</p>
+      <span class="sv-card__link">Open module →</span>
+    </a>
+  </section>
+
+  <!-- ============== REPRESENTATION ============== -->
+  <section class="sv-detail sv-detail--bg" id="representation">
+    <div class="sv-detail__grid">
+      <div>
+        <div class="sv-detail__header">
+          <span class="sv-detail__num">01</span>
+          <span class="sv-detail__phase">Contract &amp; club fit</span>
+        </div>
+        <h2>Representation.</h2>
+        <p>
+          When the conversation gets serious, the player needs an advocate who
+          understands the contract, the club, and the timing. We negotiate from
+          the player's side of the table, on FIFA-aligned standards.
+        </p>
+        <ul class="sv-detail__list">
+          <li>Trial &amp; offer evaluation</li>
+          <li>Contract review</li>
+          <li>Club &amp; agent communication</li>
+          <li>Family advisory</li>
+          <li>Exit / release planning</li>
+          <li>Compliance &amp; reporting</li>
+        </ul>
+        <a href="./page-contact.html" class="btn btn--ghost">Enquire about representation</a>
+      </div>
+
+      <!-- contract clauses visual -->
+      <div>
+        <p class="eyebrow eyebrow--gold" style="margin-bottom: 12px;">Contract review · sample</p>
+        <div class="clauses">
+          <div class="clause">
+            <span class="clause__num">§ 4.2</span>
+            <span class="clause__name">Term &amp; option years</span>
+            <span class="clause__status">CLEAR</span>
+          </div>
+          <div class="clause">
+            <span class="clause__num">§ 5.1</span>
+            <span class="clause__name">Wage structure &amp; bonuses</span>
+            <span class="clause__status">CLEAR</span>
+          </div>
+          <div class="clause">
+            <span class="clause__num">§ 6.4</span>
+            <span class="clause__name">Image rights</span>
+            <span class="clause__status clause__status--review">REVIEW</span>
+          </div>
+          <div class="clause">
+            <span class="clause__num">§ 7.2</span>
+            <span class="clause__name">Release / buyout clause</span>
+            <span class="clause__status clause__status--review">REVIEW</span>
+          </div>
+          <div class="clause">
+            <span class="clause__num">§ 8.1</span>
+            <span class="clause__name">Performance bonuses</span>
+            <span class="clause__status">CLEAR</span>
+          </div>
+          <div class="clause">
+            <span class="clause__num">§ 9.5</span>
+            <span class="clause__name">Solidarity contribution</span>
+            <span class="clause__status clause__status--issue">FLAG</span>
+          </div>
+        </div>
+        <p class="dim mono" style="font-size: 11px; margin-top: 12px;">EXAMPLE · illustrative review of a typical first contract</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== GPS ============== -->
+  <section class="sv-detail" id="gps">
+    <div class="sv-detail__grid sv-detail__grid--reverse">
+      <div>
+        <p class="eyebrow eyebrow--gold" style="margin-bottom: 12px;">GPS report · sample</p>
+        <div class="c-gps">
+          <div class="c-gps__head">
+            <span class="c-gps__title">GPS · Match 14 · 90 mins</span>
+            <span class="c-gps__example">EXAMPLE</span>
+          </div>
+          <div class="c-gps__row"><span class="c-gps__metric">Total distance</span><span><span class="c-gps__num">11.4 km</span><span class="c-gps__avg">avg 9.8</span></span></div>
+          <div class="c-gps__row"><span class="c-gps__metric">High-intensity distance</span><span><span class="c-gps__num">1.92 km</span><span class="c-gps__avg" style="color: var(--signal);">+0.4</span></span></div>
+          <div class="c-gps__row"><span class="c-gps__metric">Top sprint</span><span class="c-gps__num">32.6 km/h</span></div>
+          <div class="c-gps__row"><span class="c-gps__metric">Sprint count</span><span class="c-gps__num">28</span></div>
+          <div class="c-gps__row"><span class="c-gps__metric">High-intensity bursts</span><span><span class="c-gps__num">24</span><span class="c-gps__avg" style="color: var(--signal);">+3</span></span></div>
+          <div class="c-gps__row"><span class="c-gps__metric">Player load</span><span class="c-gps__num">412</span></div>
+          <div class="c-gps__row"><span class="c-gps__metric">Acceleration count</span><span class="c-gps__num">52</span></div>
+        </div>
+      </div>
+
+      <div>
+        <div class="sv-detail__header">
+          <span class="sv-detail__num">02</span>
+          <span class="sv-detail__phase">Performance evidence</span>
+        </div>
+        <h2>GPS Analysis.</h2>
+        <p>
+          Match-by-match performance data scouts can read. Sprint output,
+          high-intensity workload, total distance, decision-zone presence.
+          Numbers become a player file no one can argue with.
+        </p>
+        <ul class="sv-detail__list">
+          <li>Per-match GPS report</li>
+          <li>Trend analysis</li>
+          <li>Position-specific benchmarks</li>
+          <li>Comparable league data</li>
+          <li>Family-readable summary</li>
+          <li>Scout-ready dossier</li>
+        </ul>
+        <a href="./page-contact.html" class="btn btn--ghost">Enquire about GPS</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== SCOUTING ============== -->
+  <section class="sv-detail sv-detail--bg" id="scouting">
+    <div class="sv-detail__grid">
+      <div>
+        <div class="sv-detail__header">
+          <span class="sv-detail__num">03</span>
+          <span class="sv-detail__phase">Talent identification</span>
+        </div>
+        <h2>Scouting.</h2>
+        <p>
+          On-field evaluation in real competitive environments. Body shape,
+          decision speed, role fit, response to pressure — all observed across
+          multiple matches before any conversation begins.
+        </p>
+        <ul class="sv-detail__list">
+          <li>Live match attendance</li>
+          <li>Role-specific evaluation</li>
+          <li>Multi-session profiling</li>
+          <li>Family interview</li>
+          <li>Comparable benchmarking</li>
+          <li>Confidential profile</li>
+        </ul>
+        <a href="./page-contact.html" class="btn btn--ghost">Enquire about scouting</a>
+      </div>
+
+      <div>
+        <p class="eyebrow eyebrow--gold" style="margin-bottom: 12px;">Tactic board · sample</p>
+        <div class="c-tactic" style="aspect-ratio: 16/11;">
+          <div class="c-tactic__pitch"></div>
+          <div class="c-tactic__player" style="left: 12%; top: 30%;"></div>
+          <div class="c-tactic__player" style="left: 12%; top: 50%;"></div>
+          <div class="c-tactic__player" style="left: 12%; top: 70%;"></div>
+          <div class="c-tactic__player" style="left: 35%; top: 35%;"></div>
+          <div class="c-tactic__player c-tactic__player--focus" style="left: 50%; top: 50%;"></div>
+          <div class="c-tactic__player" style="left: 35%; top: 65%;"></div>
+          <div class="c-tactic__player" style="left: 65%; top: 30%;"></div>
+          <div class="c-tactic__player" style="left: 65%; top: 70%;"></div>
+          <div class="c-tactic__player" style="left: 82%; top: 40%;"></div>
+          <div class="c-tactic__player" style="left: 82%; top: 60%;"></div>
+          <div class="c-tactic__arrow" style="left: 50%; top: 50%; width: 25%; transform: rotate(-25deg);"></div>
+          <div class="c-tactic__arrow" style="left: 50%; top: 50%; width: 20%; transform: rotate(22deg);"></div>
+          <div class="c-tactic__arrow" style="left: 50%; top: 50%; width: 30%; transform: rotate(0);"></div>
+          <span class="c-tactic__label">EVAL · #8 box-to-box · role fit + decision zones</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== CAREER ============== -->
+  <section class="sv-detail" id="career">
+    <div class="sv-detail__grid sv-detail__grid--reverse">
+      <div>
+        <p class="eyebrow eyebrow--gold" style="margin-bottom: 12px;">Pathway graph · sample</p>
+        <div class="pathway-graph">
+          <div class="pathway-row">
+            <span class="pathway-row__age">U17</span>
+            <div class="pathway-row__bar">
+              <div class="pathway-row__seg pathway-row__seg--academy">Academy</div>
+            </div>
+          </div>
+          <div class="pathway-row">
+            <span class="pathway-row__age">U18</span>
+            <div class="pathway-row__bar">
+              <div class="pathway-row__seg pathway-row__seg--academy">Academy</div>
+              <div class="pathway-row__seg pathway-row__seg--college" style="left: 60%; width: 40%;">Showcase</div>
+            </div>
+          </div>
+          <div class="pathway-row">
+            <span class="pathway-row__age">U19</span>
+            <div class="pathway-row__bar">
+              <div class="pathway-row__seg pathway-row__seg--college">Academy / college</div>
+              <div class="pathway-row__seg pathway-row__seg--semipro" style="left: 55%; width: 45%;">L1O</div>
+            </div>
+          </div>
+          <div class="pathway-row">
+            <span class="pathway-row__age">U20</span>
+            <div class="pathway-row__bar">
+              <div class="pathway-row__seg pathway-row__seg--semipro" style="left: 0; width: 60%;">Semi-pro</div>
+              <div class="pathway-row__seg pathway-row__seg--pro" style="left: 55%; width: 45%;">Trial</div>
+            </div>
+          </div>
+          <div class="pathway-row">
+            <span class="pathway-row__age">U21</span>
+            <div class="pathway-row__bar">
+              <div class="pathway-row__seg pathway-row__seg--pro" style="left: 0; width: 100%;">CPL / MLS Next Pro / European Y2</div>
+            </div>
+          </div>
+          <div class="pathway-row">
+            <span class="pathway-row__age">U23</span>
+            <div class="pathway-row__bar">
+              <div class="pathway-row__seg pathway-row__seg--pro" style="left: 0; width: 100%;">Pro contract · USL / European 1st team</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="sv-detail__header">
+          <span class="sv-detail__num">04</span>
+          <span class="sv-detail__phase">Pathway planning</span>
+        </div>
+        <h2>Career Guidance.</h2>
+        <p>
+          Families face genuine forks: stay in academy, take a college offer,
+          chase a CPL or MLS Next Pro slot, pursue European trials. We map the
+          routes against the player's profile, timing, and realistic outcomes.
+        </p>
+        <ul class="sv-detail__list">
+          <li>Route comparison</li>
+          <li>Risk &amp; timing analysis</li>
+          <li>Eligibility tracking</li>
+          <li>Combine prep</li>
+          <li>Backup pathway plan</li>
+          <li>Periodic family review</li>
+        </ul>
+        <a href="./page-contact.html" class="btn btn--ghost">Enquire about pathway planning</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- back to hub anchor -->
+  <div style="text-align: center; padding: 32px 0;">
+    <a href="#" class="btn btn--ghost">↑ Back to all services</a>
+  </div>
+
+  <!-- CTA -->
+  <section class="page-section page-section--bg">
+    <div class="shell" style="padding: 0 24px;">
+      <div class="c-cta">
+        <span class="c-cta__stamp">PKT · 2026</span>
+        <p style="font: 600 11px/1 'Inter'; text-transform: uppercase; letter-spacing: 0.22em; margin: 0 0 16px;">Service enquiry</p>
+        <h2>Ready to open the file?</h2>
+        <p style="max-width: 540px; margin: 16px auto 0; color: rgba(0,0,0,0.7); font-size: 16px;">
+          Tell us which service first — we'll respond with a path forward.
+        </p>
+        <div class="c-cta__btns">
+          <a href="./page-contact.html" class="c-cta__btn--primary">Start a conversation</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="c-footer">
+  <div>
+    <a href="./page-home.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--bone);">
+      <svg width="20" height="20" style="color: var(--gold);"><use href="#m"/></svg>
+      <span style="font: 700 14px/1 'Bebas Neue'; letter-spacing: 0.06em;">PROKICKTALENT</span>
+    </a>
+  </div>
+  <div class="c-footer__cred">
+    <span>FIFA Licensed Agent</span>
+    <span>Toronto · Canada</span>
+    <span>© 2026 ProKickTalent Sports Group</span>
+  </div>
+</footer>
+
+</body>
+</html>

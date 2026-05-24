@@ -1,0 +1,526 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>A6.1 · Home — page mockup</title>
+  <link rel="stylesheet" href="./_preview-system.css" />
+  <link rel="stylesheet" href="./_preview-components.css" />
+  <style>
+    /* page-local: hero rendered at final-beat (static snapshot for layout review) */
+    .home-hero {
+      position: relative;
+      min-height: calc(100vh - 60px);
+      display: grid;
+      grid-template-columns: 0.92fr 1.08fr;
+      gap: 32px;
+      padding: 80px 32px 64px;
+      align-items: center;
+      max-width: 1440px;
+      margin: 0 auto;
+    }
+    @media (max-width: 900px) {
+      .home-hero { grid-template-columns: 1fr; padding: 64px 16px; }
+    }
+    .home-hero__id-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
+    .home-hero__id { font: 500 11px/1 'JetBrains Mono', monospace; letter-spacing: 0.12em; color: var(--gold); padding: 4px 8px; border: 1px solid rgba(212,175,55,0.4); border-radius: 3px; }
+    .home-hero__cred { font: 600 11px/1 'Inter'; letter-spacing: 0.22em; text-transform: uppercase; color: var(--mute); padding: 4px 10px; border: 1px solid var(--hairline); border-radius: 3px; }
+    .home-hero h1 { font-size: clamp(72px, 9vw, 128px); line-height: 0.92; }
+    .home-hero h1 span { color: var(--gold); }
+    .home-hero__sub { margin-top: 32px; max-width: 480px; color: var(--mute); font-size: 17px; line-height: 1.6; }
+    .home-hero__actions { margin-top: 32px; display: flex; gap: 12px; flex-wrap: wrap; }
+    .home-hero__stage {
+      position: relative; aspect-ratio: 16 / 11; width: 100%;
+      max-height: 70vh;
+      border: 1px solid var(--hairline-strong);
+      border-radius: var(--r-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-1);
+      background: linear-gradient(135deg, #251a0d 0%, #1a1208 40%, #0b0907 100%);
+    }
+    .home-hero__stage::after {
+      content: "";
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(rgba(100,217,138,0.18) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(100,217,138,0.18) 1px, transparent 1px);
+      background-size: 64px 64px;
+      opacity: 0.7;
+      pointer-events: none;
+    }
+    .home-hero__stage-label {
+      position: absolute; top: 12px; left: 12px;
+      font: 600 10px/1 'JetBrains Mono', monospace;
+      color: var(--warn); padding: 6px 10px;
+      border: 1px solid var(--warn);
+      background: rgba(0,0,0,0.6);
+      border-radius: 3px;
+      letter-spacing: 0.08em;
+      z-index: 5;
+    }
+    .home-hero__demo-link {
+      position: absolute; bottom: 12px; right: 12px;
+      font: 500 11px/1 'JetBrains Mono', monospace;
+      color: var(--electric);
+      padding: 8px 12px;
+      border: 1px solid var(--electric);
+      background: rgba(0,0,0,0.6);
+      border-radius: var(--r-sm);
+      text-decoration: none;
+      z-index: 5;
+    }
+
+    /* service cards */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    @media (max-width: 768px) {
+      .services-grid { grid-template-columns: 1fr; }
+    }
+    .service-card {
+      padding: 32px;
+      transition: border-color 250ms var(--ease-out-expo), transform 250ms;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    .service-card:hover {
+      border-color: var(--electric);
+      transform: translateY(-2px);
+    }
+    .service-card__num {
+      font: 400 56px/1 'Bebas Neue';
+      color: rgba(255,255,255,0.08);
+      letter-spacing: 0.02em;
+    }
+    .service-card__head {
+      display: flex; justify-content: space-between; align-items: flex-start;
+    }
+    .service-card__icon {
+      width: 36px; height: 36px;
+      color: var(--gold);
+    }
+    .service-card__title { margin: 24px 0 8px; font-size: 36px; }
+    .service-card__phase {
+      font: 600 11px/1 'Inter'; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--signal);
+      margin: 0 0 8px;
+    }
+    .service-card__desc {
+      color: var(--mute); font-size: 14px; margin: 12px 0 24px;
+    }
+    .service-card__link {
+      display: inline-flex; align-items: center; gap: 8px;
+      font: 600 11px/1 'Inter'; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--bone);
+    }
+
+    /* agent feature */
+    .agent-grid {
+      display: grid;
+      grid-template-columns: 0.4fr 0.6fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+    @media (max-width: 768px) { .agent-grid { grid-template-columns: 1fr; } }
+    .agent-portrait {
+      background:
+        radial-gradient(ellipse at 50% 30%, rgba(212,175,55,0.10), transparent 50%),
+        linear-gradient(180deg, #1a2520, #0a0e10);
+      aspect-ratio: 3 / 4;
+      border-radius: var(--r-md);
+      border: 1px solid var(--hairline);
+      position: relative;
+      overflow: hidden;
+      display: flex; align-items: flex-end;
+    }
+    .agent-portrait__silhouette {
+      width: 100%; height: 100%;
+      background:
+        radial-gradient(ellipse at 50% 35%, rgba(255,255,255,0.05) 18%, transparent 24%),
+        linear-gradient(180deg, transparent 40%, rgba(255,255,255,0.04) 50%, transparent 90%);
+    }
+    .agent-portrait__cap {
+      position: absolute; left: 0; right: 0; bottom: 0;
+      padding: 16px; background: linear-gradient(0deg, rgba(0,0,0,0.8), transparent);
+      z-index: 2;
+    }
+    .agent-portrait__cap h3 { font-size: 32px; margin: 0; }
+    .agent-portrait__cap p {
+      font: 600 11px/1 'Inter'; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--gold);
+      margin: 8px 0 0;
+    }
+    .agent-quote-stack { display: flex; flex-direction: column; gap: 16px; }
+    .agent-quote {
+      padding: 24px;
+      font-size: 22px;
+      line-height: 1.4;
+      color: var(--bone);
+      font-weight: 500;
+    }
+    .agent-quote::before { content: "“"; color: var(--gold); font-size: 48px; line-height: 0.4; }
+    .agent-credentials {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;
+    }
+    .agent-credential {
+      padding: 16px;
+    }
+    .agent-credential .eyebrow { display: block; margin-bottom: 8px; }
+    .agent-credential h4 { font-size: 22px; margin: 0; }
+    .agent-credential p { font-size: 12px; color: var(--mute); margin: 4px 0 0; }
+  </style>
+</head>
+<body>
+
+<nav class="preview-chrome" aria-label="Preview index">
+  <div class="preview-chrome__inner">
+    <span class="preview-chrome__brand">PKT design previews · <b>Phase A</b></span>
+    <a class="preview-chrome__link" href="./index.html">Index</a>
+    <a class="preview-chrome__link" href="./style-tile.html">Style tile</a>
+    <a class="preview-chrome__link" href="./logo-concepts.html">Logo</a>
+    <a class="preview-chrome__link" href="./components.html">Components</a>
+    <a class="preview-chrome__link" href="./command-bar.html">⌘K bar</a>
+    <a class="preview-chrome__link" href="./hero-animation.html">Hero</a>
+    <a class="preview-chrome__link" href="./page-home.html" aria-current="page">Home</a>
+    <a class="preview-chrome__link" href="./page-about.html">About</a>
+    <a class="preview-chrome__link" href="./page-players.html">Players</a>
+    <a class="preview-chrome__link" href="./page-services.html">Services</a>
+    <a class="preview-chrome__link" href="./page-media.html">Media</a>
+    <a class="preview-chrome__link" href="./page-contact.html">Contact</a>
+  </div>
+</nav>
+
+<svg width="0" height="0" style="position: absolute;" aria-hidden="true">
+  <symbol id="m" viewBox="0 0 32 32"><path d="M3 27 Q 16 -1 29 27" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-dasharray="2.5 3"/><circle cx="16" cy="6" r="3.5" fill="currentColor"/></symbol>
+  <symbol id="ic-rep" viewBox="0 0 24 24"><path d="M5 8h14M5 12h14M5 16h10" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/><rect x="3" y="4" width="18" height="16" rx="1.5" stroke="currentColor" stroke-width="1.5" fill="none"/></symbol>
+  <symbol id="ic-gps" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5" fill="none"/><circle cx="12" cy="12" r="3" fill="currentColor"/><path d="M3 12h3M18 12h3M12 3v3M12 18v3" stroke="currentColor" stroke-width="1.5"/></symbol>
+  <symbol id="ic-scout" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="1.5" fill="none"/><line x1="15.5" y1="15.5" x2="20" y2="20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></symbol>
+  <symbol id="ic-career" viewBox="0 0 24 24"><path d="M12 3l9 9-9 9-9-9z" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M8 12l3 3 5-5" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></symbol>
+</svg>
+
+<!-- GLASSNAV -->
+<nav class="c-gnav" aria-label="Main">
+  <div class="c-gnav__inner">
+    <a href="./page-home.html" class="c-gnav__brand"><svg width="24" height="24"><use href="#m"/></svg><span>PROKICKTALENT</span></a>
+    <a href="./page-home.html" class="c-gnav__link" aria-current="page">Home</a>
+    <a href="./page-about.html" class="c-gnav__link">About</a>
+    <a href="./page-players.html" class="c-gnav__link">Players</a>
+    <a href="./page-services.html" class="c-gnav__link">Services</a>
+    <a href="./page-media.html" class="c-gnav__link">Media</a>
+    <a href="./page-contact.html" class="c-gnav__link">Contact</a>
+    <button class="c-gnav__kbd" type="button" title="Open command bar">⌘K</button>
+  </div>
+</nav>
+
+<main>
+
+  <!-- ============== 1. HERO (final-beat static snapshot — interactive at A5) ============== -->
+  <section class="home-hero">
+    <div>
+      <div class="home-hero__id-row">
+        <span class="home-hero__id">PKT-001</span>
+        <span class="home-hero__cred">Scouting Dossier</span>
+        <span class="home-hero__cred">FIFA Licensed</span>
+      </div>
+      <h1>Make the<br/><span>move.</span></h1>
+      <p class="home-hero__sub">
+        FIFA-licensed representation for U17–U23 Canadian footballers —
+        scout report, GPS performance, and the right next step.
+      </p>
+      <div class="home-hero__actions">
+        <a href="./page-contact.html" class="btn btn--primary">Start an evaluation</a>
+        <a href="./page-services.html" class="btn btn--ghost">Review services</a>
+      </div>
+    </div>
+
+    <div class="home-hero__stage">
+      <span class="home-hero__stage-label">PLACEHOLDER · AI HERO STILL</span>
+      <a href="./hero-animation.html" class="home-hero__demo-link">▶ See live animation</a>
+    </div>
+  </section>
+
+  <!-- ============== 2. PROOF MARQUEE ============== -->
+  <section style="padding: 32px 0; border-top: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline);">
+    <div class="c-marquee">
+      <div class="c-marquee__track">
+        <span class="c-marquee__item">FIFA Licensed</span>
+        <span class="c-marquee__item">Toronto · Canada</span>
+        <span class="c-marquee__item">U17–U23</span>
+        <span class="c-marquee__item">Ontario Network</span>
+        <span class="c-marquee__item">GPS Backed</span>
+        <span class="c-marquee__item">Independent Representation</span>
+        <span class="c-marquee__item">Family-First Advisory</span>
+        <span class="c-marquee__item">FIFA Licensed</span>
+        <span class="c-marquee__item">Toronto · Canada</span>
+        <span class="c-marquee__item">U17–U23</span>
+        <span class="c-marquee__item">Ontario Network</span>
+        <span class="c-marquee__item">GPS Backed</span>
+        <span class="c-marquee__item">Independent Representation</span>
+        <span class="c-marquee__item">Family-First Advisory</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== 3. APPROACH BENTO ============== -->
+  <section class="page-section">
+    <div class="shell" style="padding: 0 24px;">
+      <div class="page-section__head">
+        <div>
+          <p class="eyebrow eyebrow--signal">The approach</p>
+          <h2>Every decision needs evidence.<br/><span style="color: var(--gold);">Every player needs a plan.</span></h2>
+        </div>
+        <p>Two stages, two different problems. Each player's file pulls evidence from the same scouting + GPS + advisory layers.</p>
+      </div>
+
+      <div class="c-bento" style="min-height: 480px;">
+        <div class="c-bento__cell tier-glass" data-span="2x2">
+          <div>
+            <p class="eyebrow eyebrow--signal">Position</p>
+            <h3 style="font-size: 30px; margin-top: 8px;">Independent. Evidence-led. FIFA-licensed.</h3>
+          </div>
+          <p class="muted" style="font-size: 13px; margin: 0;">
+            Representation starts with evaluation. We look at the player, the
+            pathway, the timing, and the fit before recommending the next step.
+          </p>
+        </div>
+        <div class="c-bento__cell tier-flat" data-span="2x2" style="padding: 0;">
+          <div class="c-gps" style="border: none; background: transparent; height: 100%;">
+            <div class="c-gps__head">
+              <span class="c-gps__title">GPS · last match</span>
+              <span class="c-gps__example">EXAMPLE</span>
+            </div>
+            <div class="c-gps__row"><span class="c-gps__metric">Distance</span><span class="c-gps__num">11.4 km</span></div>
+            <div class="c-gps__row"><span class="c-gps__metric">Top sprint</span><span class="c-gps__num">32.6</span></div>
+            <div class="c-gps__row"><span class="c-gps__metric">Bursts</span><span class="c-gps__num">24</span></div>
+            <div class="c-gps__row"><span class="c-gps__metric">Load</span><span class="c-gps__num">412</span></div>
+          </div>
+        </div>
+        <div class="c-bento__cell tier-lit" data-span="2x4">
+          <div>
+            <p class="eyebrow eyebrow--gold">Credentials</p>
+            <h3 style="margin-top: 8px; font-size: 36px;">FIFA</h3>
+            <p class="muted" style="font-size: 13px;">Licensed agent · valid 2026</p>
+          </div>
+          <div>
+            <p class="dim mono" style="font-size: 10px; margin: 4px 0;">REGION · Ontario</p>
+            <p class="dim mono" style="font-size: 10px; margin: 4px 0;">BASE · Toronto</p>
+            <p class="dim mono" style="font-size: 10px; margin: 4px 0;">METHOD · scout + GPS</p>
+            <p class="dim mono" style="font-size: 10px; margin: 4px 0;">FOCUS · U17–U23</p>
+          </div>
+        </div>
+        <div class="c-bento__cell tier-glass" data-span="4x2">
+          <div>
+            <p class="eyebrow eyebrow--electric">Tactic board · #8 role</p>
+          </div>
+          <div class="c-tactic" style="margin-top: 12px; aspect-ratio: auto; height: 180px;">
+            <div class="c-tactic__pitch"></div>
+            <div class="c-tactic__player" style="left: 18%; top: 50%;"></div>
+            <div class="c-tactic__player" style="left: 35%; top: 30%;"></div>
+            <div class="c-tactic__player" style="left: 35%; top: 70%;"></div>
+            <div class="c-tactic__player c-tactic__player--focus" style="left: 50%; top: 50%;"></div>
+            <div class="c-tactic__player" style="left: 65%; top: 30%;"></div>
+            <div class="c-tactic__player" style="left: 65%; top: 70%;"></div>
+            <div class="c-tactic__player" style="left: 82%; top: 50%;"></div>
+            <div class="c-tactic__arrow" style="left: 50%; top: 50%; width: 26%; transform: rotate(-22deg);"></div>
+            <div class="c-tactic__arrow" style="left: 50%; top: 50%; width: 22%; transform: rotate(20deg);"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== 4. PATHWAY TABS ============== -->
+  <section class="page-section page-section--bg">
+    <div class="shell" style="padding: 0 24px;">
+      <div class="page-section__head">
+        <div>
+          <p class="eyebrow eyebrow--signal">Pathway matrix</p>
+          <h2>The players we evaluate.</h2>
+        </div>
+        <p>Two stages, two different problems. The work is to understand what the player is ready for and what move creates the strongest next opportunity.</p>
+      </div>
+
+      <div class="c-ptabs">
+        <div class="c-ptabs__tabs" role="tablist">
+          <button class="c-ptabs__tab" data-active="true" data-tab="u1719">
+            U17-U19 <strong>Academy / Showcase</strong>
+          </button>
+          <button class="c-ptabs__tab" data-tab="u2023">
+            U20-U23 <strong>College / Semi-Pro</strong>
+          </button>
+        </div>
+        <div class="c-ptabs__panel" data-active="true" data-panel="u1719">
+          <div><h4>Evaluate</h4><ul><li>Match influence</li><li>Technical floor</li><li>Coachability</li><li>Physical output</li></ul></div>
+          <div><h4>Family needs</h4><p>Which events, academies, and introductions are worth the time, money, and risk.</p></div>
+          <div><h4>Next move</h4><p>Build an evidence-backed player file and target the right showcase or trial path.</p></div>
+        </div>
+        <div class="c-ptabs__panel" data-panel="u2023">
+          <div><h4>Evaluate</h4><ul><li>Role clarity</li><li>Game model fit</li><li>Data consistency</li><li>Contract timing</li></ul></div>
+          <div><h4>Family needs</h4><p>How to compare CPL, MLS Next Pro, European trial, college, and semi-pro routes.</p></div>
+          <div><h4>Next move</h4><p>Package the player for serious conversations with clubs, scouts, and decision-makers.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== 5. SERVICES ============== -->
+  <section class="page-section">
+    <div class="shell" style="padding: 0 24px;">
+      <div class="page-section__head">
+        <div>
+          <p class="eyebrow eyebrow--signal">Report modules</p>
+          <h2>Services as a player file.</h2>
+        </div>
+        <p>Each service answers a different question in the same file: is the player ready, where do they fit, what supports them, and who should be in the next conversation?</p>
+      </div>
+
+      <div class="services-grid">
+        <a href="./page-services.html#representation" class="service-card tier-lit">
+          <div class="service-card__head">
+            <svg class="service-card__icon"><use href="#ic-rep"/></svg>
+            <span class="service-card__num">01</span>
+          </div>
+          <p class="service-card__phase">Contract &amp; club fit</p>
+          <h3 class="service-card__title">Representation</h3>
+          <p class="service-card__desc">Professional advocacy through trials, offers, and contract terms.</p>
+          <span class="service-card__link">Open module →</span>
+        </a>
+        <a href="./page-services.html#gps" class="service-card tier-lit">
+          <div class="service-card__head">
+            <svg class="service-card__icon"><use href="#ic-gps"/></svg>
+            <span class="service-card__num">02</span>
+          </div>
+          <p class="service-card__phase">Performance evidence</p>
+          <h3 class="service-card__title">GPS Analysis</h3>
+          <p class="service-card__desc">Reports that turn speed, workload, and intensity into development signals.</p>
+          <span class="service-card__link">Open module →</span>
+        </a>
+        <a href="./page-services.html#scouting" class="service-card tier-lit">
+          <div class="service-card__head">
+            <svg class="service-card__icon"><use href="#ic-scout"/></svg>
+            <span class="service-card__num">03</span>
+          </div>
+          <p class="service-card__phase">Talent identification</p>
+          <h3 class="service-card__title">Scouting</h3>
+          <p class="service-card__desc">Field evaluation across competitive environments, tournaments, and emerging pathways.</p>
+          <span class="service-card__link">Open module →</span>
+        </a>
+        <a href="./page-services.html#career" class="service-card tier-lit">
+          <div class="service-card__head">
+            <svg class="service-card__icon"><use href="#ic-career"/></svg>
+            <span class="service-card__num">04</span>
+          </div>
+          <p class="service-card__phase">Pathway planning</p>
+          <h3 class="service-card__title">Career Guidance</h3>
+          <p class="service-card__desc">Advisory for families comparing academy, college, CPL, and European routes.</p>
+          <span class="service-card__link">Open module →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== 6. AGENT FEATURE ============== -->
+  <section class="page-section page-section--bg">
+    <div class="shell" style="padding: 0 24px;">
+      <div class="page-section__head">
+        <div>
+          <p class="eyebrow eyebrow--gold">The agent</p>
+          <h2>Burak Can Piroglu.</h2>
+        </div>
+        <p>FIFA-licensed agent based in Toronto. Data-informed evaluation paired with football judgment.</p>
+      </div>
+
+      <div class="agent-grid">
+        <div class="agent-portrait tier-flat">
+          <div class="agent-portrait__silhouette"></div>
+          <div class="agent-portrait__cap">
+            <h3>Burak Can Piroglu</h3>
+            <p>FIFA™ Licensed Football Agent</p>
+          </div>
+        </div>
+        <div class="agent-quote-stack">
+          <div class="agent-quote tier-glass">
+            The work starts before the trial. The trial only confirms what the evidence already shows.
+          </div>
+          <div class="agent-credentials">
+            <div class="agent-credential tier-flat">
+              <span class="eyebrow eyebrow--signal">License</span>
+              <h4>FIFA</h4>
+              <p>Professional standards · contract awareness</p>
+            </div>
+            <div class="agent-credential tier-flat">
+              <span class="eyebrow eyebrow--signal">Base</span>
+              <h4>Toronto</h4>
+              <p>Canadian pathway · international context</p>
+            </div>
+            <div class="agent-credential tier-flat">
+              <span class="eyebrow eyebrow--signal">Evaluation</span>
+              <h4>Data-informed</h4>
+              <p>GPS reports paired with football judgment</p>
+            </div>
+            <div class="agent-credential tier-flat">
+              <span class="eyebrow eyebrow--signal">Focus</span>
+              <h4>U17–U23</h4>
+              <p>Serious players approaching exposure or transition</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== 7. CTA PANEL ============== -->
+  <section class="page-section">
+    <div class="shell" style="padding: 0 24px;">
+      <div class="c-cta">
+        <span class="c-cta__stamp">PKT · 2026 · EVAL REQUEST</span>
+        <p style="font: 600 11px/1 'Inter'; text-transform: uppercase; letter-spacing: 0.22em; margin: 0 0 16px;">Evaluation request</p>
+        <h2>Ready to build the player file?</h2>
+        <p style="max-width: 540px; margin: 16px auto 0; color: rgba(0,0,0,0.7); font-size: 16px;">
+          Send the context, the questions, and the next decision in front of you.
+          PKT will help evaluate the pathway before the move is made.
+        </p>
+        <div class="c-cta__btns">
+          <a href="./page-contact.html" class="c-cta__btn--primary">Start a player evaluation</a>
+          <a href="mailto:burak@example.com" class="c-cta__btn--ghost">Email Burak</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="c-footer">
+  <div>
+    <a href="./page-home.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--bone);">
+      <svg width="20" height="20" style="color: var(--gold);"><use href="#m"/></svg>
+      <span style="font: 700 14px/1 'Bebas Neue'; letter-spacing: 0.06em;">PROKICKTALENT</span>
+    </a>
+  </div>
+  <div class="c-footer__cred">
+    <span>FIFA Licensed Agent</span>
+    <span>Toronto · Canada</span>
+    <span>© 2026 ProKickTalent Sports Group</span>
+  </div>
+</footer>
+
+<script>
+  // PathwayTabs
+  document.querySelectorAll('.c-ptabs__tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      const id = tab.dataset.tab;
+      const parent = tab.closest('.c-ptabs');
+      parent.querySelectorAll('.c-ptabs__tab').forEach(t => t.removeAttribute('data-active'));
+      parent.querySelectorAll('.c-ptabs__panel').forEach(p => p.removeAttribute('data-active'));
+      tab.setAttribute('data-active', 'true');
+      parent.querySelector(`[data-panel="${id}"]`).setAttribute('data-active', 'true');
+    });
+  });
+</script>
+
+</body>
+</html>

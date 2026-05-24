@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>A6.3 · Players — page mockup</title>
+  <link rel="stylesheet" href="./_preview-system.css" />
+  <link rel="stylesheet" href="./_preview-components.css" />
+  <style>
+    .pl-hero {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 96px 24px 64px;
+      display: grid;
+      grid-template-columns: 0.62fr 0.38fr;
+      gap: 48px;
+      align-items: center;
+    }
+    @media (max-width: 768px) { .pl-hero { grid-template-columns: 1fr; } }
+    .pl-hero h1 { font-size: clamp(64px, 8vw, 128px); }
+    .pl-hero h1 span { color: var(--gold); }
+    .pl-hero p { color: var(--mute); font-size: 17px; max-width: 480px; margin: 24px 0 32px; }
+
+    /* Featured anonymized player */
+    .pl-feature {
+      max-width: 340px;
+      margin-left: auto;
+    }
+
+    /* filter tabs */
+    .pl-filters {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px 48px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+      border-bottom: 1px solid var(--hairline);
+    }
+    .pl-filter {
+      padding: 10px 18px;
+      background: transparent;
+      border: 1px solid var(--hairline);
+      border-radius: var(--r-sm);
+      color: var(--mute);
+      font: 600 11px/1 'Inter';
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      cursor: pointer;
+      transition: border-color 250ms var(--ease-out-expo), color 250ms;
+    }
+    .pl-filter:hover { color: var(--bone); border-color: var(--hairline-strong); }
+    .pl-filter[data-active="true"] {
+      color: var(--bg);
+      background: var(--bone);
+      border-color: var(--bone);
+    }
+    .pl-filter__count {
+      margin-left: 6px;
+      font: 500 10px/1 'JetBrains Mono', monospace;
+      color: var(--dim);
+    }
+    .pl-filter[data-active="true"] .pl-filter__count { color: var(--bg); }
+
+    /* roster grid */
+    .pl-roster {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 48px 24px 96px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+    @media (max-width: 900px) { .pl-roster { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 640px) { .pl-roster { grid-template-columns: repeat(2, 1fr); } }
+
+    /* notice block */
+    .pl-notice {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 16px 24px;
+      background: var(--surface-2);
+      border: 1px solid var(--hairline);
+      border-radius: var(--r-sm);
+      color: var(--mute);
+      font-size: 13px;
+      text-align: center;
+    }
+    .pl-notice b { color: var(--warn); }
+
+    /* what we look for */
+    .wlf-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    @media (max-width: 768px) { .wlf-grid { grid-template-columns: 1fr; } }
+    .wlf {
+      padding: 32px;
+    }
+    .wlf__num {
+      font: 400 56px/1 'Bebas Neue';
+      color: rgba(255,255,255,0.06);
+    }
+    .wlf h3 { font-size: 32px; margin: 16px 0 12px; }
+    .wlf p { color: var(--mute); font-size: 14px; margin: 0; }
+
+    /* recruitment cta */
+    .recruit {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px 96px;
+    }
+    .recruit-block {
+      padding: 96px 32px;
+      border-radius: var(--r-md);
+      background:
+        radial-gradient(ellipse at 30% 70%, rgba(212,175,55,0.10), transparent 50%),
+        radial-gradient(ellipse at 70% 30%, rgba(100,217,138,0.06), transparent 50%),
+        var(--surface-1);
+      border: 1px solid var(--hairline);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .recruit-block::after {
+      content: ""; position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(100,217,138,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(100,217,138,0.05) 1px, transparent 1px);
+      background-size: 56px 56px;
+      pointer-events: none;
+    }
+    .recruit-block > * { position: relative; z-index: 1; }
+    .recruit-block h2 { font-size: clamp(56px, 8vw, 128px); margin: 16px 0 24px; }
+    .recruit-block h2 span { color: var(--signal); }
+  </style>
+</head>
+<body>
+
+<nav class="preview-chrome" aria-label="Preview index">
+  <div class="preview-chrome__inner">
+    <span class="preview-chrome__brand">PKT design previews · <b>Phase A</b></span>
+    <a class="preview-chrome__link" href="./index.html">Index</a>
+    <a class="preview-chrome__link" href="./style-tile.html">Style tile</a>
+    <a class="preview-chrome__link" href="./logo-concepts.html">Logo</a>
+    <a class="preview-chrome__link" href="./components.html">Components</a>
+    <a class="preview-chrome__link" href="./command-bar.html">⌘K bar</a>
+    <a class="preview-chrome__link" href="./hero-animation.html">Hero</a>
+    <a class="preview-chrome__link" href="./page-home.html">Home</a>
+    <a class="preview-chrome__link" href="./page-about.html">About</a>
+    <a class="preview-chrome__link" href="./page-players.html" aria-current="page">Players</a>
+    <a class="preview-chrome__link" href="./page-services.html">Services</a>
+    <a class="preview-chrome__link" href="./page-media.html">Media</a>
+    <a class="preview-chrome__link" href="./page-contact.html">Contact</a>
+  </div>
+</nav>
+
+<svg width="0" height="0" style="position: absolute;" aria-hidden="true">
+  <symbol id="m" viewBox="0 0 32 32"><path d="M3 27 Q 16 -1 29 27" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-dasharray="2.5 3"/><circle cx="16" cy="6" r="3.5" fill="currentColor"/></symbol>
+</svg>
+
+<nav class="c-gnav">
+  <div class="c-gnav__inner">
+    <a href="./page-home.html" class="c-gnav__brand"><svg width="24" height="24"><use href="#m"/></svg><span>PROKICKTALENT</span></a>
+    <a href="./page-home.html" class="c-gnav__link">Home</a>
+    <a href="./page-about.html" class="c-gnav__link">About</a>
+    <a href="./page-players.html" class="c-gnav__link" aria-current="page">Players</a>
+    <a href="./page-services.html" class="c-gnav__link">Services</a>
+    <a href="./page-media.html" class="c-gnav__link">Media</a>
+    <a href="./page-contact.html" class="c-gnav__link">Contact</a>
+    <button class="c-gnav__kbd" type="button">⌘K</button>
+  </div>
+</nav>
+
+<main>
+  <!-- HERO -->
+  <section class="pl-hero">
+    <div>
+      <p class="eyebrow eyebrow--signal">Roster</p>
+      <h1 style="margin-top: 16px;">The players<br/>we evaluate<br/><span>this year.</span></h1>
+      <p>
+        Anonymized at launch — every card is a real evaluation footprint, no
+        identifying details. Real names and faces appear only when written
+        player + family consent is in hand.
+      </p>
+      <a href="./page-contact.html" class="btn btn--primary">I want to be represented →</a>
+    </div>
+    <div class="pl-feature">
+      <p class="eyebrow eyebrow--gold" style="text-align: right; margin-bottom: 12px;">Featured · this month</p>
+      <article class="c-pcard tier-lit" style="cursor: default;">
+        <div class="c-pcard__photo"><div class="c-pcard__silhouette"></div></div>
+        <div class="c-pcard__body">
+          <p class="c-pcard__status c-pcard__status--signed">Signed</p>
+          <h3 class="c-pcard__name">U21 #8</h3>
+          <p class="c-pcard__meta">CM · 2005 · European trial · placed Q1 2026</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- NOTICE -->
+  <div class="pl-notice">
+    <b>⚠ Anonymized roster at launch.</b>
+    PlayerCard supports a <code class="mono">mode: "real"</code> variant the moment consent is in place.
+  </div>
+
+  <!-- FILTER TABS -->
+  <div class="pl-filters" role="tablist">
+    <button class="pl-filter" data-active="true" data-filter="all">All <span class="pl-filter__count">12</span></button>
+    <button class="pl-filter" data-filter="watched">Watched <span class="pl-filter__count">5</span></button>
+    <button class="pl-filter" data-filter="trial">Trialing <span class="pl-filter__count">3</span></button>
+    <button class="pl-filter" data-filter="signed">Signed <span class="pl-filter__count">2</span></button>
+    <button class="pl-filter" data-filter="placed">Placed <span class="pl-filter__count">2</span></button>
+  </div>
+
+  <!-- ROSTER -->
+  <div class="pl-roster" id="roster">
+    <article class="c-pcard" data-status="watched">
+      <div class="c-pcard__photo"><div class="c-pcard__silhouette"></div></div>
+      <div class="c-pcard__body">
+        <p class="c-pcard__status">Watched</p>
+        <h3 class="c-pcard__name">U19 winger</h3>
+        <p class="c-pcard__meta">RW · 2007 · Ontario</p>
+      </div>
+    </article>
+    <article class="c-pcard" data-status="trial">
+      <div class="c-pcard__photo"><div class="c-pcard__silhouette"></div></div>
+      <div class="c-pcard__body">
+        <p class="c-pcard__status c-pcard__status--trial">Trialing</p>
+        <h3 class="c-pcard__name">U21 #8</h3>
+        <p class="c-pcard__meta">CM · 2005 · Toronto</p>
+      </div>
+    </article>
+    <article class="c-pcard" data-status="signed">
+      <div class="c-pcard__photo"><div class="c-pcard__silhouette"></div></div>
+      <div class="c-pcard__body">
+        <p class="c-pcard__status c-pcard__status--signed">Signed</p>
+        <h3 class="c-pcard__name">U23 centre-back</h3>
+        <p class="c-pcard__meta">CB · 2003 · L1O</p>
+      </div>
+    </article>
+    <article class="c-pcard" data-status="placed">
+      <div class="c-pcard__photo"><div class="c-pcard__silhouette"></div></div>
+      <div class="c-pcard__body">
+        <p class="c-pcard__status c-pcard__status--placed">Placed</p>
+        <h3 class="c-pcard__name">U20 striker</h3>
+        <p class="c-pcard__meta">ST · 2006 · European trial</p>
+      </div>
+    </article>
+    <article class="c-pcard" data-status="watched">
+      <div class="c-pcard__photo"><div class="c-pcard__silhouette"></div></div>
+      <div class="c-pcard__body">
+        <p class="c-pcard__status">Watched</p>
+        <h3 class="c-pcard__name">U18 keeper</h3>
+        <p class="c-pcard__meta">GK · 2008 · GTA</p>
+      </div>
+    </article>
+    <article class="c-pcard" data-status="trial">
+      <div class="c-pcard__photo"><div class="c-pcard__silhouette"></div></div>
+      <div class="c-pcard__body">
+        <p class="c-pcard__status c-pcard__status--trial">Trialing</p>
+        <h3 class="c-pcard__name">U22 fullback</h3>
+        <p class="c-pcard__meta">LB · 2004 · MLS Next Pro</p>
+      </div>
+    </article>
+    <article class="c-pcard" data-status="watched">
+      <div class="c-pcard__photo"><div class="c-pcard__silhouette"></div></div>
+      <div class="c-pcard__body">
+        <p class="c-pcard__status">Watched</p>
+        <h3 class="c-pcard__name">U17 midfielder</h3>
+        <p class="c-pcard__meta">AM · 2009 · Ontario</p>
+      </div>
+    </article>
+    <article class="c-pcard" data-status="placed">
+      <div class="c-pcard__photo"><div class="c-pcard__silhouette"></div></div>
+      <div class="c-pcard__body">
+        <p class="c-pcard__status c-pcard__status--placed">Placed</p>
+        <h3 class="c-pcard__name">U23 winger</h3>
+        <p class="c-pcard__meta">LW · 2003 · USL Championship</p>
+      </div>
+    </article>
+    <article class="c-pcard" data-status="watched">
+      <div class="c-pcard__photo"><div class="c-pcard__silhouette"></div></div>
+      <div class="c-pcard__body">
+        <p class="c-pcard__status">Watched</p>
+        <h3 class="c-pcard__name">U19 #6</h3>
+        <p class="c-pcard__meta">DM · 2007 · L1O reserve</p>
+      </div>
+    </article>
+    <article class="c-pcard" data-status="trial">
+      <div class="c-pcard__photo"><div class="c-pcard__silhouette"></div></div>
+      <div class="c-pcard__body">
+        <p class="c-pcard__status c-pcard__status--trial">Trialing</p>
+        <h3 class="c-pcard__name">U20 forward</h3>
+        <p class="c-pcard__meta">ST · 2006 · CPL combine</p>
+      </div>
+    </article>
+    <article class="c-pcard" data-status="signed">
+      <div class="c-pcard__photo"><div class="c-pcard__silhouette"></div></div>
+      <div class="c-pcard__body">
+        <p class="c-pcard__status c-pcard__status--signed">Signed</p>
+        <h3 class="c-pcard__name">U21 fullback</h3>
+        <p class="c-pcard__meta">RB · 2005 · CPL Y2</p>
+      </div>
+    </article>
+    <article class="c-pcard" data-status="watched">
+      <div class="c-pcard__photo"><div class="c-pcard__silhouette"></div></div>
+      <div class="c-pcard__body">
+        <p class="c-pcard__status">Watched</p>
+        <h3 class="c-pcard__name">U18 winger</h3>
+        <p class="c-pcard__meta">LW · 2008 · Showcase 2026</p>
+      </div>
+    </article>
+  </div>
+
+  <!-- WHAT WE LOOK FOR -->
+  <section class="page-section page-section--bg">
+    <div style="max-width: 1280px; margin: 0 auto; padding: 0 24px;">
+      <div class="page-section__head">
+        <div>
+          <p class="eyebrow eyebrow--gold">The standard</p>
+          <h2>What we look for.</h2>
+        </div>
+        <p>Three filters. They run before any conversation. Anything that doesn't pass stays as a watched profile until it does.</p>
+      </div>
+
+      <div class="wlf-grid">
+        <article class="wlf tier-glass">
+          <span class="wlf__num">01</span>
+          <h3>Skill &amp; potential.</h3>
+          <p>Raw ability on the ball, tactical awareness, and the physical tools to compete at the next level. Evaluated across all positions.</p>
+        </article>
+        <article class="wlf tier-glass">
+          <span class="wlf__num">02</span>
+          <h3>Drive &amp; dedication.</h3>
+          <p>Natural talent is the starting point. What separates professionals is the commitment to improving every single day, on and off the pitch.</p>
+        </article>
+        <article class="wlf tier-glass">
+          <span class="wlf__num">03</span>
+          <h3>Character &amp; coachability.</h3>
+          <p>Professional clubs look at the whole player. We represent athletes with the mindset to accept feedback, grow, and lead by example.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- RECRUITMENT CTA -->
+  <section class="page-section recruit">
+    <div class="recruit-block">
+      <p class="eyebrow eyebrow--signal">For players</p>
+      <h2>Are you<br/><span>next?</span></h2>
+      <p class="muted" style="max-width: 560px; margin: 0 auto 32px; font-size: 17px;">
+        Submit your profile and a recent match — we'll evaluate and respond
+        within seven days.
+      </p>
+      <a href="./page-contact.html" class="btn btn--primary">Submit my profile →</a>
+    </div>
+  </section>
+</main>
+
+<footer class="c-footer">
+  <div>
+    <a href="./page-home.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--bone);">
+      <svg width="20" height="20" style="color: var(--gold);"><use href="#m"/></svg>
+      <span style="font: 700 14px/1 'Bebas Neue'; letter-spacing: 0.06em;">PROKICKTALENT</span>
+    </a>
+  </div>
+  <div class="c-footer__cred">
+    <span>FIFA Licensed Agent</span>
+    <span>Toronto · Canada</span>
+    <span>© 2026 ProKickTalent Sports Group</span>
+  </div>
+</footer>
+
+<script>
+  // filter tabs
+  const filters = document.querySelectorAll('.pl-filter');
+  const cards = document.querySelectorAll('#roster .c-pcard');
+  filters.forEach(f => {
+    f.addEventListener('click', () => {
+      filters.forEach(x => x.removeAttribute('data-active'));
+      f.setAttribute('data-active', 'true');
+      const want = f.dataset.filter;
+      cards.forEach(c => {
+        c.style.display = (want === 'all' || c.dataset.status === want) ? '' : 'none';
+      });
+    });
+  });
+</script>
+
+</body>
+</html>

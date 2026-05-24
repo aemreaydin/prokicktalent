@@ -1,81 +1,88 @@
 ---
 const navLinks = [
   { href: '/', label: 'Home' },
-  { href: '/about', label: 'About Us' },
+  { href: '/about', label: 'About' },
   { href: '/players', label: 'Players' },
   { href: '/services', label: 'Services' },
   { href: '/media', label: 'Media' },
-  { href: '/contact', label: 'Contact Us' },
 ];
 const currentPath = Astro.url.pathname;
+const isActive = (href: string) =>
+  href === '/' ? currentPath === '/' : currentPath.startsWith(href);
 ---
 
-<header class="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-sm border-b border-white/10">
-  <nav class="max-w-7xl mx-auto px-6 flex items-center justify-between h-16">
-    <!-- Logo -->
-    <a href="/" class="font-heading text-xl text-white tracking-widest hover:text-gold transition-colors">
-      PROKICKTALENT
+<nav class="nav" id="site-nav" aria-label="Main">
+  <div class="nav__in">
+    <a href="/" class="nav__brand" aria-label="ProKickTalent home">
+      <svg width="24" height="24" viewBox="0 0 32 32" aria-hidden="true">
+        <path d="M3 27 Q 16 -1 29 27" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-dasharray="2.5 3"></path>
+        <circle cx="16" cy="6" r="3.5" fill="currentColor"></circle>
+      </svg>
+      <b>ProKickTalent</b>
     </a>
 
-    <!-- Desktop Links -->
-    <ul class="hidden md:flex items-center gap-8">
-      {navLinks.map(link => (
-        <li>
-          <a
-            href={link.href}
-            class={`text-sm font-body tracking-widest uppercase transition-colors hover:text-gold ${
-              currentPath === link.href ? 'text-gold' : 'text-gray-300'
-            }`}
-          >
-            {link.label}
-          </a>
-        </li>
+    <div class="nav__links">
+      {navLinks.map((link) => (
+        <a
+          href={link.href}
+          class="nav__link"
+          aria-current={isActive(link.href) ? 'page' : undefined}
+        >
+          {link.label}
+        </a>
       ))}
-    </ul>
+    </div>
 
-    <!-- Mobile Hamburger -->
-    <button
-      id="menu-toggle"
-      class="md:hidden text-white focus:outline-none"
-      aria-label="Toggle menu"
-    >
-      <svg id="icon-open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-      </svg>
-      <svg id="icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+    <a href="/contact" class="nav__cta">Start an evaluation</a>
+
+    <button class="nav__toggle" id="theme-toggle" type="button" aria-label="Toggle light/dark theme">◐&nbsp;light</button>
+
+    <button class="nav__burger" id="nav-burger" type="button" aria-label="Toggle menu" aria-expanded="false">
+      <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24" aria-hidden="true">
+        <path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16" />
       </svg>
     </button>
-  </nav>
-
-  <!-- Mobile Menu Drawer -->
-  <div id="mobile-menu" class="hidden md:hidden bg-surface border-t border-white/10">
-    <ul class="flex flex-col px-6 py-4 gap-4">
-      {navLinks.map(link => (
-        <li>
-          <a
-            href={link.href}
-            class={`block text-sm tracking-widest uppercase transition-colors hover:text-gold ${
-              currentPath === link.href ? 'text-gold' : 'text-gray-300'
-            }`}
-          >
-            {link.label}
-          </a>
-        </li>
-      ))}
-    </ul>
   </div>
-</header>
 
-<script>
-  const toggle = document.getElementById('menu-toggle');
-  const menu = document.getElementById('mobile-menu');
-  const iconOpen = document.getElementById('icon-open');
-  const iconClose = document.getElementById('icon-close');
+  <div class="nav__mobile" id="nav-mobile">
+    {navLinks.map((link) => (
+      <a href={link.href} aria-current={isActive(link.href) ? 'page' : undefined}>{link.label}</a>
+    ))}
+    <a href="/contact">Start an evaluation</a>
+  </div>
+</nav>
 
-  toggle?.addEventListener('click', () => {
-    menu?.classList.toggle('hidden');
-    iconOpen?.classList.toggle('hidden');
-    iconClose?.classList.toggle('hidden');
-  });
+<script is:inline>
+  (function () {
+    const nav = document.getElementById('site-nav');
+    const root = document.documentElement;
+    const toggle = document.getElementById('theme-toggle');
+    const burger = document.getElementById('nav-burger');
+    const mobile = document.getElementById('nav-mobile');
+
+    // reflect current theme on the toggle label (theme already applied in <head>)
+    const sync = () => {
+      const dark = root.getAttribute('data-theme') === 'dark';
+      if (toggle) toggle.innerHTML = dark ? '◐&nbsp;dark' : '◐&nbsp;light';
+    };
+    sync();
+
+    toggle?.addEventListener('click', () => {
+      const dark = root.getAttribute('data-theme') !== 'dark';
+      if (dark) root.setAttribute('data-theme', 'dark');
+      else root.removeAttribute('data-theme');
+      try { localStorage.setItem('pkt-theme', dark ? 'dark' : 'light'); } catch (e) {}
+      sync();
+    });
+
+    burger?.addEventListener('click', () => {
+      const open = mobile.getAttribute('data-open') === 'true';
+      mobile.setAttribute('data-open', String(!open));
+      burger.setAttribute('aria-expanded', String(!open));
+    });
+
+    const onScroll = () => nav.setAttribute('data-scrolled', String(window.scrollY > 16));
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+  })();
 </script>

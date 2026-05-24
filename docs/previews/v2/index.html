@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>v2 · Editorial rework — index</title>
+  <meta name="description" content="ProKickTalent redesign — v2 editorial direction (Fraunces + Inter). Preview index for the modern football site redesign." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><path d='M3 27 Q 16 -1 29 27' stroke='%23CBA257' stroke-width='2' fill='none' stroke-linecap='round'/><circle cx='16' cy='6' r='3.5' fill='%23CBA257'/></svg>" />
+  <link rel="stylesheet" href="./_system.css" />
+  <style>
+    .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 720px) { .cards { grid-template-columns: 1fr; } }
+    .pcard { display: block; padding: 32px; }
+    .pcard h3 { margin: 10px 0 10px; }
+    .pcard p { color: var(--mute); font-size: 14px; margin: 0; }
+    .change { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--r-md); overflow: hidden; }
+    @media (max-width: 720px) { .change { grid-template-columns: 1fr; } }
+    .change > div { background: var(--bg); padding: 20px 24px; }
+    .change__from b, .change__to b { font: 600 10px/1 var(--sans); letter-spacing: 0.2em; text-transform: uppercase; display: block; margin-bottom: 10px; }
+    .change__from b { color: var(--dim); }
+    .change__to b { color: var(--gold); }
+    .change ul { list-style: none; padding: 0; margin: 0; font-size: 14px; line-height: 1.9; }
+    .change__from { color: var(--dim); }
+    .change__to { color: var(--mute); }
+  </style>
+</head>
+<body>
+
+<nav class="pchrome">
+  <div class="pchrome__in">
+    <span class="pchrome__brand">PKT · <b>v2 editorial</b></span>
+    <a href="./index.html" aria-current="page">Index</a>
+    <a href="./home.html">Home</a>
+    <a href="./about.html">About</a>
+    <a href="./players.html">Players</a>
+    <a href="./services.html">Services</a>
+    <a href="./contract-analysis.html">Contract</a>
+    <a href="./media.html">Media</a>
+    <a href="./contact.html">Contact</a>
+    <a href="./hero.html">Hero</a>
+    <a href="../index.html">← v1</a>
+    <button class="theme-toggle" id="themeToggle" type="button">◐ light</button>
+  </div>
+</nav>
+<script>
+  // Default = light (CSS :root). Dark is opt-in via [data-theme="dark"].
+  const tg = document.getElementById('themeToggle');
+  const root = document.documentElement;
+  if (localStorage.getItem('pkt-v2-theme') === 'dark') { root.setAttribute('data-theme', 'dark'); tg.textContent = '◐ dark'; }
+  tg.addEventListener('click', () => {
+    const dark = root.getAttribute('data-theme') !== 'dark';
+    if (dark) root.setAttribute('data-theme', 'dark'); else root.removeAttribute('data-theme');
+    tg.textContent = dark ? '◐ dark' : '◐ light';
+    localStorage.setItem('pkt-v2-theme', dark ? 'dark' : 'light');
+  });
+</script>
+
+<main class="wrap section">
+
+  <header style="margin-bottom: 64px;">
+    <p class="eyebrow eyebrow--gold" style="margin-bottom: 24px;">Phase A2 · Editorial rework</p>
+    <h1 class="display-1" style="margin-bottom: 28px;">The <em>second</em> draft.</h1>
+    <p class="lede" style="max-width: 56ch;">
+      Same content, rebuilt on the decisions from the research round: Fraunces +
+      Inter, a single gold accent, the founder-anchored structure from Gestifute,
+      and the editorial-statement hero that 11 of 11 peer sites use instead of a
+      component grid.
+    </p>
+  </header>
+
+  <section style="margin-bottom: 72px;">
+    <div class="cards">
+      <a href="./hero.html" class="card pcard">
+        <p class="eyebrow eyebrow--gold">Showpiece</p>
+        <h3>Hero — editorial</h3>
+        <p>Full-bleed photo + three-beat statement on scroll. No tactic board, no scout cards, no GPS overlay. Just the moment and the line.</p>
+      </a>
+      <a href="./home.html" class="card pcard">
+        <p class="eyebrow eyebrow--gold">Full page</p>
+        <h3>Home — founder-anchored</h3>
+        <p>Five sections, not seven. Burak is the structure. Services as an editorial list, pathway as two quiet columns, restrained closing CTA.</p>
+      </a>
+      <a href="./contract-analysis.html" class="card pcard">
+        <p class="eyebrow eyebrow--gold">Feature</p>
+        <h3>Contract analysis</h3>
+        <p>The Representation differentiator — clause-by-clause contract review with plain-language notes, status flags, and a signable-after-changes verdict.</p>
+      </a>
+      <a href="./about.html" class="card pcard">
+        <p class="eyebrow eyebrow--gold">Page</p>
+        <h3>About</h3>
+        <p>Mission, the founder's path as a vertical timeline (2018 → 2026), and the verifiable credentials the practice stands on.</p>
+      </a>
+      <a href="./players.html" class="card pcard">
+        <p class="eyebrow eyebrow--gold">Page</p>
+        <h3>Players</h3>
+        <p>Anonymized roster with status filter (watched / trialing / signed / placed), "what we look for", and a recruitment close.</p>
+      </a>
+      <a href="./services.html" class="card pcard">
+        <p class="eyebrow eyebrow--gold">Page</p>
+        <h3>Services</h3>
+        <p>Editorial hub linking to four anchored sections — representation, GPS, scouting, career — each with a restrained service visual.</p>
+      </a>
+      <a href="./media.html" class="card pcard">
+        <p class="eyebrow eyebrow--gold">Page</p>
+        <h3>Media</h3>
+        <p>Masonry gallery with hover captions and a horizontal press row. Instagram follow in the hero.</p>
+      </a>
+      <a href="./contact.html" class="card pcard">
+        <p class="eyebrow eyebrow--gold">Page</p>
+        <h3>Contact</h3>
+        <p>Editorial form with electric focus states beside a "what to expect" column — response time, intro call, confidentiality.</p>
+      </a>
+    </div>
+  </section>
+
+  <section>
+    <div class="shead"><p class="eyebrow eyebrow--gold">What changed from v1</p><h2>Less, but better.</h2></div>
+    <div class="change">
+      <div class="change__from">
+        <b>v1 — generic</b>
+        <ul>
+          <li>Bebas Neue everywhere</li>
+          <li>4 accents (gold/green/electric/warn)</li>
+          <li>Component-grid hero w/ overlays</li>
+          <li>7+ sections per page</li>
+          <li>Glass cards + heavy grain</li>
+          <li>Tactic board, GPS readout, scout cards in the hero</li>
+          <li>Bento everything</li>
+        </ul>
+      </div>
+      <div class="change__to">
+        <b>v2 — editorial</b>
+        <ul>
+          <li>Fraunces (serif) + Inter, italic emphasis</li>
+          <li>1 accent (gold) + 1 data tone, monochrome otherwise</li>
+          <li>Editorial-statement hero, photo + line</li>
+          <li>5 sections, generous whitespace</li>
+          <li>Flat surfaces + hairlines, faint grain</li>
+          <li>Hero is just the moment; data lives in the body</li>
+          <li>Editorial lists + quiet columns</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-bottom: 0;">
+    <div class="card" style="padding: 32px;">
+      <p class="eyebrow eyebrow--gold" style="margin-bottom: 16px;">Decided</p>
+      <h3 style="margin-bottom: 16px;">Light default · dark on toggle.</h3>
+      <p class="muted" style="max-width: 60ch; margin: 0;">
+        Light / warm paper is now the default (the Players' Tribune / Gestifute /
+        Mundial model) — the bigger differentiator from your old dark brand. The
+        <em class="em">◐ light</em> button top-right flips to the dark editorial
+        variant (Wasserman model) and remembers your choice. Try both; the site
+        ships light.
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="foot__in">
+    <span class="pchrome__brand">PKT · v2 editorial rework</span>
+    <div class="foot__cred"><span>Fraunces + Inter</span><span>Phase A2</span></div>
+  </div>
+</footer>
+
+</body>
+</html>

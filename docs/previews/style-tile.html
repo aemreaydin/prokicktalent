@@ -1,0 +1,415 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>A1 · Style tile</title>
+  <link rel="stylesheet" href="./_preview-system.css" />
+  <style>
+    /* page-local */
+    .swatch {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding: 16px;
+      background: var(--surface-1);
+      border: 1px solid var(--hairline);
+      border-radius: var(--r-md);
+    }
+    .swatch__chip {
+      height: 80px;
+      border-radius: var(--r-sm);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--hairline);
+    }
+    .swatch__chip--glass {
+      background:
+        repeating-linear-gradient(45deg, rgba(255,255,255,0.05), rgba(255,255,255,0.05) 12px, transparent 12px, transparent 24px),
+        var(--surface-glass);
+      backdrop-filter: blur(20px);
+    }
+    .swatch__meta { display: flex; justify-content: space-between; align-items: baseline; }
+    .swatch__name { font: 600 13px/1 'Inter', sans-serif; color: var(--bone); }
+    .swatch__hex { font: 500 11px/1 'JetBrains Mono', monospace; color: var(--mute); }
+    .swatch__role { font-size: 12px; color: var(--mute); margin: 0; }
+    .swatch__token { font: 500 10px/1 'JetBrains Mono', monospace; color: var(--electric); }
+
+    .type-row {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 32px;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--hairline);
+      align-items: baseline;
+    }
+    .type-row__meta { display: flex; flex-direction: column; gap: 4px; }
+    .type-row__label { font: 600 12px/1.4 'Inter', sans-serif; text-transform: uppercase; letter-spacing: 0.18em; color: var(--mute); }
+    .type-row__token { font: 500 11px/1.4 'JetBrains Mono', monospace; color: var(--electric); }
+
+    .surface-demo {
+      padding: 32px;
+      min-height: 220px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .motion-box {
+      background: var(--surface-2);
+      border: 1px solid var(--hairline);
+      border-radius: var(--r-md);
+      padding: 24px;
+      min-height: 200px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      cursor: pointer;
+    }
+    .motion-box__ball {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--gold);
+      transform: translateX(-80px);
+      transition: transform 480ms var(--ease-out-expo);
+    }
+    .motion-box:hover .motion-box__ball { transform: translateX(80px); }
+    .motion-box--quint .motion-box__ball { transition-timing-function: var(--ease-in-out-quint); transition-duration: 600ms; }
+    .motion-box--linear .motion-box__ball { transition-timing-function: linear; transition-duration: 600ms; }
+    .motion-box--cinema .motion-box__ball { transition-duration: 1400ms; transition-timing-function: var(--ease-out-expo); }
+    .motion-box small { color: var(--mute); font: 500 11px/1 'JetBrains Mono', monospace; }
+  </style>
+</head>
+<body>
+
+<nav class="preview-chrome" aria-label="Preview index">
+  <div class="preview-chrome__inner">
+    <span class="preview-chrome__brand">PKT design previews · <b>Phase A</b></span>
+    <a class="preview-chrome__link" href="./index.html">Index</a>
+    <a class="preview-chrome__link" href="./style-tile.html" aria-current="page">Style tile</a>
+    <a class="preview-chrome__link" href="./logo-concepts.html">Logo</a>
+    <a class="preview-chrome__link" href="./components.html">Components</a>
+    <a class="preview-chrome__link" href="./command-bar.html">⌘K bar</a>
+    <a class="preview-chrome__link" href="./hero-animation.html">Hero</a>
+    <a class="preview-chrome__link" href="./page-home.html">Home</a>
+    <a class="preview-chrome__link" href="./page-about.html">About</a>
+    <a class="preview-chrome__link" href="./page-players.html">Players</a>
+    <a class="preview-chrome__link" href="./page-services.html">Services</a>
+    <a class="preview-chrome__link" href="./page-media.html">Media</a>
+    <a class="preview-chrome__link" href="./page-contact.html">Contact</a>
+  </div>
+</nav>
+
+<main class="shell">
+
+  <header style="margin-bottom: 80px;">
+    <p class="eyebrow eyebrow--electric">A1 · Style tile</p>
+    <h1 style="margin: 16px 0 24px;">Tokens.</h1>
+    <p class="muted" style="max-width: 640px; font-size: 18px;">
+      Every design decision below becomes a token in
+      <code class="mono">tailwind.config.mjs</code> or
+      <code class="mono">global.css</code> during Phase B. Hover, scroll, and
+      see how things behave before they get implemented.
+    </p>
+  </header>
+
+  <!-- ============== PALETTE ============== -->
+  <section style="margin-bottom: 96px;">
+    <header class="section-head">
+      <div class="section-head__title">
+        <span class="num">01</span>
+        <h2>Palette</h2>
+      </div>
+      <p class="section-head__caption">
+        Cooler floor, three surface tiers, four accents. Gold = accreditation only.
+        Signal = pitch/data. Electric = live/interactive. Warn = trial-window urgency.
+      </p>
+    </header>
+
+    <div class="grid-3" style="grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));">
+
+      <div class="swatch">
+        <div class="swatch__chip" style="background: var(--bg);"></div>
+        <div class="swatch__meta"><span class="swatch__name">Background</span><span class="swatch__hex">#07090B</span></div>
+        <p class="swatch__role">Page floor. Slightly cooler than before.</p>
+        <span class="swatch__token">--bg</span>
+      </div>
+
+      <div class="swatch">
+        <div class="swatch__chip" style="background: var(--surface-1);"></div>
+        <div class="swatch__meta"><span class="swatch__name">Surface 1</span><span class="swatch__hex">#0E1216</span></div>
+        <p class="swatch__role">Flat-matte card base.</p>
+        <span class="swatch__token">--surface-1</span>
+      </div>
+
+      <div class="swatch">
+        <div class="swatch__chip" style="background: var(--surface-2);"></div>
+        <div class="swatch__meta"><span class="swatch__name">Surface 2</span><span class="swatch__hex">#11181C</span></div>
+        <p class="swatch__role">Elevated / nested cards.</p>
+        <span class="swatch__token">--surface-2</span>
+      </div>
+
+      <div class="swatch">
+        <div class="swatch__chip swatch__chip--glass"></div>
+        <div class="swatch__meta"><span class="swatch__name">Surface glass</span><span class="swatch__hex">rgba 255 / 0.04 + blur</span></div>
+        <p class="swatch__role">Frosted overlays, modals, command bar.</p>
+        <span class="swatch__token">--surface-glass</span>
+      </div>
+
+      <div class="swatch">
+        <div class="swatch__chip" style="background: var(--bone);"></div>
+        <div class="swatch__meta"><span class="swatch__name">Bone</span><span class="swatch__hex">#E9E5D8</span></div>
+        <p class="swatch__role">Body text on dark, primary headlines.</p>
+        <span class="swatch__token">--bone</span>
+      </div>
+
+      <div class="swatch">
+        <div class="swatch__chip" style="background: var(--mute);"></div>
+        <div class="swatch__meta"><span class="swatch__name">Mute</span><span class="swatch__hex">#8A8F98</span></div>
+        <p class="swatch__role">Secondary text, captions, eyebrows.</p>
+        <span class="swatch__token">--mute</span>
+      </div>
+
+      <div class="swatch">
+        <div class="swatch__chip" style="background: var(--signal);"></div>
+        <div class="swatch__meta"><span class="swatch__name">Signal</span><span class="swatch__hex">#64D98A</span></div>
+        <p class="swatch__role">Pitch lines, GPS readouts, data context.</p>
+        <span class="swatch__token">--signal</span>
+      </div>
+
+      <div class="swatch">
+        <div class="swatch__chip" style="background: var(--gold);"></div>
+        <div class="swatch__meta"><span class="swatch__name">Gold</span><span class="swatch__hex">#D4AF37</span></div>
+        <p class="swatch__role">FIFA accreditation, primary CTA, brand mark.</p>
+        <span class="swatch__token">--gold</span>
+      </div>
+
+      <div class="swatch">
+        <div class="swatch__chip" style="background: var(--electric);"></div>
+        <div class="swatch__meta"><span class="swatch__name">Electric</span><span class="swatch__hex">#6EE7FF</span></div>
+        <p class="swatch__role">NEW. Live dots, focus rings, hover borders.</p>
+        <span class="swatch__token">--electric</span>
+      </div>
+
+      <div class="swatch">
+        <div class="swatch__chip" style="background: var(--warn);"></div>
+        <div class="swatch__meta"><span class="swatch__name">Warn</span><span class="swatch__hex">#F5B14C</span></div>
+        <p class="swatch__role">NEW. "Trial window" urgency / EXAMPLE labels.</p>
+        <span class="swatch__token">--warn</span>
+      </div>
+
+      <div class="swatch">
+        <div class="swatch__chip" style="background: var(--hairline);"></div>
+        <div class="swatch__meta"><span class="swatch__name">Hairline</span><span class="swatch__hex">rgba 255 / 0.08</span></div>
+        <p class="swatch__role">All borders, dividers, separators.</p>
+        <span class="swatch__token">--hairline</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============== TYPOGRAPHY ============== -->
+  <section style="margin-bottom: 96px;">
+    <header class="section-head">
+      <div class="section-head__title">
+        <span class="num">02</span>
+        <h2>Typography</h2>
+      </div>
+      <p class="section-head__caption">
+        Bebas for headlines (≥32px only). Inter for body and UI. JetBrains Mono
+        for numerals. Quote variant uses Inter at 24-32px.
+      </p>
+    </header>
+
+    <div>
+
+      <div class="type-row">
+        <div class="type-row__meta">
+          <span class="type-row__label">Display H1</span>
+          <span class="type-row__token">Bebas · clamp(64–128)</span>
+          <span class="type-row__token">line-height 0.95</span>
+        </div>
+        <h1 class="no-margin">See the player.</h1>
+      </div>
+
+      <div class="type-row">
+        <div class="type-row__meta">
+          <span class="type-row__label">Section H2</span>
+          <span class="type-row__token">Bebas · clamp(40–72)</span>
+        </div>
+        <h2 class="no-margin">The players we evaluate.</h2>
+      </div>
+
+      <div class="type-row">
+        <div class="type-row__meta">
+          <span class="type-row__label">Card H3</span>
+          <span class="type-row__token">Bebas · clamp(28–40)</span>
+        </div>
+        <h3 class="no-margin">Academy showcase window.</h3>
+      </div>
+
+      <div class="type-row">
+        <div class="type-row__meta">
+          <span class="type-row__label">Quote</span>
+          <span class="type-row__token">Inter · 24-32 · 500 italic</span>
+        </div>
+        <p class="no-margin" style="font: italic 500 28px/1.35 'Inter', sans-serif; color: var(--bone);">
+          "The work starts before the trial."
+        </p>
+      </div>
+
+      <div class="type-row">
+        <div class="type-row__meta">
+          <span class="type-row__label">Body</span>
+          <span class="type-row__token">Inter · 16-18 · 400</span>
+          <span class="type-row__token">line-height 1.65</span>
+        </div>
+        <p class="no-margin muted" style="max-width: 580px;">
+          FIFA-licensed representation for U17-U23 Canadian footballers ready
+          to turn match performance, GPS data, and career timing into the
+          right next move.
+        </p>
+      </div>
+
+      <div class="type-row">
+        <div class="type-row__meta">
+          <span class="type-row__label">UI / eyebrow</span>
+          <span class="type-row__token">Inter · 11-12 · 500-600</span>
+          <span class="type-row__token">tracking 0.22em uppercase</span>
+        </div>
+        <span class="eyebrow eyebrow--signal">Scouting dossier · PKT-001</span>
+      </div>
+
+      <div class="type-row">
+        <div class="type-row__meta">
+          <span class="type-row__label">Numerals</span>
+          <span class="type-row__token">JetBrains Mono · 13-16</span>
+          <span class="type-row__token">tabular-nums</span>
+        </div>
+        <div class="mono" style="display: flex; gap: 32px; color: var(--signal); font-size: 16px;">
+          <span>32.6 km/h</span><span>11.4 km</span><span>24 bursts</span><span>0.965</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============== SURFACES ============== -->
+  <section style="margin-bottom: 96px;">
+    <header class="section-head">
+      <div class="section-head__title">
+        <span class="num">03</span>
+        <h2>Surface tiers</h2>
+      </div>
+      <p class="section-head__caption">
+        Three tiers. <b>Rule:</b> one tier per section. Tier 1 for quiet content,
+        tier 2 for sectional cards, tier 3 reserved for hero / "wow" moments.
+      </p>
+    </header>
+
+    <div class="grid-3">
+
+      <div class="tier-flat surface-demo">
+        <div>
+          <p class="eyebrow eyebrow--gold">Tier 1</p>
+          <h3 style="margin-top: 8px;">Flat matte.</h3>
+        </div>
+        <div>
+          <p class="muted no-margin" style="font-size: 13px;">Footer cards, contact form, low-frequency content.</p>
+          <span class="annot" style="margin-top: 12px;">.tier-flat · --surface-1</span>
+        </div>
+      </div>
+
+      <div class="tier-glass surface-demo">
+        <div>
+          <p class="eyebrow eyebrow--gold">Tier 2</p>
+          <h3 style="margin-top: 8px;">Frosted glass.</h3>
+        </div>
+        <div>
+          <p class="muted no-margin" style="font-size: 13px;">Service cards, pathway tabs, most sectional surfaces.</p>
+          <span class="annot" style="margin-top: 12px;">.tier-glass · backdrop-blur(20)</span>
+        </div>
+      </div>
+
+      <div class="tier-lit surface-demo">
+        <div>
+          <p class="eyebrow eyebrow--gold">Tier 3</p>
+          <h3 style="margin-top: 8px;">Lit glass.</h3>
+        </div>
+        <div>
+          <p class="muted no-margin" style="font-size: 13px;">Featured player, hero moments, the final CTA panel.</p>
+          <span class="annot" style="margin-top: 12px;">.tier-lit · radial-gradient + shadow</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============== MOTION ============== -->
+  <section style="margin-bottom: 96px;">
+    <header class="section-head">
+      <div class="section-head__title">
+        <span class="num">04</span>
+        <h2>Motion</h2>
+      </div>
+      <p class="section-head__caption">
+        Four named easings. Three duration tiers (250 / 480 / 1200ms+).
+        <b>Never 300ms</b> — it's the default-feeling tell. Hover any box.
+      </p>
+    </header>
+
+    <div class="grid-4">
+      <div class="motion-box">
+        <div class="motion-box__ball"></div>
+        <small>--ease-out-expo · 480ms</small>
+        <small class="dim">entrances</small>
+      </div>
+      <div class="motion-box motion-box--quint">
+        <div class="motion-box__ball"></div>
+        <small>--ease-in-out-quint · 600ms</small>
+        <small class="dim">state transitions</small>
+      </div>
+      <div class="motion-box motion-box--linear">
+        <div class="motion-box__ball"></div>
+        <small>linear · 600ms</small>
+        <small class="dim">marquees only</small>
+      </div>
+      <div class="motion-box motion-box--cinema">
+        <div class="motion-box__ball"></div>
+        <small>--ease-out-expo · 1400ms</small>
+        <small class="dim">cinematic / hero</small>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== BUTTONS / INTERACTIVES ============== -->
+  <section style="margin-bottom: 96px;">
+    <header class="section-head">
+      <div class="section-head__title">
+        <span class="num">05</span>
+        <h2>Interactives</h2>
+      </div>
+      <p class="section-head__caption">
+        Buttons, focus rings, micro-interactions. Hover lift = 1px, electric
+        focus ring at 2px offset. No bounces, no rotations.
+      </p>
+    </header>
+
+    <div class="flex gap-md" style="flex-wrap: wrap; align-items: center;">
+      <button class="btn btn--primary">Start an evaluation</button>
+      <button class="btn btn--ghost">Review services</button>
+      <a href="#" class="btn btn--ghost" style="border-color: var(--gold); color: var(--gold);">Gold ghost</a>
+    </div>
+    <p class="muted" style="margin-top: 16px; font-size: 13px;">
+      Tab through the buttons to see the electric focus ring (
+      <code class="mono">0 0 0 4px var(--electric)</code>
+      with 2px page-floor offset).
+    </p>
+  </section>
+
+</main>
+
+</body>
+</html>

@@ -4,14 +4,26 @@ export default {
   theme: {
     extend: {
       colors: {
+        // v2 editorial tokens (also available as CSS vars in global.css)
+        paper: '#F4F1E9',
+        ink: '#1A1813',
+        gold: '#7C5E1C',
+        data: '#2F6342',
+        // legacy tokens kept for privacy/terms back-compat
         background: '#0A0A0A',
         surface: '#111827',
-        gold: '#D4AF37',
+        bone: '#E9E5D8',
+        signal: '#64D98A',
         green: '#22C55E',
       },
       fontFamily: {
-        heading: ['"Bebas Neue"', 'sans-serif'],
-        body: ['Inter', 'sans-serif'],
+        // v2 editorial
+        serif: ['Fraunces', 'Georgia', 'serif'],
+        sans: ['Inter', 'system-ui', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
+        // legacy aliases
+        heading: ['Fraunces', 'Georgia', 'serif'],
+        body: ['Inter', 'system-ui', 'sans-serif'],
       },
     },
   },

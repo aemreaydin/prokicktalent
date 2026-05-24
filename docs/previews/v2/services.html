@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>v2 · Services — editorial</title>
+  <meta name="description" content="ProKickTalent services — representation, GPS analysis, scouting, and career guidance: four parts of one player file." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><path d='M3 27 Q 16 -1 29 27' stroke='%23CBA257' stroke-width='2' fill='none' stroke-linecap='round'/><circle cx='16' cy='6' r='3.5' fill='%23CBA257'/></svg>" />
+  <link rel="stylesheet" href="./_system.css" />
+  <style>
+    .sv-hero { position: relative; min-height: 58vh; display: flex; align-items: flex-end; overflow: hidden; }
+    .sv-hero .photo { position: absolute; inset: 0; }
+    .sv-hero__scrim { position: absolute; inset: 0; z-index: 1; background: linear-gradient(0deg, rgba(11,11,12,0.9), transparent 70%); }
+    .sv-hero__in { position: relative; z-index: 2; width: 100%; padding-bottom: clamp(36px, 6vh, 72px); }
+
+    /* hub — editorial list */
+    .hub { border-top: 1px solid var(--line); }
+    .hub__row { display: grid; grid-template-columns: 64px 1fr auto; gap: clamp(16px,4vw,48px); align-items: baseline; padding: clamp(26px,4vh,40px) 0; border-bottom: 1px solid var(--line); text-decoration: none; color: inherit; transition: padding-left 350ms var(--ease); }
+    .hub__row:hover { padding-left: 12px; }
+    .hub__n { font: 500 13px/1 var(--mono); color: var(--gold); }
+    .hub__h { margin: 0 0 6px; font-family: var(--serif); font-weight: 500; font-size: clamp(24px,2.6vw,34px); line-height: 1.05; letter-spacing: -0.015em; color: var(--ink); }
+    .hub__row p { margin: 0; color: var(--mute); font-size: 15px; max-width: 54ch; }
+    .hub__go { color: var(--mute); transition: color 250ms, transform 300ms var(--ease); }
+    .hub__row:hover .hub__go { color: var(--gold); transform: translateX(4px); }
+    @media (max-width: 720px) { .hub__row { grid-template-columns: 44px 1fr; } .hub__go { display:none; } }
+
+    /* per-service detail */
+    .det { display: grid; grid-template-columns: 0.55fr 0.45fr; gap: clamp(32px,6vw,72px); align-items: center; }
+    .det--rev > :first-child { order: 2; }
+    @media (max-width: 880px) { .det { grid-template-columns: 1fr; gap: 32px; } .det--rev > :first-child { order: 0; } }
+    .det__head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 14px; }
+    .det__n { font: 400 40px/1 var(--serif); color: var(--mute); }
+    .det__phase { font: 600 11px/1 var(--sans); letter-spacing: 0.2em; text-transform: uppercase; color: var(--data); }
+    .det ul { list-style: none; padding: 0; margin: 22px 0 28px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .det li { font-size: 14px; color: var(--mute); padding-left: 18px; position: relative; }
+    .det li::before { content: "→"; position: absolute; left: 0; color: var(--gold); }
+
+    /* mini visuals */
+    .viz { border: 1px solid var(--line-2); border-radius: var(--r-md); padding: 22px; background: var(--bg-2); }
+    .viz__cap { font: 500 10px/1 var(--mono); color: var(--mute); margin-bottom: 14px; display: flex; justify-content: space-between; }
+    .viz__ex { color: var(--gold); }
+
+    /* gps */
+    .gps__row { display:flex; justify-content:space-between; align-items:baseline; padding:9px 0; border-bottom:1px solid var(--line); }
+    .gps__row:last-child{border-bottom:none;}
+    .gps__k { font:500 11px/1.2 var(--sans); letter-spacing:0.12em; text-transform:uppercase; color:var(--mute); }
+    .gps__v { font:500 16px/1 var(--mono); color: var(--data); }
+
+    /* tactic */
+    .tac { position: relative; aspect-ratio: 16/10; border-radius: var(--r-sm); background: linear-gradient(135deg,#10231a,#0a1410); overflow:hidden; }
+    .tac__pitch { position:absolute; inset:10px; border:1px solid rgba(132,176,147,0.3); }
+    .tac__pitch::after { content:""; position:absolute; top:50%; left:50%; width:64px; height:64px; border-radius:50%; border:1px solid rgba(132,176,147,0.3); transform:translate(-50%,-50%); }
+    .tac__p { position:absolute; width:11px; height:11px; border-radius:50%; background:#ECEAE3; transform:translate(-50%,-50%); }
+    .tac__p--f { background: var(--gold); box-shadow:0 0 0 4px rgba(203,162,87,0.25); }
+
+    /* pathway bars */
+    .pw__row { display:grid; grid-template-columns:54px 1fr; gap:14px; align-items:center; padding:7px 0; }
+    .pw__age { font:500 11px/1 var(--mono); color: var(--gold); }
+    .pw__bar { height:26px; border-radius:3px; background: var(--bg-3); position:relative; overflow:hidden; }
+    .pw__seg { position:absolute; top:0; bottom:0; display:flex; align-items:center; padding:0 10px; font:600 11px/1 var(--sans); color:#fff; white-space:nowrap; }
+  </style>
+</head>
+<body>
+
+<nav class="pchrome">
+  <div class="pchrome__in">
+    <span class="pchrome__brand">PKT · <b>v2 editorial</b></span>
+    <a href="./index.html">Index</a>
+    <a href="./home.html">Home</a>
+    <a href="./about.html">About</a>
+    <a href="./players.html">Players</a>
+    <a href="./services.html" aria-current="page">Services</a>
+    <a href="./contract-analysis.html">Contract</a>
+    <a href="./media.html">Media</a>
+    <a href="./contact.html">Contact</a>
+    <a href="./hero.html">Hero</a>
+    <button class="theme-toggle" id="themeToggle" type="button">◐ light</button>
+  </div>
+</nav>
+<script>
+  (function () {
+    const tg = document.getElementById('themeToggle'), root = document.documentElement;
+    if (localStorage.getItem('pkt-v2-theme') === 'dark') { root.setAttribute('data-theme','dark'); tg.textContent='◐ dark'; }
+    tg.addEventListener('click', () => { const d = root.getAttribute('data-theme') !== 'dark'; if (d) root.setAttribute('data-theme','dark'); else root.removeAttribute('data-theme'); tg.textContent = d ? '◐ dark' : '◐ light'; localStorage.setItem('pkt-v2-theme', d ? 'dark' : 'light'); });
+  })();
+</script>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="m" viewBox="0 0 32 32"><path d="M3 27 Q 16 -1 29 27" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-dasharray="2.5 3"/><circle cx="16" cy="6" r="3.5" fill="currentColor"/></symbol>
+</svg>
+
+<nav class="nav" id="nav">
+  <div class="nav__in">
+    <a href="./home.html" class="nav__brand"><svg width="22" height="22"><use href="#m"/></svg><b>ProKickTalent</b></a>
+    <a href="./home.html" class="nav__link">Home</a>
+    <a href="./about.html" class="nav__link">About</a>
+    <a href="./players.html" class="nav__link">Players</a>
+    <a href="./services.html" class="nav__link" aria-current="page">Services</a>
+    <a href="./media.html" class="nav__link">Media</a>
+    <a href="./contact.html" class="nav__cta">Start an evaluation</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- HERO (dark band) -->
+  <section class="sv-hero" data-theme="dark">
+    <div class="photo"><span class="photo__tag">PLACEHOLDER · training-ground detail</span></div>
+    <div class="sv-hero__scrim"></div>
+    <div class="sv-hero__in">
+      <div class="wrap">
+        <p class="eyebrow eyebrow--gold" style="margin-bottom: 22px;">What we do</p>
+        <h1 class="display-1">Four parts of<br/>one <em>player file.</em></h1>
+      </div>
+    </div>
+  </section>
+
+  <!-- HUB -->
+  <section class="section">
+    <div class="wrap">
+      <div class="hub">
+        <a href="#representation" class="hub__row"><span class="hub__n">01</span><div><p class="hub__h">Representation</p><p>Advocacy through trials, offers, and contract terms — FIFA-aligned, from the player's side of the table.</p></div><span class="hub__go">↓</span></a>
+        <a href="#gps" class="hub__row"><span class="hub__n">02</span><div><p class="hub__h">GPS Analysis</p><p>Match-by-match data that turns speed, workload, and intensity into evidence scouts can read.</p></div><span class="hub__go">↓</span></a>
+        <a href="#scouting" class="hub__row"><span class="hub__n">03</span><div><p class="hub__h">Scouting</p><p>On-field evaluation across real competitive environments — body shape, decision speed, role fit.</p></div><span class="hub__go">↓</span></a>
+        <a href="#career" class="hub__row"><span class="hub__n">04</span><div><p class="hub__h">Career Guidance</p><p>Mapping academy, college, CPL, MLS Next Pro, and European routes against profile, timing, and outcomes.</p></div><span class="hub__go">↓</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- REPRESENTATION -->
+  <section class="section section--hair" id="representation">
+    <div class="wrap">
+      <div class="det">
+        <div>
+          <div class="det__head"><span class="det__n">01</span><span class="det__phase">Contract &amp; club fit</span></div>
+          <h2>Representation.</h2>
+          <p class="muted" style="margin-top:18px; font-size:16px;">When the conversation gets serious, the player needs an advocate who understands the contract, the club, and the timing. We negotiate from the player's side, on FIFA-aligned standards.</p>
+          <ul><li>Trial &amp; offer evaluation</li><li>Contract review</li><li>Club communication</li><li>Family advisory</li><li>Release planning</li><li>Compliance</li></ul>
+          <a href="./contract-analysis.html" class="btn btn--primary">See contract analysis <span class="arr">→</span></a>
+        </div>
+        <div class="viz">
+          <div class="viz__cap"><span>CONTRACT REVIEW · SAMPLE</span><span class="viz__ex">EXAMPLE</span></div>
+          <div class="gps__row"><span class="gps__k">Term</span><span class="gps__v" style="color:var(--ink)">2 + 2 yrs</span></div>
+          <div class="gps__row"><span class="gps__k">Image rights</span><span class="gps__v" style="color:var(--gold)">review</span></div>
+          <div class="gps__row"><span class="gps__k">Release clause</span><span class="gps__v" style="color:var(--gold)">review</span></div>
+          <div class="gps__row"><span class="gps__k">Solidarity</span><span class="gps__v" style="color:#C0492F">flag</span></div>
+          <p style="margin:14px 0 0; font-family:var(--serif); font-style:italic; font-size:17px;">Signable — after three changes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GPS -->
+  <section class="section" id="gps">
+    <div class="wrap">
+      <div class="det det--rev">
+        <div class="viz">
+          <div class="viz__cap"><span>GPS · MATCH 14 · 90 MIN</span><span class="viz__ex">EXAMPLE</span></div>
+          <div class="gps__row"><span class="gps__k">Distance</span><span class="gps__v">11.4 km</span></div>
+          <div class="gps__row"><span class="gps__k">High-intensity</span><span class="gps__v">1.92 km</span></div>
+          <div class="gps__row"><span class="gps__k">Top sprint</span><span class="gps__v">32.6 km/h</span></div>
+          <div class="gps__row"><span class="gps__k">Bursts</span><span class="gps__v">24</span></div>
+          <div class="gps__row"><span class="gps__k">Player load</span><span class="gps__v">412</span></div>
+        </div>
+        <div>
+          <div class="det__head"><span class="det__n">02</span><span class="det__phase">Performance evidence</span></div>
+          <h2>GPS Analysis.</h2>
+          <p class="muted" style="margin-top:18px; font-size:16px;">Match-by-match performance data scouts can read. Sprint output, high-intensity workload, total distance, decision-zone presence — numbers become a player file no one can argue with.</p>
+          <ul><li>Per-match report</li><li>Trend analysis</li><li>Position benchmarks</li><li>League comparables</li><li>Family summary</li><li>Scout-ready dossier</li></ul>
+          <a href="./contact.html" class="btn btn--ghost">Enquire about GPS</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCOUTING -->
+  <section class="section section--hair" id="scouting">
+    <div class="wrap">
+      <div class="det">
+        <div>
+          <div class="det__head"><span class="det__n">03</span><span class="det__phase">Talent identification</span></div>
+          <h2>Scouting.</h2>
+          <p class="muted" style="margin-top:18px; font-size:16px;">On-field evaluation in real competitive environments. Body shape, decision speed, role fit, response to pressure — observed across multiple matches before any conversation begins.</p>
+          <ul><li>Live attendance</li><li>Role evaluation</li><li>Multi-session profiling</li><li>Family interview</li><li>Benchmarking</li><li>Confidential profile</li></ul>
+          <a href="./contact.html" class="btn btn--ghost">Enquire about scouting</a>
+        </div>
+        <div class="viz">
+          <div class="viz__cap"><span>TACTIC BOARD · #8 ROLE</span><span class="viz__ex">EXAMPLE</span></div>
+          <div class="tac">
+            <div class="tac__pitch"></div>
+            <div class="tac__p" style="left:14%;top:50%"></div>
+            <div class="tac__p" style="left:35%;top:30%"></div>
+            <div class="tac__p" style="left:35%;top:70%"></div>
+            <div class="tac__p tac__p--f" style="left:50%;top:50%"></div>
+            <div class="tac__p" style="left:65%;top:30%"></div>
+            <div class="tac__p" style="left:65%;top:70%"></div>
+            <div class="tac__p" style="left:84%;top:50%"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAREER -->
+  <section class="section" id="career">
+    <div class="wrap">
+      <div class="det det--rev">
+        <div class="viz">
+          <div class="viz__cap"><span>PATHWAY GRAPH · SAMPLE</span><span class="viz__ex">EXAMPLE</span></div>
+          <div class="pw__row"><span class="pw__age">U17</span><div class="pw__bar"><div class="pw__seg" style="left:0;width:42%;background:#2F6342">Academy</div></div></div>
+          <div class="pw__row"><span class="pw__age">U19</span><div class="pw__bar"><div class="pw__seg" style="left:0;width:55%;background:#2F6342">Academy</div><div class="pw__seg" style="left:52%;width:48%;background:#7C5E1C">L1O</div></div></div>
+          <div class="pw__row"><span class="pw__age">U21</span><div class="pw__bar"><div class="pw__seg" style="left:0;width:100%;background:#7C5E1C">CPL / MLS Next Pro</div></div></div>
+          <div class="pw__row"><span class="pw__age">U23</span><div class="pw__bar"><div class="pw__seg" style="left:0;width:100%;background:#6B4F18">Pro contract · USL / Europe</div></div></div>
+        </div>
+        <div>
+          <div class="det__head"><span class="det__n">04</span><span class="det__phase">Pathway planning</span></div>
+          <h2>Career Guidance.</h2>
+          <p class="muted" style="margin-top:18px; font-size:16px;">Families face real forks: stay in academy, take a college offer, chase a CPL or MLS Next Pro slot, pursue European trials. We map the routes against profile, timing, and realistic outcomes.</p>
+          <ul><li>Route comparison</li><li>Risk &amp; timing</li><li>Eligibility tracking</li><li>Combine prep</li><li>Backup plan</li><li>Periodic review</li></ul>
+          <a href="./contact.html" class="btn btn--ghost">Enquire about pathway</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section section--hair" style="text-align:center;">
+    <div class="wrap wrap--narrow">
+      <p class="eyebrow eyebrow--gold" style="margin-bottom:24px;">Service enquiry</p>
+      <h2 class="display-2">Ready to open <em>the file?</em></h2>
+      <p class="lede" style="margin:20px auto 32px; max-width:46ch;">Tell us which service first — we'll respond with a path forward.</p>
+      <a href="./contact.html" class="btn btn--primary">Start a conversation <span class="arr">→</span></a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="foot__in">
+    <a href="./home.html" class="nav__brand"><svg width="20" height="20" style="color:var(--gold)"><use href="#m"/></svg><b style="font-size:16px">ProKickTalent</b></a>
+    <div class="foot__cred"><span>FIFA Licensed Agent</span><span>Toronto · Canada</span><span>© 2026 ProKickTalent</span></div>
+  </div>
+</footer>
+
+<script>const nav=document.getElementById('nav');addEventListener('scroll',()=>{nav.dataset.scrolled=scrollY>16;},{passive:true});</script>
+
+</body>
+</html>

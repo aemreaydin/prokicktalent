@@ -1,122 +1,109 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { createReader } from '@keystatic/core/reader';
-import keystaticConfig from '../../keystatic.config';
 
-const reader = createReader(process.cwd(), keystaticConfig);
-const ab = await reader.singletons.about.read();
-
-const mp1 = ab?.missionParagraph1 ?? '';
-const mp2 = ab?.missionParagraph2 ?? '';
-const mp3 = ab?.missionParagraph3 ?? '';
-const fp1 = ab?.founderParagraph1 ?? '';
-const fp2 = ab?.founderParagraph2 ?? '';
-const fp3 = ab?.founderParagraph3 ?? '';
-const fq  = ab?.founderQuote ?? '';
-const fp4 = ab?.founderParagraph4 ?? '';
+const timeline = [
+  { year: '2018', title: 'Player advisory begins.', body: 'Informally advising Ontario players and families on academy exposure, trial decisions, and the red flags families miss.' },
+  { year: '2021', title: 'FIFA-aligned representation.', body: 'Representation built around FIFA standards — contract awareness, advocacy through trials and offers, professional independence.' },
+  { year: '2024', title: 'ProKickTalent Sports Group founded.', body: 'Formalized as a dedicated agency: scouting, GPS, and advisory under one practice, based in Toronto, serving Ontario and Canada.' },
+  { year: '2026', title: 'GPS analytics integrated.', body: 'Every active player file now pairs match scouting with GPS performance reporting — distance, sprint output, intensity, workload.' },
+];
+const creds = [
+  { k: 'License', v: 'FIFA', d: 'Professional standards' },
+  { k: 'Base', v: 'Toronto', d: 'Ontario · Canada' },
+  { k: 'Focus', v: 'U17–U23', d: 'Serious players only' },
+  { k: 'Method', v: 'Scout + GPS', d: 'Judgment + data' },
+];
 ---
 
-<Layout
-  title="About Us"
-  description="Learn about ProKickTalent Sports Group and our founder, FIFA-licensed agent Burak Can Piroglu."
->
+<Layout title="About" description="About ProKickTalent — a FIFA-licensed football agency built around evidence-led representation for U17–U23 Canadian footballers.">
 
-  <!-- PAGE HERO -->
-  <section class="relative py-32 flex items-center overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-r from-background via-surface to-background"></div>
-    <div class="relative z-10 max-w-7xl mx-auto px-6">
-      <p class="text-gold text-sm tracking-[0.3em] uppercase font-body mb-3">Our Story</p>
-      <h1 class="font-heading text-6xl md:text-8xl text-white leading-none">
-        About<br/><span class="text-gold">ProKickTalent</span>
-      </h1>
+  <section class="about-hero" data-theme="dark">
+    <div class="photo"><span class="photo__tag">PLACEHOLDER · pitch / Toronto skyline</span></div>
+    <div class="about-hero__scrim"></div>
+    <div class="about-hero__in">
+      <div class="wrap">
+        <p class="eyebrow eyebrow--gold" style="margin-bottom: 22px;">Our story</p>
+        <h1 class="display-1">Built from the <em>ground up.</em></h1>
+      </div>
     </div>
   </section>
 
-  <!-- AGENCY MISSION -->
-  <section class="py-20 px-6 max-w-7xl mx-auto">
-    <div class="grid md:grid-cols-2 gap-16 items-start">
-      <div>
-        <p class="text-gold text-sm tracking-[0.3em] uppercase font-body mb-4">Our Mission</p>
-        <h2 class="font-heading text-4xl md:text-5xl text-white mb-8 leading-tight">
-          Built for Canadian Youth Football
-        </h2>
-        <p class="text-gray-300 font-body text-base leading-relaxed mb-6">{mp1}</p>
-        <p class="text-gray-400 font-body text-base leading-relaxed mb-6">{mp2}</p>
-        <p class="text-gray-400 font-body text-base leading-relaxed mb-10">{mp3}</p>
-        <a
-          href="/contact"
-          class="inline-block bg-gold text-black font-body font-semibold text-sm tracking-[0.2em] uppercase px-8 py-3 hover:bg-yellow-400 transition-colors"
-        >
-          Get In Touch
-        </a>
+  <section class="section">
+    <div class="wrap">
+      <div class="mission">
+        <p class="eyebrow eyebrow--gold" style="margin-bottom: 24px;">Mission</p>
+        <p class="lede" style="font-size: clamp(20px,2.4vw,26px); line-height: 1.5; color: var(--ink);">ProKickTalent represents serious U17–U23 Canadian footballers — independent of any club or academy, aligned to one outcome: the right next move for the player.</p>
+        <p class="pullquote">Representation starts with evaluation. The player file is built before any introduction is made.</p>
+        <p class="muted" style="font-size: 17px;">Families navigating academy exposure, college, semi-pro, CPL, and European trials deserve clear guidance grounded in scouting, GPS data, and FIFA-aligned representation standards. That clarity — not a quick introduction — is the product.</p>
       </div>
+    </div>
+  </section>
 
-      <!-- Stats / Credentials -->
-      <div class="grid grid-cols-2 gap-4">
-        {[
-          { value: 'FIFA', label: 'Licensed Agent' },
-          { value: 'Ontario', label: 'Based & Operating' },
-          { value: 'U13–U23', label: 'Age Groups Served' },
-          { value: 'Data-Driven', label: 'GPS Performance Analysis' },
-        ].map(stat => (
-          <div class="bg-surface border border-white/10 p-6 text-center">
-            <p class="font-heading text-3xl text-gold mb-2">{stat.value}</p>
-            <p class="text-gray-400 font-body text-xs tracking-wider uppercase">{stat.label}</p>
+  <section class="section section--hair">
+    <div class="wrap">
+      <div class="shead"><p class="eyebrow eyebrow--gold">The path</p><h2>No shortcuts.</h2></div>
+      <div class="tl">
+        {timeline.map((t) => (
+          <div class="tl__node">
+            <p class="tl__year">{t.year}</p>
+            <h3>{t.title}</h3>
+            <p>{t.body}</p>
           </div>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- DIVIDER -->
-  <div class="max-w-7xl mx-auto px-6">
-    <div class="border-t border-white/10"></div>
-  </div>
-
-  <!-- FOUNDER STORY -->
-  <section class="py-20 px-6 max-w-7xl mx-auto">
-    <div class="grid md:grid-cols-3 gap-12 items-start">
-
-      <!-- Photo placeholder -->
-      <div class="md:col-span-1">
-        <div class="border border-white/10 aspect-[3/4] overflow-hidden">
-          <img src="/images/burak.jpg" alt="Burak Can Piroglu — FIFA Licensed Football Agent" class="w-full h-full object-cover object-top" />
-        </div>
-        <div class="mt-4 p-4 border border-gold/20 bg-surface/50">
-          <p class="font-heading text-xl text-white tracking-wide">Burak Can Piroglu</p>
-          <p class="text-gold text-xs tracking-widest uppercase font-body mt-1">FIFA&trade; Licensed Football Agent</p>
-          <p class="text-gray-500 font-body text-xs mt-2">Toronto, Ontario &mdash; Canada</p>
-        </div>
+  <section class="section">
+    <div class="wrap">
+      <div class="shead">
+        <p class="eyebrow eyebrow--gold">Credentials</p>
+        <h2>What the practice stands on.</h2>
+        <p class="shead__lede">Every claim below is verifiable. Nothing else gets a card.</p>
       </div>
-
-      <!-- Story text -->
-      <div class="md:col-span-2">
-        <p class="text-gold text-sm tracking-[0.3em] uppercase font-body mb-4">From the Founder</p>
-        <h2 class="font-heading text-4xl md:text-5xl text-white mb-8 leading-tight">
-          Built from the Ground Up.<br/>
-          <span class="text-gold">No shortcuts.</span>
-        </h2>
-
-        <div class="space-y-5 font-body text-gray-300 text-base leading-relaxed">
-          <p>{fp1}</p>
-          <p>{fp2}</p>
-          <blockquote class="border-l-4 border-gold pl-6 py-2 my-8">
-            <p class="text-white font-body text-lg italic">"{fq}"</p>
-          </blockquote>
-          <p>{fp3}</p>
-          <p class="text-gold font-semibold">{fp4}</p>
-        </div>
-
-        <div class="mt-10">
-          <a
-            href="/contact"
-            class="inline-block border border-gold text-gold font-body font-semibold text-sm tracking-[0.2em] uppercase px-8 py-3 hover:bg-gold hover:text-black transition-colors"
-          >
-            Let's Talk
-          </a>
-        </div>
+      <div class="creds">
+        {creds.map((c) => (
+          <div class="cred"><p class="eyebrow">{c.k}</p><b>{c.v}</b><span>{c.d}</span></div>
+        ))}
       </div>
     </div>
   </section>
 
+  <section class="section section--hair" style="text-align:center;">
+    <div class="wrap wrap--narrow">
+      <p class="eyebrow eyebrow--gold" style="margin-bottom: 24px;">Start the conversation</p>
+      <h2 class="display-2">Let's talk about <em>your player.</em></h2>
+      <p class="lede" style="margin: 20px auto 32px; max-width: 46ch;">Send the context, the questions, and the next decision in front of you.</p>
+      <a href="/contact" class="btn btn--primary">Get in touch <span class="arr">→</span></a>
+    </div>
+  </section>
+
 </Layout>
+
+<style>
+  .about-hero { position: relative; min-height: 64vh; display: flex; align-items: flex-end; overflow: hidden; }
+  .about-hero .photo { position: absolute; inset: 0; }
+  .about-hero__scrim { position: absolute; inset: 0; z-index: 1; background: linear-gradient(0deg, rgba(11,11,12,0.9), transparent 70%), linear-gradient(90deg, rgba(11,11,12,0.7), transparent 60%); }
+  .about-hero__in { position: relative; z-index: 2; width: 100%; padding-bottom: clamp(40px, 7vh, 88px); }
+
+  .mission { max-width: 760px; }
+  .pullquote { font-family: var(--serif); font-style: italic; font-size: clamp(26px, 3.4vw, 40px); line-height: 1.35; color: var(--ink); margin: 44px 0; padding: 28px 0; border-block: 1px solid var(--line); }
+  .pullquote::before { content: "“"; color: var(--gold); }
+
+  .tl { max-width: 760px; position: relative; padding-left: 56px; }
+  .tl::before { content: ""; position: absolute; left: 13px; top: 10px; bottom: 10px; width: 1px; background: var(--line-2); }
+  .tl__node { position: relative; padding-bottom: 40px; }
+  .tl__node:last-child { padding-bottom: 0; }
+  .tl__node::before { content: ""; position: absolute; left: -49px; top: 6px; width: 11px; height: 11px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 0 4px var(--bg); }
+  .tl__year { font: 500 12px/1 var(--mono); color: var(--gold); letter-spacing: 0.1em; }
+  .tl__node h3 { margin: 12px 0 8px; }
+  .tl__node p { color: var(--mute); font-size: 15px; margin: 0; }
+
+  .creds { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--r-md); overflow: hidden; }
+  .cred { background: var(--bg); padding: 24px; }
+  .cred .eyebrow { margin-bottom: 10px; }
+  .cred b { font-family: var(--serif); font-weight: 500; font-size: 24px; display: block; }
+  .cred span { color: var(--mute); font-size: 13px; }
+
+  @media (max-width: 720px) { .creds { grid-template-columns: repeat(2, 1fr); } }
+</style>

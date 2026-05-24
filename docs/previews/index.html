@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PKT design previews — index</title>
+  <link rel="stylesheet" href="./_preview-system.css" />
+</head>
+<body>
+
+<nav class="preview-chrome" aria-label="Preview index">
+  <div class="preview-chrome__inner">
+    <span class="preview-chrome__brand">PKT design previews · <b>Phase A</b></span>
+    <a class="preview-chrome__link" href="./index.html" aria-current="page">Index</a>
+    <a class="preview-chrome__link" href="./style-tile.html">Style tile</a>
+    <a class="preview-chrome__link" href="./logo-concepts.html">Logo</a>
+    <a class="preview-chrome__link" href="./components.html">Components</a>
+    <a class="preview-chrome__link" href="./command-bar.html">⌘K bar</a>
+    <a class="preview-chrome__link" href="./hero-animation.html">Hero</a>
+    <a class="preview-chrome__link" href="./page-home.html">Home</a>
+    <a class="preview-chrome__link" href="./page-about.html">About</a>
+    <a class="preview-chrome__link" href="./page-players.html">Players</a>
+    <a class="preview-chrome__link" href="./page-services.html">Services</a>
+    <a class="preview-chrome__link" href="./page-media.html">Media</a>
+    <a class="preview-chrome__link" href="./page-contact.html">Contact</a>
+  </div>
+</nav>
+
+<main class="shell">
+
+  <a href="./v2/index.html" style="display:block; text-decoration:none; margin-bottom: 40px; padding: 20px 24px; border: 1px solid var(--gold); border-radius: var(--r-md); background: rgba(212,175,55,0.08);">
+    <p style="margin:0 0 6px; font: 600 11px/1 'Inter',sans-serif; letter-spacing:0.22em; text-transform:uppercase; color: var(--gold);">⚠ This is v1 — the &ldquo;what to avoid&rdquo; reference</p>
+    <p style="margin:0; color: var(--bone); font-size: 15px;">The current direction is <b>v2 · Editorial (Fraunces + Inter)</b> with a dark/light toggle. → <span style="color: var(--electric);">Open the v2 previews</span></p>
+  </a>
+
+  <header class="stack" style="--stack: 24px; margin-bottom: 48px;">
+    <p class="eyebrow eyebrow--electric">Phase A · UI design artifacts</p>
+    <h1>Modern football site<br/>redesign — previews.</h1>
+    <p class="muted" style="max-width: 640px; font-size: 18px;">
+      Standalone, in-browser design artifacts produced under the
+      <code class="mono">modern-football-site-redesign</code> OpenSpec change.
+      Open any preview below in this browser, react to it, and we'll
+      record decisions before Phase B implementation begins.
+    </p>
+    <p class="mono dim" style="font-size: 13px;">
+      Nothing in <code>src/</code> has been touched yet. These previews are
+      strictly review material.
+    </p>
+  </header>
+
+  <section class="tier-lit" style="padding: 28px 32px; margin-bottom: 64px;">
+    <p class="eyebrow eyebrow--gold">Decide first</p>
+    <h3 style="margin: 8px 0 12px;">Typography direction</h3>
+    <p class="muted" style="margin: 0 0 16px; font-size: 15px;">
+      Peer research (see <code class="mono">docs/plans/2026-05-23-peer-research.md</code>)
+      surfaced four real typography directions from premium sports agents,
+      editorial football, and quiet-luxury references. Pick one before the
+      rest of the previews get reworked — the type choice drives everything else.
+    </p>
+    <a href="./typography.html" style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 18px; background: var(--gold); color: #0A0A0A; font: 600 12px/1 'Inter', sans-serif; text-transform: uppercase; letter-spacing: 0.18em; border-radius: var(--r-sm); text-decoration: none;">Open typography preview →</a>
+  </section>
+
+  <section style="margin-bottom: 64px;">
+    <header class="section-head">
+      <div class="section-head__title">
+        <span class="num">A1 — A2</span>
+        <h2>Foundations</h2>
+      </div>
+      <p class="section-head__caption">
+        The design system itself — palette, typography, surfaces, motion, brand identity.
+      </p>
+    </header>
+    <div class="grid-2">
+      <a href="./style-tile.html" class="tier-glass preview-card" style="display: block; padding: 24px; transition: border-color 250ms var(--ease-out-expo), transform 250ms;">
+        <p class="eyebrow eyebrow--signal">A1 · Style tile</p>
+        <h3 style="margin: 8px 0 12px;">Palette · type · surfaces · motion</h3>
+        <p class="muted" style="font-size: 14px; margin: 0;">
+          Every token in one place: 11 colors with hex + role, the Bebas/Inter/Mono
+          scale, three surface tiers side by side, easing demos.
+        </p>
+      </a>
+      <a href="./logo-concepts.html" class="tier-glass preview-card" style="display: block; padding: 24px;">
+        <p class="eyebrow eyebrow--signal">A2 · Logo concepts</p>
+        <h3 style="margin: 8px 0 12px;">Pick one icon-mark direction</h3>
+        <p class="muted" style="font-size: 14px; margin: 0;">
+          Five geometric variations: pitch arc, ball, goalmouth, trajectory,
+          contact dot. Rendered at 16/24/32/64/128px with a "selected" affordance.
+        </p>
+      </a>
+    </div>
+  </section>
+
+  <section style="margin-bottom: 64px;">
+    <header class="section-head">
+      <div class="section-head__title">
+        <span class="num">A3 — A5</span>
+        <h2>The kit</h2>
+      </div>
+      <p class="section-head__caption">
+        The component library and the showpieces — the command bar and the scroll-driven hero.
+      </p>
+    </header>
+    <div class="grid-3">
+      <a href="./components.html" class="tier-glass preview-card" style="display: block; padding: 24px;">
+        <p class="eyebrow eyebrow--signal">A3 · Components</p>
+        <h3 style="margin: 8px 0 12px;">Kitchen-sink</h3>
+        <p class="muted" style="font-size: 14px; margin: 0;">
+          Every component in isolation with its states and the pages it appears on.
+        </p>
+      </a>
+      <a href="./command-bar.html" class="tier-glass preview-card" style="display: block; padding: 24px;">
+        <p class="eyebrow eyebrow--signal">A4 · ⌘K command bar</p>
+        <h3 style="margin: 8px 0 12px;">Working prototype</h3>
+        <p class="muted" style="font-size: 14px; margin: 0;">
+          Idle · open · typing · mobile sheet. Real keyboard wiring, real filtering.
+        </p>
+      </a>
+      <a href="./hero-animation.html" class="tier-glass preview-card" style="display: block; padding: 24px;">
+        <p class="eyebrow eyebrow--signal">A5 · Hero animation</p>
+        <h3 style="margin: 8px 0 12px;">"The strike, deconstructed"</h3>
+        <p class="muted" style="font-size: 14px; margin: 0;">
+          Scroll-driven prototype. SVG placeholder where the AI still will go.
+        </p>
+      </a>
+    </div>
+  </section>
+
+  <section style="margin-bottom: 96px;">
+    <header class="section-head">
+      <div class="section-head__title">
+        <span class="num">A6</span>
+        <h2>Page mockups</h2>
+      </div>
+      <p class="section-head__caption">
+        Each of the six public pages, composed from the components above.
+      </p>
+    </header>
+    <div class="grid-3">
+      <a href="./page-home.html" class="tier-glass preview-card" style="display: block; padding: 20px;">
+        <p class="eyebrow eyebrow--gold">/</p>
+        <h3 style="margin: 8px 0 8px;">Home</h3>
+        <p class="muted" style="font-size: 13px; margin: 0;">Hero · marquee · approach bento · pathway tabs · services · agent · CTA</p>
+      </a>
+      <a href="./page-about.html" class="tier-glass preview-card" style="display: block; padding: 20px;">
+        <p class="eyebrow eyebrow--gold">/about</p>
+        <h3 style="margin: 8px 0 8px;">About</h3>
+        <p class="muted" style="font-size: 13px; margin: 0;">Mission · vertical timeline · credentials bento</p>
+      </a>
+      <a href="./page-players.html" class="tier-glass preview-card" style="display: block; padding: 20px;">
+        <p class="eyebrow eyebrow--gold">/players</p>
+        <h3 style="margin: 8px 0 8px;">Players</h3>
+        <p class="muted" style="font-size: 13px; margin: 0;">Anonymized roster · filter tabs · "What we look for" · recruitment</p>
+      </a>
+      <a href="./page-services.html" class="tier-glass preview-card" style="display: block; padding: 20px;">
+        <p class="eyebrow eyebrow--gold">/services</p>
+        <h3 style="margin: 8px 0 8px;">Services</h3>
+        <p class="muted" style="font-size: 13px; margin: 0;">Hub grid · per-service anchored sections with service visuals</p>
+      </a>
+      <a href="./page-media.html" class="tier-glass preview-card" style="display: block; padding: 20px;">
+        <p class="eyebrow eyebrow--gold">/media</p>
+        <h3 style="margin: 8px 0 8px;">Media</h3>
+        <p class="muted" style="font-size: 13px; margin: 0;">Masonry bento · press row · Instagram CTA</p>
+      </a>
+      <a href="./page-contact.html" class="tier-glass preview-card" style="display: block; padding: 20px;">
+        <p class="eyebrow eyebrow--gold">/contact</p>
+        <h3 style="margin: 8px 0 8px;">Contact</h3>
+        <p class="muted" style="font-size: 13px; margin: 0;">Glass form + "What to expect" column</p>
+      </a>
+    </div>
+  </section>
+
+  <section class="tier-lit" style="padding: 32px;">
+    <p class="eyebrow eyebrow--gold">How to review</p>
+    <h3 style="margin: 8px 0 16px;">Open each preview · react · tell us what to change.</h3>
+    <ol class="muted" style="font-size: 15px; line-height: 1.75; padding-left: 20px;">
+      <li>Open every page in this list. Take 30-60s on each.</li>
+      <li>Mark anything you want changed: a color, a component, a copy line, a layout.</li>
+      <li>For the logo, pick one of the five concepts.</li>
+      <li>For the command bar, decide: ship it / cut it / defer it.</li>
+      <li>Reply with your decisions — I'll fold them into <code class="mono">design.md</code>
+          and start Phase B implementation.</li>
+    </ol>
+  </section>
+
+</main>
+
+<script>
+  // tiny hover lift on preview cards — pure progressive enhancement
+  document.querySelectorAll('.preview-card').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      el.style.transform = 'translateY(-2px)';
+      el.style.borderColor = 'var(--electric)';
+    });
+    el.addEventListener('mouseleave', () => {
+      el.style.transform = '';
+      el.style.borderColor = '';
+    });
+  });
+</script>
+
+</body>
+</html>
