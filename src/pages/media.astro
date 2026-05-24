@@ -1,24 +1,31 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { createReader } from '@keystatic/core/reader';
+import keystaticConfig from '../../keystatic.config';
 
-const tiles = [
-  { size: 'big', cap: 'U21 trial · Liverpool training facility', date: '2026 · March' },
-  { size: '', cap: 'Match scouting · L1O round 8', date: '2026 · April' },
-  { size: 'tall', cap: 'Manchester United youth fixture', date: '2025 · December' },
-  { size: '', cap: 'GPS session debrief', date: '2026 · February' },
-  { size: 'wide', cap: 'Toronto FC II training observation', date: '2026 · January' },
-  { size: '', cap: 'Family meeting · downtown Toronto', date: '2026 · February' },
-  { size: '', cap: 'CPL combine attendance', date: '2026 · March' },
-  { size: 'wide', cap: 'Showcase tournament · regional', date: '2026 · February' },
-  { size: '', cap: 'Match recap · player development', date: '2026 · April' },
-  { size: '', cap: 'GPS unit calibration', date: '2026 · January' },
-];
-const press = [
-  { src: 'L1O Newsletter', date: 'Jun 2026', title: '"Independent agents and the new player pathway"', sub: 'League1 Ontario monthly · feature' },
-  { src: 'Canadian Premier Pod', date: 'May 2026', title: '"What U23 evaluation actually looks like"', sub: 'Episode 47 · 38 min' },
-  { src: 'Ontario Soccer', date: 'Mar 2026', title: '"GPS performance in youth development"', sub: 'Panel · Toronto convention' },
-  { src: 'Across The Lake', date: 'Feb 2026', title: '"Building a Canadian pathway file"', sub: 'Longform interview · 4,500 words' },
-];
+const reader = createReader(process.cwd(), keystaticConfig);
+const SIZE_CLASS = { regular: '', wide: 'wide', tall: 'tall', feature: 'big' };
+
+const tiles = (await reader.collections.gallery.all())
+  .map(({ entry: g }) => ({
+    image: g.image,
+    cap: g.caption,
+    date: g.date,
+    size: SIZE_CLASS[g.size] ?? '',
+    order: g.order ?? 0,
+  }))
+  .sort((a, b) => a.order - b.order);
+
+const press = (await reader.collections.press.all())
+  .map(({ entry: p }) => ({
+    src: p.source,
+    date: p.date,
+    title: p.headline,
+    sub: p.subtitle,
+    url: p.url || '#',
+    order: p.order ?? 0,
+  }))
+  .sort((a, b) => a.order - b.order);
 ---
 
 <Layout title="Media" description="Media and moments from ProKickTalent — matchdays, sessions, and press coverage.">
@@ -43,8 +50,7 @@ const press = [
       <div class="masonry">
         {tiles.map((t) => (
           <div class="tile" data-s={t.size}>
-            <div class="photo"></div>
-            <span class="tile__badge">PLACEHOLDER</span>
+            <img class="tile__img" src={t.image} alt={t.cap} loading="lazy" />
             <div class="tile__cap"><p>{t.cap}</p><small>{t.date}</small></div>
           </div>
         ))}
@@ -57,9 +63,9 @@ const press = [
       <div class="shead"><p class="eyebrow eyebrow--gold">In the press</p><h2>Where PKT shows up.</h2></div>
       <div class="press__row">
         {press.map((p) => (
-          <a href="#" class="press-card">
+          <a href={p.url} class="press-card">
             <div class="press-card__top"><span class="press-card__src">{p.src}</span><span class="press-card__date">{p.date}</span></div>
-            <h3>{p.title}</h3><p>{p.sub}</p>
+            <h3>&ldquo;{p.title}&rdquo;</h3><p>{p.sub}</p>
           </a>
         ))}
       </div>
@@ -84,6 +90,7 @@ const press = [
   .tile[data-s="tall"]{grid-row:span 2;}
   .tile[data-s="big"]{grid-column:span 2; grid-row:span 2;}
   .tile .photo{ position:absolute; inset:0; }
+  .tile__img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
   .tile__cap { position:absolute; left:0; right:0; bottom:0; padding:28px 14px 14px; background:linear-gradient(0deg,rgba(0,0,0,0.85),transparent); opacity:0; transform:translateY(15%); transition:opacity 300ms var(--ease),transform 300ms; }
   .tile:hover .tile__cap { opacity:1; transform:none; }
   .tile__cap p{ margin:0; font:500 12px/1.4 var(--sans); color:#ECEAE3; }

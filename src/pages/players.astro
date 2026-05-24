@@ -1,20 +1,26 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { createReader } from '@keystatic/core/reader';
+import keystaticConfig from '../../keystatic.config';
 
-const roster = [
-  { status: 'watched', label: 'Watched', name: 'U19 winger', meta: 'RW · 2007 · Ontario' },
-  { status: 'trial', label: 'Trialing', name: 'U21 #8', meta: 'CM · 2005 · Toronto' },
-  { status: 'signed', label: 'Signed', name: 'U23 centre-back', meta: 'CB · 2003 · L1O' },
-  { status: 'placed', label: 'Placed', name: 'U20 striker', meta: 'ST · 2006 · European trial' },
-  { status: 'watched', label: 'Watched', name: 'U18 keeper', meta: 'GK · 2008 · GTA' },
-  { status: 'trial', label: 'Trialing', name: 'U22 fullback', meta: 'LB · 2004 · MLS Next Pro' },
-  { status: 'watched', label: 'Watched', name: 'U17 midfielder', meta: 'AM · 2009 · Ontario' },
-  { status: 'placed', label: 'Placed', name: 'U23 winger', meta: 'LW · 2003 · USL Championship' },
-  { status: 'watched', label: 'Watched', name: 'U19 #6', meta: 'DM · 2007 · L1O reserve' },
-  { status: 'trial', label: 'Trialing', name: 'U20 forward', meta: 'ST · 2006 · CPL combine' },
-  { status: 'signed', label: 'Signed', name: 'U21 fullback', meta: 'RB · 2005 · CPL Y2' },
-  { status: 'watched', label: 'Watched', name: 'U18 winger', meta: 'LW · 2008 · Showcase 2026' },
-];
+const reader = createReader(process.cwd(), keystaticConfig);
+const STATUS_LABEL = { watched: 'Watched', trial: 'Trialing', signed: 'Signed', placed: 'Placed' };
+
+const roster = (await reader.collections.roster.all())
+  .map(({ entry: r }) => {
+    const id = r.identity;
+    const real = id.discriminant === 'real' && id.value?.consentOnFile;
+    return {
+      order: r.order ?? 0,
+      status: r.status,
+      label: STATUS_LABEL[r.status] ?? 'Watched',
+      name: real ? id.value.realName : `${r.ageGroup} ${r.descriptor}`,
+      meta: `${r.position} · ${r.birthYear} · ${r.region}`,
+      photo: real ? id.value.photo : null,
+    };
+  })
+  .sort((a, b) => a.order - b.order);
+
 const counts = {
   all: roster.length,
   watched: roster.filter((p) => p.status === 'watched').length,
@@ -58,7 +64,9 @@ const lookFor = [
       <div class="roster" id="roster">
         {roster.map((p) => (
           <article class="pcard" data-status={p.status}>
-            <div class="pcard__photo"><div class="pcard__sil"></div></div>
+            <div class="pcard__photo">
+              {p.photo ? <img class="pcard__img" src={p.photo} alt={p.name} /> : <div class="pcard__sil"></div>}
+            </div>
             <div class="pcard__body">
               <p class="pcard__status" data-s={p.status}>{p.label}</p>
               <p class="pcard__name">{p.name}</p>
@@ -118,6 +126,7 @@ const lookFor = [
   .pcard:hover { border-color: var(--line-2); transform: translateY(-3px); }
   .pcard__photo { aspect-ratio: 3/4; position: relative; display: flex; align-items: flex-end; justify-content: center; background: linear-gradient(180deg, var(--bg-3), var(--bg-2)); overflow: hidden; }
   .pcard__sil { width: 64%; height: 80%; background: var(--line-2); mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 130'><ellipse cx='50' cy='28' rx='17' ry='21'/><path d='M22 130 Q22 62 50 57 Q78 62 78 130 Z'/></svg>") no-repeat center/contain; -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 130'><ellipse cx='50' cy='28' rx='17' ry='21'/><path d='M22 130 Q22 62 50 57 Q78 62 78 130 Z'/></svg>") no-repeat center/contain; }
+  .pcard__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center top; }
   .pcard__body { padding: 16px; }
   .pcard__status { display: inline-flex; align-items: center; gap: 6px; font: 600 10px/1 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--mute); margin-bottom: 10px; }
   .pcard__status::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }

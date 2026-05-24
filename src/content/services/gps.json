@@ -1,9 +1,18 @@
 {
+  "slug": "gps",
   "order": 2,
   "number": "02",
-  "title": "GPS Performance Analysis & Reports",
-  "tagline": "Where Sports Meet Science.",
-  "highlight": "ProKickTalent Signature Service",
-  "bodyParagraph1": "Using cutting-edge GPS tracking vest technology, we collect real match and training data to build personalized performance reports for each player. Speed, distance, intensity, positioning; we turn raw athletic data into actionable insights.",
-  "bodyParagraph2": "These reports help players develop faster and impress scouts with objective evidence of their athletic output. This is ProKickTalent's signature offering the edge that separates serious players from the rest."
+  "title": "GPS Analysis",
+  "phase": "Performance evidence",
+  "hubBlurb": "Match-by-match data that turns speed, workload, and intensity into evidence scouts can read.",
+  "body": "Match-by-match performance data scouts can read. Sprint output, high-intensity workload, total distance, decision-zone presence — numbers become a player file no one can argue with.",
+  "bullets": [
+    "Per-match report",
+    "Trend analysis",
+    "Position benchmarks",
+    "League comparables",
+    "Family summary",
+    "Scout-ready dossier"
+  ],
+  "vizType": "gps"
 }

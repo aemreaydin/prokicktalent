@@ -1,12 +1,22 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { createReader } from '@keystatic/core/reader';
+import keystaticConfig from '../../keystatic.config';
 
-const hub = [
-  { id: 'representation', n: '01', title: 'Representation', desc: "Advocacy through trials, offers, and contract terms — FIFA-aligned, from the player's side of the table." },
-  { id: 'gps', n: '02', title: 'GPS Analysis', desc: 'Match-by-match data that turns speed, workload, and intensity into evidence scouts can read.' },
-  { id: 'scouting', n: '03', title: 'Scouting', desc: 'On-field evaluation across real competitive environments — body shape, decision speed, role fit.' },
-  { id: 'career', n: '04', title: 'Career Guidance', desc: 'Mapping academy, college, CPL, MLS Next Pro, and European routes against profile, timing, and outcomes.' },
-];
+const reader = createReader(process.cwd(), keystaticConfig);
+const services = (await reader.collections.services.all())
+  .map(({ slug, entry: s }) => ({
+    slug,
+    number: s.number,
+    title: s.title,
+    phase: s.phase,
+    hubBlurb: s.hubBlurb,
+    body: s.body,
+    bullets: s.bullets,
+    vizType: s.vizType,
+    order: s.order ?? 0,
+  }))
+  .sort((a, b) => a.order - b.order);
 ---
 
 <Layout title="Services" description="ProKickTalent services — representation, GPS analysis, scouting, and career guidance: four parts of one player file.">
@@ -26,10 +36,10 @@ const hub = [
   <section class="section">
     <div class="wrap">
       <div class="hub">
-        {hub.map((h) => (
-          <a href={`#${h.id}`} class="hub__row">
-            <span class="hub__n">{h.n}</span>
-            <div><p class="hub__h">{h.title}</p><p class="hub__d">{h.desc}</p></div>
+        {services.map((s) => (
+          <a href={`#${s.slug}`} class="hub__row">
+            <span class="hub__n">{s.number}</span>
+            <div><p class="hub__h">{s.title}</p><p class="hub__d">{s.hubBlurb}</p></div>
             <span class="hub__go">↓</span>
           </a>
         ))}
@@ -37,101 +47,71 @@ const hub = [
     </div>
   </section>
 
-  <!-- REPRESENTATION -->
-  <section class="section section--hair" id="representation">
-    <div class="wrap">
-      <div class="det">
-        <div>
-          <div class="det__head"><span class="det__n">01</span><span class="det__phase">Contract &amp; club fit</span></div>
-          <h2>Representation.</h2>
-          <p class="muted" style="margin-top:18px; font-size:16px;">When the conversation gets serious, the player needs an advocate who understands the contract, the club, and the timing. We negotiate from the player's side, on FIFA-aligned standards.</p>
-          <ul><li>Trial &amp; offer evaluation</li><li>Contract review</li><li>Club communication</li><li>Family advisory</li><li>Release planning</li><li>Compliance</li></ul>
-          <a href="/services/contract-analysis" class="btn btn--primary">See contract analysis <span class="arr">→</span></a>
-        </div>
-        <div class="viz">
-          <div class="viz__cap"><span>CONTRACT REVIEW · SAMPLE</span><span class="viz__ex">EXAMPLE</span></div>
-          <div class="vrow"><span class="vk">Term</span><span class="vv" style="color:var(--ink)">2 + 2 yrs</span></div>
-          <div class="vrow"><span class="vk">Image rights</span><span class="vv" style="color:var(--gold)">review</span></div>
-          <div class="vrow"><span class="vk">Release clause</span><span class="vv" style="color:var(--gold)">review</span></div>
-          <div class="vrow"><span class="vk">Solidarity</span><span class="vv vv--flag">flag</span></div>
-          <p style="margin:14px 0 0; font-family:var(--serif); font-style:italic; font-size:17px;">Signable — after three changes.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- GPS -->
-  <section class="section" id="gps">
-    <div class="wrap">
-      <div class="det det--rev">
-        <div class="viz">
-          <div class="viz__cap"><span>GPS · MATCH 14 · 90 MIN</span><span class="viz__ex">EXAMPLE</span></div>
-          <div class="vrow"><span class="vk">Distance</span><span class="vv">11.4 km</span></div>
-          <div class="vrow"><span class="vk">High-intensity</span><span class="vv">1.92 km</span></div>
-          <div class="vrow"><span class="vk">Top sprint</span><span class="vv">32.6 km/h</span></div>
-          <div class="vrow"><span class="vk">Bursts</span><span class="vv">24</span></div>
-          <div class="vrow"><span class="vk">Player load</span><span class="vv">412</span></div>
-        </div>
-        <div>
-          <div class="det__head"><span class="det__n">02</span><span class="det__phase">Performance evidence</span></div>
-          <h2>GPS Analysis.</h2>
-          <p class="muted" style="margin-top:18px; font-size:16px;">Match-by-match performance data scouts can read. Sprint output, high-intensity workload, total distance, decision-zone presence — numbers become a player file no one can argue with.</p>
-          <ul><li>Per-match report</li><li>Trend analysis</li><li>Position benchmarks</li><li>League comparables</li><li>Family summary</li><li>Scout-ready dossier</li></ul>
-          <a href="/contact" class="btn btn--ghost">Enquire about GPS</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SCOUTING -->
-  <section class="section section--hair" id="scouting">
-    <div class="wrap">
-      <div class="det">
-        <div>
-          <div class="det__head"><span class="det__n">03</span><span class="det__phase">Talent identification</span></div>
-          <h2>Scouting.</h2>
-          <p class="muted" style="margin-top:18px; font-size:16px;">On-field evaluation in real competitive environments. Body shape, decision speed, role fit, response to pressure — observed across multiple matches before any conversation begins.</p>
-          <ul><li>Live attendance</li><li>Role evaluation</li><li>Multi-session profiling</li><li>Family interview</li><li>Benchmarking</li><li>Confidential profile</li></ul>
-          <a href="/contact" class="btn btn--ghost">Enquire about scouting</a>
-        </div>
-        <div class="viz">
-          <div class="viz__cap"><span>TACTIC BOARD · #8 ROLE</span><span class="viz__ex">EXAMPLE</span></div>
-          <div class="tac">
-            <div class="tac__pitch"></div>
-            <div class="tac__p" style="left:14%;top:50%"></div>
-            <div class="tac__p" style="left:35%;top:30%"></div>
-            <div class="tac__p" style="left:35%;top:70%"></div>
-            <div class="tac__p tac__p--f" style="left:50%;top:50%"></div>
-            <div class="tac__p" style="left:65%;top:30%"></div>
-            <div class="tac__p" style="left:65%;top:70%"></div>
-            <div class="tac__p" style="left:84%;top:50%"></div>
+  <!-- SERVICE DETAILS (from the services collection; viz chosen by vizType) -->
+  {services.map((s, i) => (
+    <section class={i % 2 === 0 ? 'section section--hair' : 'section'} id={s.slug}>
+      <div class="wrap">
+        <div class={i % 2 === 1 ? 'det det--rev' : 'det'}>
+          <div>
+            <div class="det__head"><span class="det__n">{s.number}</span><span class="det__phase">{s.phase}</span></div>
+            <h2>{s.title}.</h2>
+            <p class="muted" style="margin-top:18px; font-size:16px;">{s.body}</p>
+            <ul>{s.bullets.map((b) => <li>{b}</li>)}</ul>
+            {s.slug === 'representation' ? (
+              <a href="/services/contract-analysis" class="btn btn--primary">See contract analysis <span class="arr">→</span></a>
+            ) : (
+              <a href="/contact" class="btn btn--ghost">Enquire about {s.title.toLowerCase()}</a>
+            )}
           </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- CAREER -->
-  <section class="section" id="career">
-    <div class="wrap">
-      <div class="det det--rev">
-        <div class="viz">
-          <div class="viz__cap"><span>PATHWAY GRAPH · SAMPLE</span><span class="viz__ex">EXAMPLE</span></div>
-          <div class="pw__row"><span class="pw__age">U17</span><div class="pw__bar"><div class="pw__seg" style="left:0;width:42%;background:#2F6342">Academy</div></div></div>
-          <div class="pw__row"><span class="pw__age">U19</span><div class="pw__bar"><div class="pw__seg" style="left:0;width:55%;background:#2F6342">Academy</div><div class="pw__seg" style="left:52%;width:48%;background:#7C5E1C">L1O</div></div></div>
-          <div class="pw__row"><span class="pw__age">U21</span><div class="pw__bar"><div class="pw__seg" style="left:0;width:100%;background:#7C5E1C">CPL / MLS Next Pro</div></div></div>
-          <div class="pw__row"><span class="pw__age">U23</span><div class="pw__bar"><div class="pw__seg" style="left:0;width:100%;background:#6B4F18">Pro contract · USL / Europe</div></div></div>
-        </div>
-        <div>
-          <div class="det__head"><span class="det__n">04</span><span class="det__phase">Pathway planning</span></div>
-          <h2>Career Guidance.</h2>
-          <p class="muted" style="margin-top:18px; font-size:16px;">Families face real forks: stay in academy, take a college offer, chase a CPL or MLS Next Pro slot, pursue European trials. We map the routes against profile, timing, and realistic outcomes.</p>
-          <ul><li>Route comparison</li><li>Risk &amp; timing</li><li>Eligibility tracking</li><li>Combine prep</li><li>Backup plan</li><li>Periodic review</li></ul>
-          <a href="/contact" class="btn btn--ghost">Enquire about pathway</a>
+          {s.vizType === 'contract' && (
+            <div class="viz">
+              <div class="viz__cap"><span>CONTRACT REVIEW · SAMPLE</span><span class="viz__ex">EXAMPLE</span></div>
+              <div class="vrow"><span class="vk">Term</span><span class="vv" style="color:var(--ink)">2 + 2 yrs</span></div>
+              <div class="vrow"><span class="vk">Image rights</span><span class="vv" style="color:var(--gold)">review</span></div>
+              <div class="vrow"><span class="vk">Release clause</span><span class="vv" style="color:var(--gold)">review</span></div>
+              <div class="vrow"><span class="vk">Solidarity</span><span class="vv vv--flag">flag</span></div>
+              <p style="margin:14px 0 0; font-family:var(--serif); font-style:italic; font-size:17px;">Signable — after three changes.</p>
+            </div>
+          )}
+          {s.vizType === 'gps' && (
+            <div class="viz">
+              <div class="viz__cap"><span>GPS · MATCH 14 · 90 MIN</span><span class="viz__ex">EXAMPLE</span></div>
+              <div class="vrow"><span class="vk">Distance</span><span class="vv">11.4 km</span></div>
+              <div class="vrow"><span class="vk">High-intensity</span><span class="vv">1.92 km</span></div>
+              <div class="vrow"><span class="vk">Top sprint</span><span class="vv">32.6 km/h</span></div>
+              <div class="vrow"><span class="vk">Bursts</span><span class="vv">24</span></div>
+              <div class="vrow"><span class="vk">Player load</span><span class="vv">412</span></div>
+            </div>
+          )}
+          {s.vizType === 'tactic' && (
+            <div class="viz">
+              <div class="viz__cap"><span>TACTIC BOARD · #8 ROLE</span><span class="viz__ex">EXAMPLE</span></div>
+              <div class="tac">
+                <div class="tac__pitch"></div>
+                <div class="tac__p" style="left:14%;top:50%"></div>
+                <div class="tac__p" style="left:35%;top:30%"></div>
+                <div class="tac__p" style="left:35%;top:70%"></div>
+                <div class="tac__p tac__p--f" style="left:50%;top:50%"></div>
+                <div class="tac__p" style="left:65%;top:30%"></div>
+                <div class="tac__p" style="left:65%;top:70%"></div>
+                <div class="tac__p" style="left:84%;top:50%"></div>
+              </div>
+            </div>
+          )}
+          {s.vizType === 'pathway' && (
+            <div class="viz">
+              <div class="viz__cap"><span>PATHWAY GRAPH · SAMPLE</span><span class="viz__ex">EXAMPLE</span></div>
+              <div class="pw__row"><span class="pw__age">U17</span><div class="pw__bar"><div class="pw__seg" style="left:0;width:42%;background:#2F6342">Academy</div></div></div>
+              <div class="pw__row"><span class="pw__age">U19</span><div class="pw__bar"><div class="pw__seg" style="left:0;width:55%;background:#2F6342">Academy</div><div class="pw__seg" style="left:52%;width:48%;background:#7C5E1C">L1O</div></div></div>
+              <div class="pw__row"><span class="pw__age">U21</span><div class="pw__bar"><div class="pw__seg" style="left:0;width:100%;background:#7C5E1C">CPL / MLS Next Pro</div></div></div>
+              <div class="pw__row"><span class="pw__age">U23</span><div class="pw__bar"><div class="pw__seg" style="left:0;width:100%;background:#6B4F18">Pro contract · USL / Europe</div></div></div>
+            </div>
+          )}
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  ))}
 
   <!-- CTA -->
   <section class="section section--hair" style="text-align:center;">
